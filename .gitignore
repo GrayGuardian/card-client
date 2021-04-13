@@ -1,0 +1,10 @@
+Temp/
+Packages/
+obj/
+Logs/
+Library/
+.vscode/
+*.sln
+*.csproj
+Assets/Resources/Default/
+Assets/Resources/Default.meta
