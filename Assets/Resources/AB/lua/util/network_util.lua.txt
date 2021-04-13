@@ -1,0 +1,156 @@
+local Network = class('Network')
+local socket = require('socket_util'):new()
+function Network:init()
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_CONNECT,
+        function()
+            print('Socket connect!')
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_CONNECTERROR,
+        function()
+            print('Socket connect error!')
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_DISCONNECT,
+        function()
+            print('Socket disconnect!')
+            if self.heartBeatTimer ~= nil then
+                self.heartBeatTimer:stop()
+            end
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_ERROR,
+        function(error)
+            print('Socket Error:', error)
+
+            ui:showOnlyTip(
+                'NETWORK_ERROR',
+                {
+                    msg = '网络连接错误，请重新登录！',
+                    isClose = false,
+                    onClick = function()
+                        ui:loadScene('Login')
+                        self.errorTipUI = nil
+                    end
+                }
+            )
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_MESSAGE,
+        function(data)
+            local body = pb:decode('socket_pb.s2c', data.bytes)
+            if body == nil then
+                return
+            end
+
+            if string.find('heartBeatRet|upModelData|', body.router .. '|') == nil then
+                print(string.format('socket.s2c router:%s body:%s', body.router, tostring(body)))
+            end
+
+            body = pb:pbToTable(body)
+            local router = body.router
+            local t_data = body[router]
+
+            broadcast:notify(BROADCAST_CODE.SOCKET_EVENT(router), t_data)
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_EVENT('connRet'),
+        function(data)
+            print('连接成功')
+            --开始发送心跳包
+            self.heartBeatTimer =
+                timer:on(
+                5,
+                true,
+                function()
+                    --发送心跳包
+                    self:emit('heartBeat')
+                end
+            )
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_EVENT('kick'),
+        function(data)
+            print('连接被断开>>', tostring(data))
+            ui:showOnlyTip(
+                'NETWORK_ERROR',
+                {
+                    msg = data.error.msg .. '，请重新登录！',
+                    isClose = false,
+                    onClick = function()
+                        ui:loadScene('Login')
+                    end
+                }
+            )
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_EVENT('error'),
+        function(error)
+            print('收到逻辑错误>>', tostring(error))
+            ui:showOnlyTip('NETWORK_ERROR', {msg = error.msg})
+        end
+    )
+
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_EVENT('heartBeatRet'),
+        function(data)
+            self.unix = data.now
+        end
+    )
+
+    self.url = nil
+    self.connData = nil
+end
+
+function Network:conn(url, connData, cb)
+    if url ~= nil then
+        self.url = url
+    end
+    if connData ~= nil then
+        self.connData = connData
+    end
+    socket:conn(self.url)
+
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_CONNECT,
+        function()
+            self:emit('conn', self.connData, cb)
+        end,
+        0,
+        true
+    )
+end
+function Network:emit(router, data, cb)
+    data = data or {}
+    local body = {router = router}
+    body[router] = data
+    body = pb:encode('socket_pb.c2s', body)
+
+    if string.find('heartBeat|', router .. '|') == nil then
+        print(string.format('socket.c2s router:%s body:%s', router, pb:decode('socket_pb.c2s', body)))
+    end
+
+    socket:emit('c2s', body)
+    if cb ~= nil then
+        broadcast:on(
+            BROADCAST_CODE.SOCKET_EVENT(router .. 'Ret'),
+            function(data)
+                if cb ~= nil then
+                    cb(data)
+                end
+            end,
+            0,
+            true
+        )
+    end
+end
+
+return Network

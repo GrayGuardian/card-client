@@ -1,0 +1,265 @@
+local CompBase = class('CompBase')
+
+------------------- 继承重写 -------------------
+-- Mono生命周期 OnDestroy、Awake与第一次OnEnable无法监听 OnDestroy可用onDestroy替代
+
+-- Button点击事件 组件名首字母自动大写 o-组件实例 order-组件序号，可区分多个重名组件
+-- function UITip:on[UIComp_Button_Name]Click(o,order)
+
+-- end
+function CompBase:onLoad()
+end
+function CompBase:onDestroy()
+end
+------------------- 继承重写 -------------------
+
+function CompBase:init(name, param)
+    self.name = name
+    self.param = param == nil and {} or param
+    self.csComp = nil
+    self.node = nil
+
+    self.uiComp = {}
+    self.timerMap = {}
+    self.broadcastMap = {}
+    self.abResMap = {}
+end
+
+--绑定物体
+function CompBase:bind(csComp)
+    csComp.LuaName = self.name
+    self.csComp = csComp
+    self.node = csComp.transform
+
+    self:monoLifecycleInit()
+    self:uiCompInit()
+    self:_onLoad()
+end
+
+--Mono生命周期初始化
+function CompBase:monoLifecycleInit()
+    local monoListenEvent =
+        System.Action_string_objects(
+        function(key, param)
+            local action = self[key]
+            if key == 'OnDestroy' then
+                action = function()
+                    self:_onDestroy()
+                end
+            end
+            if action == nil then
+                return
+            end
+            if param == nil or param.Length == 0 then
+                action(self)
+            elseif param.Length == 1 then
+                action(self, param:GetValue(0))
+            elseif param.Length == 2 then
+                action(self, param:GetValue(0), param:GetValue(1))
+            end
+        end
+    )
+    self:broadcast_on(
+        BROADCAST_CODE.MONO_QUIT,
+        function()
+            self.csComp:DelListenEvent(monoListenEvent)
+        end
+    )
+    self.csComp:AddListenEvent(monoListenEvent)
+end
+-- ui组件初始化
+function CompBase:uiCompInit()
+    local types = {'Text', 'Image', 'Button', 'InputField', 'ScrollRect'}
+
+    for index, t in ipairs(types) do
+        self.uiComp[t] = {}
+        local arr = comp:getCSComponentsInChildren(self.node, UEUI[t])
+        for i = 0, arr.Length - 1 do
+            local comp = arr:GetValue(i)
+            local key = comp.name
+            if type(self.uiComp[t][key]) == 'table' then
+                table.insert(self.uiComp[t][key], comp)
+            else
+                -- body
+                if self.uiComp[t][key] == nil then
+                    self.uiComp[t][key] = comp
+                else
+                    --print("ui已存在", #self.uiComp[t][key])
+                    local tempComp = self.uiComp[t][key]
+                    self.uiComp[t][key] = {}
+                    table.insert(self.uiComp[t][key], tempComp)
+                    table.insert(self.uiComp[t][key], comp)
+                end
+            end
+            --print("加入CompUI>>", " type:", t, "  name:", key)
+        end
+    end
+
+    -- 注册Button事件
+    for key, comp in pairs(self.uiComp.Button) do
+        local sum = 0
+        local e = nil
+        if type(comp) == 'table' then
+            e = 'on' .. comp[1].name:gsub('^%l', string.upper) .. 'Click'
+        else
+            e = 'on' .. comp.name:gsub('^%l', string.upper) .. 'Click'
+        end
+        print(self.name, ' Comp 注册Button事件>', e)
+        if self[e] ~= nil then
+            if type(comp) == 'table' then
+                sum = #comp
+                for i, comp1 in pairs(comp) do
+                    comp1.onClick:AddListener(
+                        function()
+                            self[e](self, comp1, i)
+                        end
+                    )
+                end
+            else
+                sum = 1
+                comp.onClick:AddListener(
+                    function()
+                        self[e](self, comp, 1)
+                    end
+                )
+            end
+        end
+
+        --print("注册Button事件>", e, "  共计注册：", sum)
+    end
+end
+
+function CompBase:_onLoad()
+    print('加载Comp-' .. self.name .. '>>>>>>>>>>>>>>>>>>>>>>>> onLoad')
+    self:onLoad()
+end
+function CompBase:_onDestroy()
+    print('卸载Comp-' .. self.name .. ' >>>>>>>>>>>>>>>>>>>>>>>> onDestroy')
+    self:timer_clear()
+    self:broadcast_clear()
+    self:load_clear()
+    self:onDestroy()
+end
+-- 卸载
+function CompBase:close()
+    comp:closeComponent(self.node, self)
+end
+function CompBase:timer_on(time, loopCount, onTrigger)
+    local t = timer:on(time, loopCount, onTrigger)
+    table.insert(self.timerMap, t)
+end
+function CompBase:timer_out(t)
+    timer:out(t)
+    table.del(self.timerMap, t)
+end
+function CompBase:timer_clear()
+    for index, t in ipairs(self.timerMap) do
+        self:timer_out(t)
+    end
+    self.timerMap = {}
+end
+function CompBase:broadcast_on(key, callback, order, isOnce)
+    if broadcast:on(key, callback, order, isOnce) then
+        local info = {key = key, callback = callback}
+        table.insert(self.broadcastMap, info)
+    end
+end
+function CompBase:broadcast_out(key, callback)
+    broadcast:out(key, callback)
+    table.del(self.broadcastMap, {key = key, callback = callback})
+end
+function CompBase:broadcast_clear()
+    for index, info in ipairs(self.broadcastMap) do
+        self:broadcast_out(info.key, info.callback)
+    end
+    self.broadcastMap = {}
+end
+function CompBase:load_sprite(key, resName, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    local k = {key = key, resName = resName}
+    local prefab = resUtil:LoadSprite(key, resName, loadIsClose)
+    self.abResMap[k] = prefab
+    return prefab
+end
+function CompBase:load_sprite_asyn(key, resName, cb, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    resUtil:LoadSpriteAsyn(
+        key,
+        resName,
+        System.Action_UnityEngine_Sprite(
+            function(prefab)
+                local k = {key = key, resName = resName}
+                self.abResMap[k] = prefab
+                if cb ~= nil then
+                    cb(prefab)
+                end
+            end
+        ),
+        loadIsClose
+    )
+end
+function CompBase:load_gameObject(key, resName, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    local k = {key = key, resName = resName}
+    local prefab = resUtil:LoadGameObject(key, resName, loadIsClose)
+    self.abResMap[k] = prefab
+    return prefab
+end
+function CompBase:load_gameObject_asyn(key, resName, cb, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    resUtil:LoadGameObjectAsyn(
+        key,
+        resName,
+        System.Action_UnityEngine_GameObject(
+            function(prefab)
+                local k = {key = key, resName = resName}
+                self.abResMap[k] = prefab
+                if cb ~= nil then
+                    cb(prefab)
+                end
+            end
+        ),
+        loadIsClose
+    )
+end
+function CompBase:load_animator(key, resName, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    local k = {key = key, resName = resName}
+    local prefab = resUtil:LoadAnimator(key, resName, loadIsClose)
+    self.abResMap[k] = prefab
+    return prefab
+end
+function CompBase:load_animator_asyn(key, resName, cb, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    resUtil:LoadAnimatorAsyn(
+        key,
+        resName,
+        System.Action_UnityEngine_RuntimeAnimatorController(
+            function(prefab)
+                local k = {key = key, resName = resName}
+                self.abResMap[k] = prefab
+                if cb ~= nil then
+                    cb(prefab)
+                end
+            end
+        ),
+        loadIsClose
+    )
+end
+function CompBase:unload(res)
+    for k, prefab in pairs(self.abResMap) do
+        if (prefab == res) then
+            resUtil:UnLoad(res)
+            -- print('清理AB包资源>>', utils.serialize(k))
+            self.abResMap[k] = nil
+        end
+    end
+end
+function CompBase:load_clear()
+    for key, prefab in pairs(self.abResMap) do
+        --print("清理AB包资源>>", utils.serialize(key))
+        resUtil:UnLoad(prefab)
+    end
+    self.abResMap = {}
+end
+return CompBase

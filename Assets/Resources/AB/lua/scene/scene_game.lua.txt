@@ -1,0 +1,7 @@
+local base = require("scene_base")
+local Scene = class("game", base)
+function Scene:onLoad()
+    print(utils.serialize(player.baseInfo))
+end
+
+return Scene

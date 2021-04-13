@@ -1,0 +1,11 @@
+local Json = class("Json")
+local cjson = require("cjson")
+function Json:init()
+    local jsonMap = {"ab_rely"}
+    for index, key in ipairs(jsonMap) do
+        local json = resUtil:LoadString("json", key, true)
+        self[key] = cjson.decode(json)
+    end
+end
+
+return Json

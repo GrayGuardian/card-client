@@ -1,0 +1,314 @@
+local base = require("ui_base")
+local UI = class("upres", base)
+
+----------------UI配置------------------
+function UI:GET_AB()
+    return "upres"
+end
+function UI:GET_ABS()
+    return {}
+end
+----------------UI配置------------------
+
+function UI:onLoad()
+    self.barNode = self.node:Find("loadBarNode")
+    self:hideBarNode()
+
+    self:networkInit()
+end
+function UI:networkInit()
+    --通过进度条检查 防止无更新一闪的情况
+    self:showBarNode()
+    self:setBarDesc("正在检查更新。。。")
+    local num = 0
+    local t = 1
+    local updateCb = nil
+    updateCb = function()
+        num = num + UE.Time.deltaTime / t
+        self:setBarVal(num)
+        if num > 1 then
+            self:hideBarNode()
+            self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
+
+            self:upResLoad()
+        end
+    end
+    self:broadcast_on(BROADCAST_CODE.MONO_UPDATE, updateCb)
+
+    refUtil:WebVersionInit(
+        function()
+            --self:upResLoad()
+        end,
+        function()
+            self:hideBarNode()
+            self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
+            ui:showTip(
+                {
+                    msg = "网络连接超时，是否重试？",
+                    btnTitle = "重试",
+                    onClick = function()
+                        self:networkInit()
+                    end,
+                    isClose = false
+                }
+            )
+        end
+    )
+end
+
+function UI:upResLoad()
+    self.refdata = refUtil:GetRefData()
+    print(string.format("更新状态：%s refdata:%s", self.refdata.type, self.refdata.data:toString()))
+    if self.refdata.type == 0 then
+        self:upResOver()
+    elseif self.refdata.type == 1 then
+        ui:showTip(
+            {
+                msg = "需要手动下载安装包进行更新，是否前往下载？",
+                btnTitle = "前往下载",
+                onClick = function()
+                    Application.Quit()
+                end,
+                isClose = false
+            }
+        )
+    elseif self.refdata.type == 2 then
+        ui:showTip(
+            {
+                msg = string.format("首次下载资源文件，共计需要下载%s资源文件", utils.sizeFormat(self.refdata.size)),
+                btnTitle = "开始下载",
+                onClick = function()
+                    self:downloadRes()
+                end,
+                isClose = false
+            }
+        )
+    elseif self.refdata.type == 3 then
+        ui:showTip(
+            {
+                msg = string.format("发现新版本，共计需要下载%s资源文件", utils.sizeFormat(self.refdata.size)),
+                btnTitle = "开始下载",
+                onClick = function()
+                    self:downloadRes()
+                end,
+                isClose = false
+            }
+        )
+    elseif self.refdata.type == 4 then
+        self:upResOver()
+    elseif self.refdata.type == 5 then
+        ui:showTip(
+            {
+                msg = string.format("文件损坏,需要重新下载\n共计需要下载%s资源文件", utils.sizeFormat(self.refdata.size)),
+                btnTitle = "开始下载",
+                onClick = function()
+                    self:downloadRes()
+                end,
+                isClose = false
+            }
+        )
+    end
+end
+
+function UI:showBarNode()
+    self.barNode.gameObject:SetActive(true)
+end
+function UI:hideBarNode()
+    self.barNode.gameObject:SetActive(false)
+end
+function UI:setBarVal(val)
+    self.uiComp.Image.valImage.fillAmount = val
+end
+function UI:setBarDesc(desc)
+    self.uiComp.Text.descText.text = desc
+end
+function UI:downloadRes()
+    print("开始下载资源")
+    self:showBarNode()
+    self:downloadABFile(
+        self.refdata.data.ABs,
+        function()
+            self:downloadResOver()
+        end,
+        function(abInfo)
+            print(string.format("AB包[%s]开始更新", abInfo.name))
+        end,
+        function(abInfo)
+            print(string.format("AB包[%s]更新完毕", abInfo.name))
+        end,
+        function(abInfo, order, size, count)
+            self:setBarVal(size / count)
+            self:setBarDesc(
+                string.format(
+                    "正在下载文件[%s]：%s/%s    [%s/%s]",
+                    abInfo.name,
+                    utils.sizeFormat(size),
+                    utils.sizeFormat(count),
+                    order + 1,
+                    self.refdata.data.ABs.Length
+                )
+            )
+            print(
+                string.format(
+                    "AB包[%s]正在下载：[%s/%s]：%s/%s",
+                    abInfo.name,
+                    order + 1,
+                    self.refdata.data.ABs.Length,
+                    utils.sizeFormat(size),
+                    utils.sizeFormat(count)
+                )
+            )
+        end,
+        function()
+            self:hideBarNode()
+            ui:showTip(
+                {
+                    msg = "网络连接超时，是否重试？",
+                    btnTitle = "重试",
+                    onClick = function()
+                        self:downloadRes()
+                    end,
+                    isClose = false
+                }
+            )
+            print("下载失败")
+        end
+    )
+end
+function UI:downloadResOver()
+    print("资源全部下载完毕")
+    self:hideBarNode()
+    if self.refdata.data.IsRestart then
+        refUtil:UpVersion()
+        ui:showTip(
+            {
+                msg = "更新完毕，请重启游戏",
+                onClick = function()
+                    Application.Quit()
+                end,
+                isClose = false
+            }
+        )
+        return
+    end
+    self:upResOver()
+end
+function UI:upResOver()
+    print("资源全部更新完毕")
+    refUtil:UpVersion()
+    refUtil:ClearRedundantRes()
+    self:loadAsset()
+end
+
+function UI:loadAsset()
+    print("预加载资源")
+
+    --需要预加载的AB包名
+    local abs = {"map"}
+    for index, ab in ipairs(abs) do
+        resUtil:LoadAssetBundleAsyn(
+            ab,
+            System.Action_UnityEngine_AssetBundle(
+                function(bundle)
+                    print("异步加载AB包完毕>>>", ab, bundle)
+                end
+            )
+        )
+    end
+
+    --需要从AB包中加载的对象池
+    local pools = {{key = "role", abKey = "player", resName = "player", config = {cnt = 10}}}
+    for index, info in ipairs(pools) do
+        pool:loadPoolByAB(
+            info.key,
+            info.abKey,
+            info.resName,
+            info.config,
+            function(cnt)
+                print("对象池初始化>>", info.key, cnt)
+            end
+        )
+    end
+
+    --通过虚假进度条加载
+    self:showBarNode()
+    self:setBarDesc("加载资源。。。")
+    local num = 0
+    local t = 1 --预计需要时间
+    local updateCb = nil
+    updateCb = function()
+        num = num + UE.Time.deltaTime / t
+        self:setBarVal(num)
+        if num > 1 then
+            self:hideBarNode()
+            self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
+
+            self:allOver()
+        end
+    end
+    self:broadcast_on(BROADCAST_CODE.MONO_UPDATE, updateCb)
+end
+
+function UI:allOver()
+    print("全部更新完毕")
+
+    ui:loadScene("Login")
+end
+
+function UI:downloadABFile(
+    abInfos,
+    allDownloadOverEvent,
+    singleDownloadStartEvent,
+    singleDownloadOverEvent,
+    singleDownloadUpdateEvent,
+    errorEvent,
+    order)
+    print(abInfos)
+    order = order and order or 0
+    if abInfos.Length <= order then
+        if allDownloadOverEvent ~= nil then
+            allDownloadOverEvent()
+        end
+        return
+    end
+    local abInfo = abInfos:GetValue(order)
+
+    if singleDownloadStartEvent ~= nil then
+        singleDownloadStartEvent(abInfo)
+    end
+
+    local download_url = string.format("%sAssetBundles/%s", GameConst.DOWNLOAD_URL, abInfo.name)
+    local save_path = string.format("%s/AssetBundles/%s", GameConst.RES_LOCAL_ROOT, abInfo.name)
+    local temp_fileName = string.format("%s_%s.temp", abInfo.name, abInfo.hash)
+    CSHttpUtil:Download(
+        download_url,
+        save_path,
+        temp_fileName,
+        function()
+            if singleDownloadOverEvent ~= nil then
+                singleDownloadOverEvent(abInfo)
+            end
+            self:downloadABFile(
+                abInfos,
+                allDownloadOverEvent,
+                singleDownloadStartEvent,
+                singleDownloadOverEvent,
+                singleDownloadUpdateEvent,
+                errorEvent,
+                order + 1
+            )
+        end,
+        function(downloadSize, countSize)
+            if singleDownloadUpdateEvent ~= nil then
+                singleDownloadUpdateEvent(abInfo, order, downloadSize, countSize)
+            end
+        end,
+        function()
+            if errorEvent ~= nil then
+                errorEvent()
+            end
+        end
+    )
+    --print(string.format("download_url:%s\nsave_path:%s\ntemp_fileName:%s",download_url,save_path,temp_fileName))
+end
+return UI

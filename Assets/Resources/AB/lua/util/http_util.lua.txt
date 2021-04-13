@@ -1,0 +1,95 @@
+local Http = class('Json')
+CSHttpUtil = Util.Http
+
+local url = GameConst.HTTP
+function Http:init()
+    broadcast:on(
+        BROADCAST_CODE.HTTP_LOGICERROR,
+        function(error)
+            --print('业务逻辑错误:>>>',tostring(error));
+            if error.code == ERROR_CODE.TOKEN_ERROR then
+                ui:showOnlyTip(
+                    'NETWORK_ERROR',
+                    {
+                        msg = error.msg .. '，请重新登录！',
+                        isClose = false,
+                        onClick = function()
+                            ui:loadScene('Login')
+                        end
+                    }
+                )
+
+                return
+            end
+
+            ui:showOnlyTip('NETWORK_ERROR', {msg = error.msg})
+        end
+    )
+    broadcast:on(
+        BROADCAST_CODE.HTTP_CONNONERROR,
+        function(data)
+            --print("连接错误:>>>", tostring(data))
+            ui:showOnlyTip(
+                'NETWORK_ERROR',
+                {
+                    msg = '网络连接错误，是否重试？',
+                    btnTitle = '重试',
+                    onClick = function()
+                        http:send(data.router, data.data, data.cb)
+                    end
+                }
+            )
+        end
+    )
+
+    self.token = ''
+end
+
+function Http:send(router, data, cb)
+    local body = {}
+    body.router = router
+    body[router] = data
+
+    local bytes = pb:encode('http_pb.http_c2s', body)
+    if bytes == '' then
+        return
+    end
+
+    print(string.format('http.c2s router:%s body:%s', router, pb:decode('http_pb.http_c2s', bytes)))
+
+    CSHttpUtil:Post_Asyn(
+        url,
+        bytes,
+        self.token,
+        function(result)
+            local t_body = pb:decode('http_pb.http_s2c', csbytesToLuabytes(result.bytes))
+            print(string.format('http.s2c router:%s body:%s', t_router, tostring(t_body)))
+            t_body = pb:pbToTable(t_body)
+            local t_router = t_body.router
+            local t_data = t_body[t_router]
+            t_data = t_data and t_data or {}
+
+            if t_router == 'error' then
+                --出现业务逻辑错误
+                broadcast:notify(BROADCAST_CODE.HTTP_LOGICERROR, t_data)
+                return
+            end
+
+            --监听带有token返回数据 更新token
+            if t_data.token ~= nil then
+                print('http update token>>>>>', t_data.token)
+                self.token = t_data.token
+            end
+
+            if cb ~= nil then
+                cb(t_data)
+            end
+        end,
+        function()
+            --出现连接错误
+            broadcast:notify(BROADCAST_CODE.HTTP_CONNONERROR, {router = router, data = data, cb = cb})
+        end
+    )
+end
+
+return Http

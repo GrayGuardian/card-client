@@ -1,0 +1,31 @@
+local base = require("model_base")
+local Model = class("player", base)
+
+local PlayerCurrency = require("model_player_currency")
+local PlayerStyle = require("model_player_style")
+
+function Model:CLASS_NAME()
+    return "Player"
+end
+function Model:onLoad()
+    print("Player onLoad", self.baseInfo)
+
+    self.currency = PlayerCurrency:new()
+end
+
+function Model:getPublicPlayerInfo()
+    local data = {}
+    data.pid = self:get_pid()
+    data.name = self:get_name()
+    data.forward = self:get_pos().forward
+    data.roleId = self.style:get_roleId()
+    data.mountId = 0
+    local nameStyle = self.style:get_nameStyle()
+    if nameStyle == 0 then
+        nameStyle = 1
+    end
+    data.nameStyle = nameStyle
+    return data
+end
+
+return Model

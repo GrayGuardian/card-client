@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 2540104430
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: lua
+      Dependencies: {}
+    Info_1:
+      Name: p1
+      Dependencies: {}
+    Info_2:
+      Name: json
+      Dependencies: {}
+    Info_3:
+      Name: ui1
+      Dependencies:
+        Dependency_0: p1
+    Info_4:
+      Name: upres
+      Dependencies: {}
+    Info_5:
+      Name: prefab1
+      Dependencies:
+        Dependency_0: p1

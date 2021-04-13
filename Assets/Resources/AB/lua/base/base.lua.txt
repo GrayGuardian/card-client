@@ -1,0 +1,31 @@
+-- 缩写
+_G.UE = UnityEngine
+_G.UEUI = UE.UI
+_G.GameObject = UE.GameObject
+_G.Application = UE.Application
+
+-- c#
+_G.resUtil = Util.Res
+_G.refUtil = Util.Ref
+_G.fileUtil = Util.File
+-- tolua
+require("utils")
+
+_G.BROADCAST_CODE = require("BROADCAST_CODE")
+local error_info = require("error_info")
+_G.SUCCESS_CODE = error_info.SUCCESS_CODE
+_G.ERROR_CODE = error_info.ERROR_CODE
+_G.genErrorMsg = error_info.genErrorMsg
+_G.tpl = require("tpl")
+
+_G.pb = require("pb_util"):new()
+_G.json = require("json_util"):new()
+
+_G.broadcast = require("broadcast_util"):new()
+_G.mono = require("mono_util"):new()
+_G.timer = require("timer_util"):new()
+_G.ui = require("ui"):new()
+_G.comp = require("comp"):new()
+_G.http = require("http_util"):new()
+_G.network = require("network_util"):new()
+_G.pool = require("pool_util"):new()

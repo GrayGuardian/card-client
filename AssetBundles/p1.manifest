@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 2993101222
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: dcd063e35098b249b6bae4fed87756af
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AB/p1/btn_close1.png
+- Assets/Resources/AB/p1/bg_ui1_bottom.png
+- Assets/Resources/AB/p1/bg_outline1.png
+- Assets/Resources/AB/p1/icon_red_point.png
+- Assets/Resources/AB/p1/bar1_bg.png
+- Assets/Resources/AB/p1/bg_input1.png
+- Assets/Resources/AB/p1/icon_gray_point.png
+- Assets/Resources/AB/p1/bg_ui1.png
+- Assets/Resources/AB/p1/bar1_val.png
+- Assets/Resources/AB/p1/bg_btn1.png
+- Assets/Resources/AB/p1/bg_title1.png
+- Assets/Resources/AB/p1/bg_btn2.png
+Dependencies: []

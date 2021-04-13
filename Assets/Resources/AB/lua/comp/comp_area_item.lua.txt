@@ -1,0 +1,28 @@
+local base = require("comp_base")
+local Comp = class("area_item", base)
+
+function Comp:onLoad()
+    self.info = self.param.info
+    self.onClick = self.param.onClick
+
+    self:refresh()
+
+    self:hideOutLine()
+end
+function Comp:refresh()
+    self.uiComp.Text.nameText.text = self.info.name
+    self.uiComp.Image.stateIcon.sprite =
+        self:load_sprite("p1", self.info.ismaintenance == 0 and "icon_red_point" or "icon_gray_point")
+end
+function Comp:showOutLine()
+    self.uiComp.Image.outlineImage.gameObject:SetActive(true)
+end
+function Comp:hideOutLine()
+    self.uiComp.Image.outlineImage.gameObject:SetActive(false)
+end
+function Comp:onBtnClick()
+    if self.onClick ~= nil then
+        self:onClick()
+    end
+end
+return Comp

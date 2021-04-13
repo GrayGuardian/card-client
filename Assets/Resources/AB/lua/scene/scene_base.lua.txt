@@ -1,0 +1,173 @@
+local SceneBase = class('SceneBase')
+
+------------------- 继承重写 -------------------
+--加载参数二次重写默认值
+function SceneBase:GET_DEFAULT_OPTS()
+    return table.copy(SceneBase.DEFAULT_OPTS)
+end
+function SceneBase:onLoad()
+end
+function SceneBase:onDestroy()
+end
+------------------- 继承重写 -------------------
+
+SceneBase.static.DEFAULT_OPTS = {isCloseAllUI = true}
+
+function SceneBase:init(info, param, opts)
+    self.info = info
+    self.param = param
+
+    self.opts = self:GET_DEFAULT_OPTS()
+    if opts ~= nil then
+        for key, value in pairs(opts) do
+            self.opts[key] = value
+        end
+    end
+    for key, value in pairs(SceneBase.DEFAULT_OPTS) do
+        if self.opts[key] == nil then
+            self.opts[key] = value
+        end
+    end
+
+    print(self.info.name, '>>>>>>>>>>', utils.serialize(self.opts))
+
+    self.timerMap = {}
+    self.broadcastMap = {}
+    self.abResMap = {}
+
+    self:_onLoad()
+end
+function SceneBase:_onLoad()
+    print('卸载场景-' .. self.info.name .. ' >>>>>>>>>>>>>>>>>>>>>>>> onLoad')
+    self:onLoad()
+end
+function SceneBase:_onDestroy()
+    print('卸载场景-' .. self.info.name .. ' >>>>>>>>>>>>>>>>>>>>>>>> onDestroy')
+    if self.opts.isCloseAllUI == true then
+        ui:closeAllUI()
+    end
+    self:timer_clear()
+    self:broadcast_clear()
+    self:load_clear()
+
+    self:onDestroy()
+end
+function SceneBase:timer_on(time, loopCount, onTrigger)
+    local t = timer:on(time, loopCount, onTrigger)
+    table.insert(self.timerMap, t)
+end
+function SceneBase:timer_out(t)
+    timer:out(t)
+    table.del(self.timerMap, t)
+end
+function SceneBase:timer_clear()
+    for index, t in ipairs(self.timerMap) do
+        self:timer_out(t)
+    end
+    self.timerMap = {}
+end
+function SceneBase:broadcast_on(key, callback, order, isOnce)
+    if broadcast:on(key, callback, order, isOnce) then
+        local info = {key = key, callback = callback}
+        table.insert(self.broadcastMap, info)
+    end
+end
+function SceneBase:broadcast_out(key, callback)
+    broadcast:out(key, callback)
+    table.del(self.broadcastMap, {key = key, callback = callback})
+end
+function SceneBase:broadcast_clear()
+    for index, info in ipairs(self.broadcastMap) do
+        self:broadcast_out(info.key, info.callback)
+    end
+    self.broadcastMap = {}
+end
+function SceneBase:load_sprite(key, resName, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    local k = {key = key, resName = resName}
+    local prefab = resUtil:LoadSprite(key, resName, loadIsClose)
+    self.abResMap[k] = prefab
+    return prefab
+end
+function SceneBase:load_sprite_asyn(key, resName, cb, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    resUtil:LoadSpriteAsyn(
+        key,
+        resName,
+        System.Action_UnityEngine_Sprite(
+            function(prefab)
+                local k = {key = key, resName = resName}
+                self.abResMap[k] = prefab
+                if cb ~= nil then
+                    cb(prefab)
+                end
+            end
+        ),
+        loadIsClose
+    )
+end
+function SceneBase:load_gameObject(key, resName, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    local k = {key = key, resName = resName}
+    local prefab = resUtil:LoadGameObject(key, resName, loadIsClose)
+    self.abResMap[k] = prefab
+    return prefab
+end
+function SceneBase:load_gameObject_asyn(key, resName, cb, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    resUtil:LoadGameObjectAsyn(
+        key,
+        resName,
+        System.Action_UnityEngine_GameObject(
+            function(prefab)
+                local k = {key = key, resName = resName}
+                self.abResMap[k] = prefab
+                if cb ~= nil then
+                    cb(prefab)
+                end
+            end
+        ),
+        loadIsClose
+    )
+end
+function SceneBase:load_animator(key, resName, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    local k = {key = key, resName = resName}
+    local prefab = resUtil:LoadAnimator(key, resName, loadIsClose)
+    self.abResMap[k] = prefab
+    return prefab
+end
+function SceneBase:load_animator_asyn(key, resName, cb, loadIsClose)
+    loadIsClose = loadIsClose == nil and false or loadIsClose
+    resUtil:LoadAnimatorAsyn(
+        key,
+        resName,
+        System.Action_UnityEngine_RuntimeAnimatorController(
+            function(prefab)
+                local k = {key = key, resName = resName}
+                self.abResMap[k] = prefab
+                if cb ~= nil then
+                    cb(prefab)
+                end
+            end
+        ),
+        loadIsClose
+    )
+end
+function SceneBase:unload(res)
+    for k, prefab in pairs(self.abResMap) do
+        if (prefab == res) then
+            resUtil:UnLoad(res)
+            -- print('清理AB包资源>>', utils.serialize(k))
+            self.abResMap[k] = nil
+        end
+    end
+end
+function SceneBase:load_clear()
+    for key, prefab in pairs(self.abResMap) do
+        --print("清理AB包资源>>", utils.serialize(key))
+        resUtil:UnLoad(prefab)
+    end
+    self.abResMap = {}
+end
+return SceneBase

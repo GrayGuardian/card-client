@@ -1,0 +1,27 @@
+local Template = {}
+
+local getArr = function(name)
+    return require(name)
+end
+
+local getMap = function(name, key)
+    local map = {}
+    local arr = getArr(name)
+    for index, element in ipairs(arr) do
+        if element[key] ~= null then
+            map[element[key]] = element
+        else
+            --未找到标识
+        end
+    end
+    return map
+end
+
+-- local template_role = getMap("template_role", "id")
+-- local template_mount = getMap("template_mount", "id")
+-- local template_map = getMap("template_map", "id")
+
+-- Template.template_role = template_role
+-- Template.template_mount = template_mount
+-- Template.template_map = template_map
+return Template
