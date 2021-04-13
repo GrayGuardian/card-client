@@ -32,7 +32,7 @@ function UI:addAreaItem(info)
     local node = GameObject.Instantiate(resUtil:LoadGameObject("prefab1", "areaItem")).transform
     node.parent = self.contentNode
     node.localPosition = {x = 0, y = 0, z = 0}
-    node.localScale = {x = 0.8, y = 0.8, z = 0.8}
+    node.localScale = {x = 0.75, y = 0.75, z = 0.75}
     local c =
         comp:addComponent(
         node,
