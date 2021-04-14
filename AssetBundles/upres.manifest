@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2527423051
+CRC: 3879747886
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7223bbd00efa0137d038ab0cedec6b5c
+    Hash: 285abede6c4310966cc68ef2efb2efca
   TypeTreeHash:
     serializedVersion: 2
     Hash: 98389b4b07b41cb84e430329cd7ce89c
@@ -41,9 +41,9 @@ Assets:
 - Assets/Resources/AB/upres/btn_close1.png
 - Assets/Resources/AB/upres/bg.jpg
 - Assets/Resources/AB/upres/bg_content1.png
+- Assets/Resources/AB/upres/bg_btn2.png
 - Assets/Resources/AB/upres/bar1_val.png
 - Assets/Resources/AB/upres/bg_btn1.png
 - Assets/Resources/AB/upres/ui_upres_tip.prefab
 - Assets/Resources/AB/upres/bg_ui1.png
-Dependencies:
-- D:/Demo/Unity/card-game/card-client/AssetBundles/p1
+Dependencies: []

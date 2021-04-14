@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1263555745
+CRC: 2973027952
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3c0e07c6563ac8bdce62b0084f14bcbf
+    Hash: 5323c9a39eddd743690523b79b1033a7
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -23,6 +23,7 @@ Assets:
 - Assets/Resources/AB/avatar/13.png
 - Assets/Resources/AB/avatar/12.png
 - Assets/Resources/AB/avatar/9.png
+- Assets/Resources/AB/avatar/-1.png
 - Assets/Resources/AB/avatar/1.png
 - Assets/Resources/AB/avatar/7.png
 - Assets/Resources/AB/avatar/20.png

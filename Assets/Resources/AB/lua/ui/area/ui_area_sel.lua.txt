@@ -47,7 +47,6 @@ function UI:addAreaItem(info)
     return c
 end
 function UI:onItemBtnClick(c)
-    print("点击Item>>>", tostring(c.info))
     self:selAreaItem(c)
 end
 function UI:selAreaItem(c)

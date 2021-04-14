@@ -1,0 +1,38 @@
+local base = require("ui_base")
+local UI = class("tip", base)
+
+----------------UI配置------------------
+function UI:GET_AB()
+    return "ui1"
+end
+----------------UI配置------------------
+function UI:onLoad()
+    self.affirmStr = self.param.affirmStr
+
+    self.onAffirm = self.param.onAffirm
+    self.onClose = self.param.onClose
+    self.onError = self.param.onError
+
+    self.uiComp.Text.tipText.text = string.format("该操作重要且不可逆，请在输入“<color=red>%s</color>”以继续操作", self.affirmStr)
+end
+
+function UI:onBtnClick(o, order)
+    if self.uiComp.InputField.textInput.text == self.affirmStr then
+        if self.onAffirm ~= nil then
+            self.onAffirm()
+        end
+        self:close()
+    else
+        if self.onError ~= nil then
+            self.onError()
+        end
+    end
+end
+function UI:onCloseBtnClick(o, order)
+    if self.onClose ~= nil then
+        self.onClose()
+    end
+    self:close()
+end
+
+return UI

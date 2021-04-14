@@ -89,5 +89,30 @@ function UI:onDelBtnClick(o, order)
         ui:showTip({msg = "请点击选择上方列表中的人物"})
         return
     end
+    local pid = self.lastSelComp.info.pid
+    ui:showUI(
+        "ui_input_affirm",
+        {
+            affirmStr = "确认删除",
+            onAffirm = function()
+                -- 删除人物
+                http:send(
+                    "delPlayer",
+                    {pid = pid},
+                    function(data)
+                        --删除人物列表
+                        local comps = comp:getComponentsInChildren(self.contentNode, "selplayer_item")
+                        for key, comp in pairs(comps) do
+                            if comp.info ~= nil then
+                                if comp.info.pid == data.pid then
+                                    GameObject.Destroy(comp.node.gameObject)
+                                end
+                            end
+                        end
+                    end
+                )
+            end
+        }
+    )
 end
 return UI

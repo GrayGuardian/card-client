@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2483539332
+CRC: 3181946254
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 169c67bf9f275cc27193083baf4b678b
+    Hash: a302895c2cb7371fb746b94a41ec080a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f552dfe68fe9024c92f722ca99cdc001
+    Hash: 98389b4b07b41cb84e430329cd7ce89c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -22,6 +22,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
+  Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
   Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 115
   Script: {instanceID: 0}
@@ -36,6 +38,7 @@ ClassTypes:
 Assets:
 - Assets/Resources/AB/prefab1/areaItem.prefab
 - Assets/Resources/AB/prefab1/avatar1Item.prefab
+- Assets/Resources/AB/prefab1/selPlayerItem.prefab
 Dependencies:
 - D:/Demo/Unity/card-game/card-client/AssetBundles/p1
 - D:/Demo/Unity/card-game/card-client/AssetBundles/avatar
