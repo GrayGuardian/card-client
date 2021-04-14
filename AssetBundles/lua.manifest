@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 904285514
+CRC: 1133152062
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9e69d72da886671db083cde2f354db0e
+    Hash: 27ad87fdc5ca66654feadd2b77b98bbc
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -25,6 +25,7 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/jit/dis_x86.lua.txt
 - Assets/Resources/AB/lua/model/model_player_currency.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm64be.lua.txt
+- Assets/Resources/AB/lua/ui/bg_view/ui_bg_login.lua.txt
 - Assets/Resources/AB/lua/template/tpl.lua.txt
 - Assets/Resources/AB/lua/ui/area/ui_area_sel.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dump.lua.txt
@@ -68,6 +69,7 @@ Assets:
 - Assets/Resources/AB/lua/util/pb_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/v.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mips.lua.txt
+- Assets/Resources/AB/lua/comp/comp_avatar_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/event.lua.txt
 - Assets/Resources/AB/lua/base/tolua/lpeg/re.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/tp.lua.txt

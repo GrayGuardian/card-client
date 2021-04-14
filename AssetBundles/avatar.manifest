@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 1263555745
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3c0e07c6563ac8bdce62b0084f14bcbf
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AB/avatar/10.png
+- Assets/Resources/AB/avatar/8.png
+- Assets/Resources/AB/avatar/15.png
+- Assets/Resources/AB/avatar/17.png
+- Assets/Resources/AB/avatar/6.png
+- Assets/Resources/AB/avatar/11.png
+- Assets/Resources/AB/avatar/13.png
+- Assets/Resources/AB/avatar/12.png
+- Assets/Resources/AB/avatar/9.png
+- Assets/Resources/AB/avatar/1.png
+- Assets/Resources/AB/avatar/7.png
+- Assets/Resources/AB/avatar/20.png
+- Assets/Resources/AB/avatar/5.png
+- Assets/Resources/AB/avatar/18.png
+- Assets/Resources/AB/avatar/14.png
+- Assets/Resources/AB/avatar/2.png
+- Assets/Resources/AB/avatar/21.png
+- Assets/Resources/AB/avatar/3.png
+- Assets/Resources/AB/avatar/19.png
+- Assets/Resources/AB/avatar/16.png
+- Assets/Resources/AB/avatar/4.png
+Dependencies: []

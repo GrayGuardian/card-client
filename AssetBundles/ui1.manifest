@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1882006231
+CRC: 224376397
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: eccfa0203369f8a89564b1fdce1124a2
+    Hash: fc31ab7b5be03440ad7c232f437344e5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6830d5dfb2a3184c89661d48cb5532b4
@@ -46,6 +46,7 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/Resources/AB/ui1/ui_bg_login.prefab
 - Assets/Resources/AB/ui1/ui_player_main.prefab
 - Assets/Resources/AB/ui1/ui_area_sel.prefab
 - Assets/Resources/AB/ui1/ui_login.prefab

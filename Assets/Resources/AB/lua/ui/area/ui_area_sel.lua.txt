@@ -5,8 +5,8 @@ local UI = class("area_sel", base)
 function UI:GET_AB()
     return "ui1"
 end
-function UI:GET_ABS()
-    return {"p1", "prefab1"}
+function UI:GET_DEFAULT_OPTS()
+    return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
 
@@ -29,7 +29,7 @@ function UI:refresh()
     end
 end
 function UI:addAreaItem(info)
-    local node = GameObject.Instantiate(resUtil:LoadGameObject("prefab1", "areaItem")).transform
+    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "areaItem")).transform
     node.parent = self.contentNode
     node.localPosition = {x = 0, y = 0, z = 0}
     node.localScale = {x = 0.75, y = 0.75, z = 0.75}

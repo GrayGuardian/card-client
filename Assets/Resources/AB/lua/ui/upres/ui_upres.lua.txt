@@ -5,14 +5,18 @@ local UI = class("upres", base)
 function UI:GET_AB()
     return "upres"
 end
-function UI:GET_ABS()
-    return {}
-end
 ----------------UI配置------------------
 
 function UI:onLoad()
     self.barNode = self.node:Find("loadBarNode")
     self:hideBarNode()
+
+    if refUtil.Version == nil then
+        self.uiComp.Text.versionText.gameObject:SetActive(false)
+    else
+        self.uiComp.Text.versionText.gameObject:SetActive(true)
+        self.uiComp.Text.versionText.text = string.format("版本号：%s", refUtil.Version.Version)
+    end
 
     self:networkInit()
 end
@@ -204,31 +208,31 @@ function UI:loadAsset()
     print("预加载资源")
 
     --需要预加载的AB包名
-    local abs = {"map"}
-    for index, ab in ipairs(abs) do
-        resUtil:LoadAssetBundleAsyn(
-            ab,
-            System.Action_UnityEngine_AssetBundle(
-                function(bundle)
-                    print("异步加载AB包完毕>>>", ab, bundle)
-                end
-            )
-        )
-    end
+    -- local abs = {"map"}
+    -- for index, ab in ipairs(abs) do
+    --     resUtil:LoadAssetBundleAsyn(
+    --         ab,
+    --         System.Action_UnityEngine_AssetBundle(
+    --             function(bundle)
+    --                 print("异步加载AB包完毕>>>", ab, bundle)
+    --             end
+    --         )
+    --     )
+    -- end
 
     --需要从AB包中加载的对象池
-    local pools = {{key = "role", abKey = "player", resName = "player", config = {cnt = 10}}}
-    for index, info in ipairs(pools) do
-        pool:loadPoolByAB(
-            info.key,
-            info.abKey,
-            info.resName,
-            info.config,
-            function(cnt)
-                print("对象池初始化>>", info.key, cnt)
-            end
-        )
-    end
+    -- local pools = {{key = "role", abKey = "player", resName = "player", config = {cnt = 10}}}
+    -- for index, info in ipairs(pools) do
+    --     pool:loadPoolByAB(
+    --         info.key,
+    --         info.abKey,
+    --         info.resName,
+    --         info.config,
+    --         function(cnt)
+    --             print("对象池初始化>>", info.key, cnt)
+    --         end
+    --     )
+    -- end
 
     --通过虚假进度条加载
     self:showBarNode()

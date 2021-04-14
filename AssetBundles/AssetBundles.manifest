@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2540104430
+CRC: 552869893
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -17,8 +17,13 @@ AssetBundleManifest:
         Dependency_0: p1
     Info_4:
       Name: upres
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: p1
     Info_5:
       Name: prefab1
       Dependencies:
         Dependency_0: p1
+        Dependency_1: avatar
+    Info_6:
+      Name: avatar
+      Dependencies: {}

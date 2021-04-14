@@ -5,8 +5,8 @@ local UI = class("area_main", base)
 function UI:GET_AB()
     return "ui1"
 end
-function UI:GET_ABS()
-    return {"p1"}
+function UI:GET_DEFAULT_OPTS()
+    return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
 

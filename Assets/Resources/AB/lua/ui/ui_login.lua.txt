@@ -1,12 +1,12 @@
-local base = require('ui_base')
-local UI = class('login', base)
+local base = require("ui_base")
+local UI = class("login", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return 'ui1'
+    return "ui1"
 end
-function UI:GET_ABS()
-    return {'p1'}
+function UI:GET_DEFAULT_OPTS()
+    return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
 
@@ -16,15 +16,15 @@ end
 function UI:onLoginBtnClick(o, order)
     local username = self.uiComp.InputField.usernameInput.text
     local password = self.uiComp.InputField.passwordInput.text
-    if username == '' or password == '' then
-        ui:showTip({msg = '用户名及密码不可为空'})
+    if username == "" or password == "" then
+        ui:showTip({msg = "用户名及密码不可为空"})
         return
     end
     http:send(
-        'login',
+        "login",
         {username = username, password = password},
         function(data)
-            ui:showUI('ui_area_main', {area = data.area, areas = data.areas})
+            ui:showUI("ui_area_main", {area = data.area, areas = data.areas})
             self:close()
         end
     )

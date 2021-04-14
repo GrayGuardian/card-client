@@ -33,7 +33,7 @@ function UIBase:init(name, param, opts)
     self.name = name
     self.param = param
 
-    self.opts = self.GET_DEFAULT_OPTS()
+    self.opts = self:GET_DEFAULT_OPTS()
     if opts ~= nil then
         for key, value in pairs(opts) do
             self.opts[key] = value

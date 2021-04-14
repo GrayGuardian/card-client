@@ -5,9 +5,6 @@ local UI = class("upres_tip", base)
 function UI:GET_AB()
     return "upres"
 end
-function UI:GET_ABS()
-    return {}
-end
 ----------------UI配置------------------
 -- msg type title btnTitle isClose isClickClose onClick onClose onYes onNo
 function UI:onLoad()

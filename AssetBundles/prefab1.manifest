@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 374057557
+CRC: 2483539332
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 38b23119e67933463a439aebf3cd8d5d
+    Hash: 169c67bf9f275cc27193083baf4b678b
   TypeTreeHash:
     serializedVersion: 2
     Hash: f552dfe68fe9024c92f722ca99cdc001
@@ -35,5 +35,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/AB/prefab1/areaItem.prefab
+- Assets/Resources/AB/prefab1/avatar1Item.prefab
 Dependencies:
 - D:/Demo/Unity/card-game/card-client/AssetBundles/p1
+- D:/Demo/Unity/card-game/card-client/AssetBundles/avatar

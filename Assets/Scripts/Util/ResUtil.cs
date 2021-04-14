@@ -116,7 +116,7 @@ public class ResUtil
     }
     public string[] GetRelyABs(string key, string resName)
     {
-        if(key == "json" && resName == "ab_rely") return new string[]{};
+        if (key == "json" && resName == "ab_rely") return new string[] { };
 
         List<string> relyABList = new List<string>();
         string json = Util.Res.LoadString("json", "ab_rely", true);
@@ -192,6 +192,7 @@ public class ResUtil
 
     public void UnLoadAssetBundle(string key, bool unloadAllLoadedObjects = false)
     {
+
         if (GameConst.PRO_ENV != ENV_TYPE.MASTER) return;
         AssetBundle bundle = GetBundleByName(key);
         if (bundle == null) return;

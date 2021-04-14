@@ -1,0 +1,42 @@
+local base = require("comp_base")
+local Comp = class("selplayer_item", base)
+
+function Comp:onLoad()
+    self.info = self.param.info
+    self.onClick = self.param.onClick
+
+    self.infoNode = self.node:Find("infoNode")
+
+    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "avatar1Item")).transform
+    node.parent = self.node
+    node.localPosition = {x = -300, y = -3, z = 0}
+    node.localScale = {x = 1.8, y = 1.8, z = 1.8}
+    node:SetSiblingIndex(1)
+    self.avatarComp = comp:addComponent(node, "avatar_item", {id = self.info == nil and -1 or self.info.avatarid})
+
+    self:hideOutLine()
+
+    self:refresh()
+end
+function Comp:refresh()
+    self.avatarComp:refresh(self.info == nil and -1 or self.info.avatarid)
+    self.uiComp.Text.createTipText.gameObject:SetActive(self.info == nil)
+    self.infoNode.gameObject:SetActive(self.info ~= nil)
+
+    if self.info ~= nil then
+        self.uiComp.Text.nameText.text = self.info.name
+        self.uiComp.Text.lvText.text = string.format("Lv.%s", self.info.lv)
+    end
+end
+function Comp:showOutLine()
+    self.uiComp.Image.outlineImage.gameObject:SetActive(true)
+end
+function Comp:hideOutLine()
+    self.uiComp.Image.outlineImage.gameObject:SetActive(false)
+end
+function Comp:onBtnClick()
+    if self.onClick ~= nil then
+        self:onClick()
+    end
+end
+return Comp

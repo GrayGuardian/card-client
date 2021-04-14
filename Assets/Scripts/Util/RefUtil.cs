@@ -85,6 +85,7 @@ public class RefUtil
     public void UpVersion()
     {
         Debug.Log("更新版本文件>>" + WebVersion.toString());
+
         Util.Encrypt.WriteString(Path.Combine(GameConst.RES_LOCAL_ROOT, "Version"), WebVersion.toString());
     }
     /// <summary>

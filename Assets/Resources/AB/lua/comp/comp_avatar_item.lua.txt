@@ -1,0 +1,15 @@
+local base = require("comp_base")
+local Comp = class("avatar_item", base)
+
+function Comp:onLoad()
+    self.id = self.param.id
+
+    self:refresh()
+end
+function Comp:refresh(id)
+    if id ~= nil then
+        self.id = id
+    end
+    self.uiComp.Image.icon.sprite = self:load_sprite("avatar", self.id)
+end
+return Comp

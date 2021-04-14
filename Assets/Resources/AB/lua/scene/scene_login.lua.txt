@@ -27,6 +27,7 @@ function Scene:onLoad()
         true
     )
 
+    ui:showUI("ui_bg_login")
     ui:showUI("ui_login")
 end
 
