@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3120267049
+CRC: 2499377393
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a7aa2e308f6edaad5ebc51b5808e0d51
+    Hash: 19b6789c12dbc00d65d41683cd65f104
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -14,6 +14,7 @@ ClassTypes:
 Assets:
 - Assets/Resources/AB/lua/base/tolua/jit/p.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/encoder.lua.txt
+- Assets/Resources/AB/lua/ui/common/ui_input_affirm.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/coroutine.lua.txt
 - Assets/Resources/AB/lua/util/timer/timer_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/containers.lua.txt
@@ -36,6 +37,7 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Bounds.lua.txt
 - Assets/Resources/AB/lua/base/comp.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Color.lua.txt
+- Assets/Resources/AB/lua/ui/player/ui_player_create.lua.txt
 - Assets/Resources/AB/lua/ui/upres/ui_upres.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Vector2.lua.txt
@@ -105,10 +107,10 @@ Assets:
 - Assets/Resources/AB/lua/util/timer/timer_model.lua.txt
 - Assets/Resources/AB/lua/scene/scene_step.lua.txt
 - Assets/Resources/AB/lua/util/mono_util.lua.txt
-- Assets/Resources/AB/lua/ui/player/ui_player_main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/LayerMask.lua.txt
 - Assets/Resources/AB/lua/ui/common/ui_tip.lua.txt
 - Assets/Resources/AB/lua/comp/comp_area_item.lua.txt
+- Assets/Resources/AB/lua/ui/player/ui_player_sel.lua.txt
 - Assets/Resources/AB/lua/main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/bcsave.lua.txt
 - Assets/Resources/AB/lua/base/tolua/slot.lua.txt

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3181946254
+CRC: 3576814241
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a302895c2cb7371fb746b94a41ec080a
+    Hash: 7670dcd229291ebcc243fcc28eeb7324
   TypeTreeHash:
     serializedVersion: 2
     Hash: 98389b4b07b41cb84e430329cd7ce89c
@@ -40,5 +40,5 @@ Assets:
 - Assets/Resources/AB/prefab1/avatar1Item.prefab
 - Assets/Resources/AB/prefab1/selPlayerItem.prefab
 Dependencies:
-- D:/Demo/Unity/card-game/card-client/AssetBundles/p1
-- D:/Demo/Unity/card-game/card-client/AssetBundles/avatar
+- F:/Git/card/card-client/AssetBundles/avatar
+- F:/Git/card/card-client/AssetBundles/p1

@@ -1,5 +1,5 @@
-local base = require("comp_base")
-local Comp = class("avatar1_item", base)
+local base = require('comp_base')
+local Comp = class('avatar1_item', base)
 
 function Comp:onLoad()
     self.id = self.param.id
@@ -12,7 +12,7 @@ function Comp:refresh(id)
     if id ~= nil then
         self.id = id
     end
-    self.uiComp.Image.icon.sprite = self:load_sprite("avatar", self.id)
+    self.uiComp.Image.iconImage.sprite = self:load_sprite('avatar', self.id)
 end
 
 function Comp:showOutLine()

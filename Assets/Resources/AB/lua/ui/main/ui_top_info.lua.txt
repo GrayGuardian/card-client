@@ -1,14 +1,20 @@
-local base = require("ui_base")
-local UI = class("top_info", base)
+local base = require('ui_base')
+local UI = class('top_info', base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return "ui1"
+    return 'ui1'
 end
 function UI:GET_DEFAULT_OPTS()
     return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
 function UI:onLoad()
+    self:refresh()
+end
+function UI:refresh()
+    self.uiComp.Text.vipLvText.text = player:get_vipLv()
+    self.uiComp.Image.avatarIconImage.sprite = self:load_sprite('avatar', player:get_avatarid())
+    self.uiComp.Text.nameText.text = player:get_name()
 end
 return UI
