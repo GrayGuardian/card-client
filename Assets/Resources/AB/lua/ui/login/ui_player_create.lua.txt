@@ -1,0 +1,71 @@
+local base = require("ui_base")
+local UI = class("player_create", base)
+
+----------------UI配置------------------
+function UI:GET_AB()
+    return "ui1"
+end
+function UI:GET_DEFAULT_OPTS()
+    return {blockInput = false, blackMask = 0}
+end
+----------------UI配置------------------
+
+function UI:onLoad()
+    self.contentNode = self.uiComp.ScrollRect.ScrollView.transform:Find("Viewport"):Find("Content")
+
+    self:refresh()
+end
+function UI:refresh()
+    for i = 1, 21 do
+        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "avatar1Item")).transform
+        node.parent = self.contentNode
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 2, y = 2, z = 2}
+        local c =
+            comp:addComponent(
+            node,
+            "avatar1_item",
+            {
+                id = i,
+                onClick = function(c)
+                    self:onAvatarItemBtnClick(c)
+                end
+            }
+        )
+    end
+end
+function UI:onAvatarItemBtnClick(c)
+    if self.lastAvatarComp ~= nil then
+        self.lastAvatarComp:hideOutLine()
+    end
+    self.lastAvatarComp = c
+    self.lastAvatarComp:showOutLine()
+end
+function UI:onBackBtnClick(o, order)
+    ui:showUI("ui_player_sel")
+    self:close()
+end
+function UI:onCreateBtnClick(o, order)
+    if self.lastAvatarComp == nil then
+        ui:showTip({msg = "请选择头像"})
+        return
+    end
+    if self.uiComp.InputField.nameInput.text == "" then
+        ui:showTip({msg = "请输入姓名"})
+        return
+    end
+    local name = self.uiComp.InputField.nameInput.text
+    local avatarid = self.lastAvatarComp.id
+    -- 创建人物
+    http:send(
+        "createPlayer",
+        {name = name, avatarid = avatarid},
+        function(data)
+            print("人物创建成功>>>", utils.serialize(data.info))
+            table.insert(GameData.players, data.info)
+            ui:showUI("ui_player_sel")
+            self:close()
+        end
+    )
+end
+return UI

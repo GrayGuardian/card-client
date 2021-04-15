@@ -2,6 +2,10 @@ local base = require("scene_base")
 local Scene = class("game", base)
 function Scene:onLoad()
     print(utils.serialize(player.baseInfo))
+
+    ui:showUI("ui_bg_main")
+    _G.mainComp = ui:showUI("ui_main")
+    -- mainComp:close()
 end
 
 return Scene
