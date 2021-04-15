@@ -24,7 +24,10 @@ function UI:refresh()
     for index, info in ipairs(GameData.players) do
         self:addSelPlayerItem(info)
     end
-    self:addSelPlayerItem(nil)
+
+    if #GameData.players < GAME_CONFIG.MAX_PLAYER_SUM then
+        self:addSelPlayerItem(nil)
+    end
 end
 function UI:addSelPlayerItem(info)
     local node = GameObject.Instantiate(self:load_gameObject("prefab1", "selPlayerItem")).transform
@@ -107,9 +110,10 @@ function UI:onDelBtnClick(o, order)
                         --删除人物列表
                         for index, info in ipairs(GameData.players) do
                             if info.pid == data.pid then
-                                GameData.players[index] = nil
+                                table.remove(GameData.players, index)
                             end
                         end
+                        self.lastSelComp = nil
                         self:refresh()
                     end
                 )

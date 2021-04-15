@@ -56,6 +56,16 @@ function UI:onCreateBtnClick(o, order)
     end
     local name = self.uiComp.InputField.nameInput.text
     local avatarid = self.lastAvatarComp.id
-    print("创建角色>>>", name, avatarid)
+    -- 创建人物
+    http:send(
+        "createPlayer",
+        {name = name, avatarid = avatarid},
+        function(data)
+            print("人物创建成功>>>", utils.serialize(data.info))
+            table.insert(GameData.players, data.info)
+            ui:showUI("ui_player_sel")
+            self:close()
+        end
+    )
 end
 return UI

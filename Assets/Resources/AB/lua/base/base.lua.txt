@@ -11,6 +11,7 @@ _G.fileUtil = Util.File
 -- tolua
 require("utils")
 _G.GameData = {}
+_G.GAME_CONFIG = require("GAME_CONFIG")
 _G.BROADCAST_CODE = require("BROADCAST_CODE")
 local error_info = require("error_info")
 _G.SUCCESS_CODE = error_info.SUCCESS_CODE
