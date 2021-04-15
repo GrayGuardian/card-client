@@ -12,9 +12,11 @@ end
 function UI:onLoad()
     self.top_msg = ui:showUI("ui_top_msg")
     self.top_info = ui:showUI("ui_top_info")
+    self.bottom_list = ui:showUI("ui_bottom_list")
 end
 function UI:onDestroy()
     self.top_msg:close()
     self.top_info:close()
+    self.bottom_list:close()
 end
 return UI
