@@ -11,15 +11,17 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
-    self.players = self.param.players
-
     self.contentNode = self.uiComp.ScrollRect.ScrollView.transform:Find("Viewport"):Find("Content")
 
     self:refresh()
 end
 
 function UI:refresh()
-    for index, info in ipairs(self.players) do
+    for i = 0, self.contentNode.childCount - 1 do
+        GameObject.Destroy(self.contentNode:GetChild(i).gameObject)
+    end
+
+    for index, info in ipairs(GameData.players) do
         self:addSelPlayerItem(info)
     end
     self:addSelPlayerItem(nil)
@@ -44,9 +46,9 @@ function UI:addSelPlayerItem(info)
 end
 function UI:onItemBtnClick(c)
     if c.info == nil then
-        print("点击创建人物")
-        self:close()
+        -- 创建人物界面
         ui:showUI("ui_player_create")
+        self:close()
     else
         if self.lastSelComp ~= nil then
             self.lastSelComp:hideOutLine()
@@ -103,18 +105,20 @@ function UI:onDelBtnClick(o, order)
                     {pid = pid},
                     function(data)
                         --删除人物列表
-                        local comps = comp:getComponentsInChildren(self.contentNode, "selplayer_item")
-                        for key, comp in pairs(comps) do
-                            if comp.info ~= nil then
-                                if comp.info.pid == data.pid then
-                                    GameObject.Destroy(comp.node.gameObject)
-                                end
+                        for index, info in ipairs(GameData.players) do
+                            if info.pid == data.pid then
+                                GameData.players[index] = nil
                             end
                         end
+                        self:refresh()
                     end
                 )
             end
         }
     )
+end
+function UI:onBackBtnClick(o, order)
+    ui:showUI("ui_area_main")
+    self:close()
 end
 return UI

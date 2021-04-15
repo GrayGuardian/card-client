@@ -11,36 +11,35 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
-    self.areaInfo = self.param.area
-    self.areaInfos = self.param.areas
-
-    self.areaItemComp = comp:addComponent(self.node:Find("areaItem"), "area_item", {info = self.areaInfo})
+    self.areaItemComp = comp:addComponent(self.node:Find("areaItem"), "area_item", {info = GameData.areaInfo})
 end
 function UI:onAreaItemClick(o, order)
     ui:showUI(
         "ui_area_sel",
         {
-            area = self.areaInfo,
-            areas = self.areaInfos,
+            area = GameData.areaInfo,
+            areas = GameData.areaInfos,
             onClick = function(info)
-                self.areaInfo = info
-                self.areaItemComp.info = self.areaInfo
+                GameData.areaInfo = info
+                self.areaItemComp.info = GameData.areaInfo
                 self.areaItemComp:refresh()
             end
         }
     )
 end
 function UI:onNextBtnClick(o, order)
-    if self.areaInfo.ismaintenance == 1 then
+    if GameData.areaInfo.ismaintenance == 1 then
         ui:showTip({msg = "区服正在维护"})
         return
     end
     http:send(
         "nextArea",
-        {aid = self.areaInfo.aid},
+        {aid = GameData.areaInfo.aid},
         function(data)
             print("进入选人界面")
-            ui:showUI("ui_player_sel", {players = data.players})
+
+            GameData.players = data.players
+            ui:showUI("ui_player_sel")
             self:close()
         end
     )

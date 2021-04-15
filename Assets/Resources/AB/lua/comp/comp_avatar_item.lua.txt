@@ -3,7 +3,9 @@ local Comp = class("avatar_item", base)
 
 function Comp:onLoad()
     self.id = self.param.id
+    self.onClick = self.param.onClick
 
+    self:hideOutLine()
     self:refresh()
 end
 function Comp:refresh(id)
@@ -11,5 +13,21 @@ function Comp:refresh(id)
         self.id = id
     end
     self.uiComp.Image.icon.sprite = self:load_sprite("avatar", self.id)
+end
+
+function Comp:showOutLine()
+    if self.uiComp.Image.outlineImage ~= nil then
+        self.uiComp.Image.outlineImage.gameObject:SetActive(true)
+    end
+end
+function Comp:hideOutLine()
+    if self.uiComp.Image.outlineImage ~= nil then
+        self.uiComp.Image.outlineImage.gameObject:SetActive(false)
+    end
+end
+function Comp:onBtnClick()
+    if self.onClick ~= nil then
+        self:onClick()
+    end
 end
 return Comp

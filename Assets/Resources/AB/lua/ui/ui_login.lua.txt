@@ -24,7 +24,10 @@ function UI:onLoginBtnClick(o, order)
         "login",
         {username = username, password = password},
         function(data)
-            ui:showUI("ui_area_main", {area = data.area, areas = data.areas})
+            GameData.areaInfo = data.areaInfo
+            GameData.areaInfos = data.areaInfos
+
+            ui:showUI("ui_area_main")
             self:close()
         end
     )
