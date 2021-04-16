@@ -13,19 +13,11 @@ function Model:onLoad()
     self.currency = PlayerCurrency:new()
 end
 
-function Model:getPublicPlayerInfo()
-    local data = {}
-    data.pid = self:get_pid()
-    data.name = self:get_name()
-    data.forward = self:get_pos().forward
-    data.roleId = self.style:get_roleId()
-    data.mountId = 0
-    local nameStyle = self.style:get_nameStyle()
-    if nameStyle == 0 then
-        nameStyle = 1
-    end
-    data.nameStyle = nameStyle
-    return data
+-- 获得下级所需经验
+function Model:getNextLvExp(lv)
+    lv = lv == nil and self:get_lv() or lv
+    local exp = 30 * (Mathf.Pow(lv, 3) + lv * 5) - 80
+    return exp
 end
 
 return Model

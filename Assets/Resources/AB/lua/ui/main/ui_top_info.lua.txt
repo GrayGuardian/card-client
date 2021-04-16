@@ -1,9 +1,9 @@
-local base = require('ui_base')
-local UI = class('top_info', base)
+local base = require("ui_base")
+local UI = class("top_info", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return 'ui1'
+    return "ui1"
 end
 function UI:GET_DEFAULT_OPTS()
     return {blockInput = false, blackMask = 0}
@@ -13,8 +13,49 @@ function UI:onLoad()
     self:refresh()
 end
 function UI:refresh()
-    self.uiComp.Text.vipLvText.text = player:get_vipLv()
-    self.uiComp.Image.avatarIconImage.sprite = self:load_sprite('avatar', player:get_avatarid())
+    self.uiComp.Image.avatarIconImage.sprite = self:load_sprite("avatar", player:get_avatarid())
     self.uiComp.Text.nameText.text = player:get_name()
+
+    self:refreshVipItem()
+    self:refreshLvItem()
+    self:refreshVitItem()
+    self:refreshVigItem()
+    self:refreshGold1Item()
+    self:refreshGold2Item()
+    self:refreshGold3Item()
+end
+function UI:refreshVipItem()
+    self.uiComp.Text.vipLvText.text = player:get_vipLv()
+end
+function UI:refreshLvItem()
+    self.uiComp.Text.lvText.text = player:get_lv()
+    local exp = player:get_exp()
+    local nextExp = player:getNextLvExp()
+    self.uiComp.Text.expText.text = string.format("%s/%s", exp, nextExp)
+
+    self.uiComp.Image.expValImage.fillAmount = exp / nextExp
+end
+function UI:refreshVitItem()
+    local value = player:get_vitValue()
+    local max = player:get_vitMax()
+    self.uiComp.Text.vitText.text = string.format("%s/%s", value, max)
+
+    self.uiComp.Image.vitValImage.fillAmount = value / max
+end
+function UI:refreshVigItem()
+    local value = player:get_vigValue()
+    local max = player:get_vigMax()
+    self.uiComp.Text.vigText.text = string.format("%s/%s", value, max)
+
+    self.uiComp.Image.vigValImage.fillAmount = value / max
+end
+function UI:refreshGold1Item()
+    self.uiComp.Text.gold1Text.text = player.currency:get_gold1()
+end
+function UI:refreshGold2Item()
+    self.uiComp.Text.gold2Text.text = player.currency:get_gold2()
+end
+function UI:refreshGold3Item()
+    self.uiComp.Text.gold3Text.text = player.currency:get_gold3()
 end
 return UI
