@@ -29,7 +29,7 @@ public class GameConst
 #if UNITY_EDITOR
     public static string URL = "http://127.0.0.1";
 #else
-    public static string URL = "http://192.168.0.105";
+    public static string URL = "http://192.168.74.1";
 #endif
 
     /// <summary>

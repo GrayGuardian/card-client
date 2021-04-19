@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1762057546
+CRC: 1840330668
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 98c1ff84b91426d2dcfdaf20f4e7d9c8
+    Hash: 9c6902a3fcaf0f1e1cb24c2b24070328
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -15,20 +15,41 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/AB/p1/btn_close1.png
+- Assets/Resources/AB/p1/bg_top_msg.png
+- Assets/Resources/AB/p1/gold2.png
+- Assets/Resources/AB/p1/bg_bottom_list.png
+- Assets/Resources/AB/p1/gold1.png
 - Assets/Resources/AB/p1/bg_box1_outline.png
 - Assets/Resources/AB/p1/bg_view1.jpg
 - Assets/Resources/AB/p1/bg_content1.png
 - Assets/Resources/AB/p1/icon_red_point.png
+- Assets/Resources/AB/p1/bg_avatar2_mask.png
+- Assets/Resources/AB/p1/bg_box_vip.png
 - Assets/Resources/AB/p1/bar1_bg.png
-- Assets/Resources/AB/p1/bg_input1.png
+- Assets/Resources/AB/p1/bar3_val2.png
+- Assets/Resources/AB/p1/gold3.png
+- Assets/Resources/AB/p1/bg_top_info.png
+- Assets/Resources/AB/p1/label_lv.png
+- Assets/Resources/AB/p1/btn_jia1.png
+- Assets/Resources/AB/p1/bar2_bg.png
 - Assets/Resources/AB/p1/icon_gray_point.png
+- Assets/Resources/AB/p1/icon_vig.png
+- Assets/Resources/AB/p1/bg_box3_outline.png
 - Assets/Resources/AB/p1/bg_ui1.png
+- Assets/Resources/AB/p1/bar3_bg.png
+- Assets/Resources/AB/p1/bg_avatar1_outline.png
+- Assets/Resources/AB/p1/icon_vit.png
 - Assets/Resources/AB/p1/bg_box2_outline.png
+- Assets/Resources/AB/p1/bg_view2.jpg
 - Assets/Resources/AB/p1/bar1_val.png
+- Assets/Resources/AB/p1/bg_box3.png
+- Assets/Resources/AB/p1/bar2_val.png
 - Assets/Resources/AB/p1/bg_avatar1.png
 - Assets/Resources/AB/p1/icon_back1.png
 - Assets/Resources/AB/p1/bg_box2.png
+- Assets/Resources/AB/p1/bar3_val1.png
 - Assets/Resources/AB/p1/bg_btn1.png
 - Assets/Resources/AB/p1/bg_btn2.png
+- Assets/Resources/AB/p1/bg_avatar2.png
 - Assets/Resources/AB/p1/bg_box1.png
 Dependencies: []

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2585962365
+CRC: 1597057306
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: da2e0e167f378de1d11919da9f063fa3
+    Hash: ae22cd858edf38ecba3514c91901b84e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6830d5dfb2a3184c89661d48cb5532b4
@@ -47,14 +47,17 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/AB/ui1/ui_player_create.prefab
+- Assets/Resources/AB/ui1/ui_top_msg.prefab
 - Assets/Resources/AB/ui1/ui_bg_login.prefab
+- Assets/Resources/AB/ui1/ui_main.prefab
 - Assets/Resources/AB/ui1/ui_player_sel.prefab
+- Assets/Resources/AB/ui1/ui_bottom_list.prefab
 - Assets/Resources/AB/ui1/ui_area_sel.prefab
 - Assets/Resources/AB/ui1/ui_login.prefab
+- Assets/Resources/AB/ui1/ui_bg_main.prefab
 - Assets/Resources/AB/ui1/ui_input_affirm.prefab
 - Assets/Resources/AB/ui1/ui_area_main.prefab
+- Assets/Resources/AB/ui1/ui_top_info.prefab
 - Assets/Resources/AB/ui1/ui_tip.prefab
 Dependencies:
-- F:/Git/card/card-client/AssetBundles/avatar
-- F:/Git/card/card-client/AssetBundles/p1
-- F:/Git/card/card-client/AssetBundles/prefab1
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p1

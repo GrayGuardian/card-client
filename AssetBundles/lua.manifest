@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2499377393
+CRC: 1715233085
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 19b6789c12dbc00d65d41683cd65f104
+    Hash: ab9ea14c94f745329e456c6641349ad6
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -28,7 +28,6 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm64be.lua.txt
 - Assets/Resources/AB/lua/ui/bg_view/ui_bg_login.lua.txt
 - Assets/Resources/AB/lua/template/tpl.lua.txt
-- Assets/Resources/AB/lua/ui/area/ui_area_sel.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dump.lua.txt
 - Assets/Resources/AB/lua/scene/scene_login.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/url.lua.txt
@@ -37,7 +36,8 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Bounds.lua.txt
 - Assets/Resources/AB/lua/base/comp.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Color.lua.txt
-- Assets/Resources/AB/lua/ui/player/ui_player_create.lua.txt
+- Assets/Resources/AB/lua/ui/main/ui_top_msg.lua.txt
+- Assets/Resources/AB/lua/ui/login/ui_player_create.lua.txt
 - Assets/Resources/AB/lua/ui/upres/ui_upres.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Vector2.lua.txt
@@ -49,29 +49,31 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Ray.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Vector4.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/RaycastHit.lua.txt
-- Assets/Resources/AB/lua/ui/ui_login.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/mbox.lua.txt
 - Assets/Resources/AB/lua/util/broadcast_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Time.lua.txt
 - Assets/Resources/AB/lua/base/tolua/misc/utf8.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Quaternion.lua.txt
+- Assets/Resources/AB/lua/ui/main/ui_top_info.lua.txt
 - Assets/Resources/AB/lua/base/tolua/tolua.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/Timer.lua.txt
-- Assets/Resources/AB/lua/ui/area/ui_area_main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm64.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mips64.lua.txt
+- Assets/Resources/AB/lua/comp/comp_avatar1_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_x64.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Profiler.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/Reflection/BindingFlags.lua.txt
+- Assets/Resources/AB/lua/ui/login/ui_area_sel.lua.txt
 - Assets/Resources/AB/lua/base/tolua/misc/functions.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mips64el.lua.txt
 - Assets/Resources/AB/lua/base/middle_class.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Plane.lua.txt
+- Assets/Resources/AB/lua/ui/main/ui_main.lua.txt
 - Assets/Resources/AB/lua/util/json_util.lua.txt
 - Assets/Resources/AB/lua/util/pb_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/v.lua.txt
+- Assets/Resources/AB/lua/ui/bg_view/ui_bg_main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mips.lua.txt
-- Assets/Resources/AB/lua/comp/comp_avatar_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/event.lua.txt
 - Assets/Resources/AB/lua/base/tolua/lpeg/re.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/tp.lua.txt
@@ -81,6 +83,7 @@ Assets:
 - Assets/Resources/AB/lua/util/utils.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/ValueType.lua.txt
 - Assets/Resources/AB/lua/util/network_util.lua.txt
+- Assets/Resources/AB/lua/ui/login/ui_area_main.lua.txt
 - Assets/Resources/AB/lua/ui/ui_base.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm.lua.txt
 - Assets/Resources/AB/lua/comp/comp_selplayer_item.lua.txt
@@ -96,6 +99,7 @@ Assets:
 - Assets/Resources/AB/lua/util/http_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/Injection/InjectionBridgeInfo.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Vector3.lua.txt
+- Assets/Resources/AB/lua/const/GAME_CONFIG.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/protobuf.lua.txt
 - Assets/Resources/AB/lua/base/tolua/misc/strict.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/ftp.lua.txt
@@ -110,7 +114,7 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/LayerMask.lua.txt
 - Assets/Resources/AB/lua/ui/common/ui_tip.lua.txt
 - Assets/Resources/AB/lua/comp/comp_area_item.lua.txt
-- Assets/Resources/AB/lua/ui/player/ui_player_sel.lua.txt
+- Assets/Resources/AB/lua/ui/login/ui_player_sel.lua.txt
 - Assets/Resources/AB/lua/main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/bcsave.lua.txt
 - Assets/Resources/AB/lua/base/tolua/slot.lua.txt
@@ -119,9 +123,11 @@ Assets:
 - Assets/Resources/AB/lua/comp/comp_base.lua.txt
 - Assets/Resources/AB/lua/model/model_base.lua.txt
 - Assets/Resources/AB/lua/base/base.lua.txt
+- Assets/Resources/AB/lua/ui/login/ui_login.lua.txt
 - Assets/Resources/AB/lua/scene/scene_game.lua.txt
 - Assets/Resources/AB/lua/base/ui.lua.txt
 - Assets/Resources/AB/lua/util/pool_util.lua.txt
 - Assets/Resources/AB/lua/pb/server_pb.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/text_format.lua.txt
+- Assets/Resources/AB/lua/ui/main/ui_bottom_list.lua.txt
 Dependencies: []

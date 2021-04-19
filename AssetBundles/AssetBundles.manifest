@@ -1,30 +1,27 @@
 ManifestFileVersion: 0
-CRC: 4220433849
+CRC: 2581254714
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: avatar
-      Dependencies: {}
-    Info_1:
       Name: lua
       Dependencies: {}
-    Info_2:
+    Info_1:
       Name: p1
       Dependencies: {}
-    Info_3:
+    Info_2:
       Name: json
       Dependencies: {}
-    Info_4:
+    Info_3:
       Name: ui1
       Dependencies:
-        Dependency_0: avatar
-        Dependency_1: p1
-        Dependency_2: prefab1
-    Info_5:
+        Dependency_0: p1
+    Info_4:
       Name: upres
       Dependencies: {}
-    Info_6:
+    Info_5:
       Name: prefab1
       Dependencies:
-        Dependency_0: avatar
-        Dependency_1: p1
+        Dependency_0: p1
+    Info_6:
+      Name: avatar
+      Dependencies: {}
