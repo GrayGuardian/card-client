@@ -17,11 +17,8 @@ local getMap = function(name, key)
     return map
 end
 
--- local template_role = getMap("template_role", "id")
--- local template_mount = getMap("template_mount", "id")
--- local template_map = getMap("template_map", "id")
+local template_card = getMap("template_card", "id")
 
--- Template.template_role = template_role
--- Template.template_mount = template_mount
--- Template.template_map = template_map
+Template.template_card = template_card
+
 return Template
