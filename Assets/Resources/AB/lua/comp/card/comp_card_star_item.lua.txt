@@ -1,0 +1,16 @@
+local base = require("comp_base")
+local Comp = class("card_star_item", base)
+function Comp:onLoad()
+    -- state: 0-空 1-满
+    self.state = self.param.state == nil and 0 or self.param.state
+    self:refresh()
+end
+function Comp:refresh()
+    if (self.state == 0) then
+        self.uiComp.Image.iconImage.gameObject:SetActive(false)
+    else
+        self.uiComp.Image.iconImage.gameObject:SetActive(true)
+    end
+end
+
+return Comp

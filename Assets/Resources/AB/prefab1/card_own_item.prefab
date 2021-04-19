@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3176958216922023155}
   m_Layer: 5
-  m_Name: card
+  m_Name: card_own_item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 3176958217438905121}
   - component: {fileID: 3176958217438905120}
   m_Layer: 5
-  m_Name: starBox
+  m_Name: starBoxNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 3176958218206256707}
   - component: {fileID: 3176958218206256708}
   m_Layer: 5
-  m_Name: energyBox
+  m_Name: energyBoxNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

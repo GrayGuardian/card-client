@@ -1,0 +1,54 @@
+local base = require("comp_base")
+local Comp = class("card_own_item", base)
+
+function Comp:onLoad()
+    self.tid = self.param.tid
+    self.tpl = tpl.template_card[self.tid]
+
+    self.starBoxNode = self.node:Find("starBoxNode")
+    self.energyBoxNode = self.node:Find("energyBoxNode")
+    self.starCompMap = {}
+    self.energyCompMap = {}
+    for i = 1, 9 do
+        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_star_item")).transform
+        node.parent = self.starBoxNode
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+        local c = comp:addComponent(node, "card_star_item", {state = 0})
+        self.starCompMap[i] = c
+    end
+    for i = 1, 5 do
+        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_energy_item")).transform
+        node.parent = self.energyBoxNode
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+        local c = comp:addComponent(node, "card_energy_item", {state = 0})
+        self.energyCompMap[i] = c
+    end
+
+    self:refresh()
+end
+function Comp:refresh()
+    -- 背景
+    self.uiComp.Image.bg0Image.sprite = self:load_sprite("p10", string.format("bg_%s0", self.tpl.pic_bg))
+    self.uiComp.Image.bg1Image.sprite = self:load_sprite("p10", string.format("bg_%s1", self.tpl.pic_bg))
+
+    -- 卡牌图
+    self.uiComp.Image.roleImage.sprite = self:load_sprite(self.tpl.pic_ab, self.tid)
+
+    -- 框
+    self.uiComp.Image.bgCard0Image.sprite = self:load_sprite("p10", string.format("bg_card_%s0", self.tpl.rank))
+    self.uiComp.Image.bgCard1Image.sprite = self:load_sprite("p10", string.format("bg_card_%s1", self.tpl.rank))
+    self.uiComp.Image.bgCard2Image.sprite = self:load_sprite("p10", string.format("bg_card_%s2", self.tpl.rank))
+    if (self.tpl.rank == "cuprum") then
+        self.uiComp.Image.bgCard3Image.gameObject:SetActive(false)
+    else
+        self.uiComp.Image.bgCard3Image.gameObject:SetActive(true)
+        self.uiComp.Image.bgCard3Image.sprite = self:load_sprite("p10", string.format("bg_card_%s3", self.tpl.rank))
+    end
+
+    -- 属性
+    self.uiComp.Image.attributeIconImage.sprite =
+        self:load_sprite("p10", string.format("icon_attribute%s", self.tpl.attribute))
+end
+return Comp

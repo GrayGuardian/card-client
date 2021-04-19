@@ -39,6 +39,11 @@ localTable.PLAYERCURRENCYINFO_PID_FIELD = protobuf.FieldDescriptor()
 localTable.PLAYERCURRENCYINFO_GOLD1_FIELD = protobuf.FieldDescriptor()
 localTable.PLAYERCURRENCYINFO_GOLD2_FIELD = protobuf.FieldDescriptor()
 localTable.PLAYERCURRENCYINFO_GOLD3_FIELD = protobuf.FieldDescriptor()
+CARDINFO = protobuf.Descriptor()
+localTable.CARDINFO_CID_FIELD = protobuf.FieldDescriptor()
+localTable.CARDINFO_PID_FIELD = protobuf.FieldDescriptor()
+localTable.CARDINFO_TID_FIELD = protobuf.FieldDescriptor()
+localTable.CARDINFO_LV_FIELD = protobuf.FieldDescriptor()
 
 
 localTable.ERROR_CODE_FIELD.name = "code"
@@ -366,8 +371,56 @@ PLAYERCURRENCYINFO.enum_types = {}
 PLAYERCURRENCYINFO.fields = {localTable.PLAYERCURRENCYINFO_PID_FIELD, localTable.PLAYERCURRENCYINFO_GOLD1_FIELD, localTable.PLAYERCURRENCYINFO_GOLD2_FIELD, localTable.PLAYERCURRENCYINFO_GOLD3_FIELD}
 PLAYERCURRENCYINFO.is_extendable = false
 PLAYERCURRENCYINFO.extensions = {}
+localTable.CARDINFO_CID_FIELD.name = "cid"
+localTable.CARDINFO_CID_FIELD.full_name = ".common.CardInfo.cid"
+localTable.CARDINFO_CID_FIELD.number = 1
+localTable.CARDINFO_CID_FIELD.index = 0
+localTable.CARDINFO_CID_FIELD.label = 2
+localTable.CARDINFO_CID_FIELD.has_default_value = false
+localTable.CARDINFO_CID_FIELD.default_value = 0
+localTable.CARDINFO_CID_FIELD.type = 5
+localTable.CARDINFO_CID_FIELD.cpp_type = 1
+
+localTable.CARDINFO_PID_FIELD.name = "pid"
+localTable.CARDINFO_PID_FIELD.full_name = ".common.CardInfo.pid"
+localTable.CARDINFO_PID_FIELD.number = 2
+localTable.CARDINFO_PID_FIELD.index = 1
+localTable.CARDINFO_PID_FIELD.label = 2
+localTable.CARDINFO_PID_FIELD.has_default_value = false
+localTable.CARDINFO_PID_FIELD.default_value = 0
+localTable.CARDINFO_PID_FIELD.type = 5
+localTable.CARDINFO_PID_FIELD.cpp_type = 1
+
+localTable.CARDINFO_TID_FIELD.name = "tid"
+localTable.CARDINFO_TID_FIELD.full_name = ".common.CardInfo.tid"
+localTable.CARDINFO_TID_FIELD.number = 3
+localTable.CARDINFO_TID_FIELD.index = 2
+localTable.CARDINFO_TID_FIELD.label = 2
+localTable.CARDINFO_TID_FIELD.has_default_value = false
+localTable.CARDINFO_TID_FIELD.default_value = 0
+localTable.CARDINFO_TID_FIELD.type = 5
+localTable.CARDINFO_TID_FIELD.cpp_type = 1
+
+localTable.CARDINFO_LV_FIELD.name = "lv"
+localTable.CARDINFO_LV_FIELD.full_name = ".common.CardInfo.lv"
+localTable.CARDINFO_LV_FIELD.number = 4
+localTable.CARDINFO_LV_FIELD.index = 3
+localTable.CARDINFO_LV_FIELD.label = 2
+localTable.CARDINFO_LV_FIELD.has_default_value = false
+localTable.CARDINFO_LV_FIELD.default_value = 0
+localTable.CARDINFO_LV_FIELD.type = 5
+localTable.CARDINFO_LV_FIELD.cpp_type = 1
+
+CARDINFO.name = "CardInfo"
+CARDINFO.full_name = ".common.CardInfo"
+CARDINFO.nested_types = {}
+CARDINFO.enum_types = {}
+CARDINFO.fields = {localTable.CARDINFO_CID_FIELD, localTable.CARDINFO_PID_FIELD, localTable.CARDINFO_TID_FIELD, localTable.CARDINFO_LV_FIELD}
+CARDINFO.is_extendable = false
+CARDINFO.extensions = {}
 
 AreaInfo = protobuf.Message(AREAINFO)
+CardInfo = protobuf.Message(CARDINFO)
 Error = protobuf.Message(ERROR)
 PlayerCurrencyInfo = protobuf.Message(PLAYERCURRENCYINFO)
 PlayerInfo = protobuf.Message(PLAYERINFO)
