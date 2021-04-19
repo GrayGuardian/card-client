@@ -7,7 +7,7 @@ function Comp:onLoad()
 
     self.infoNode = self.node:Find("infoNode")
 
-    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "avatar1Item")).transform
+    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "avatar1_item")).transform
     node.parent = self.node
     node.localPosition = {x = -300, y = -3, z = 0}
     node.localScale = {x = 1.8, y = 1.8, z = 1.8}

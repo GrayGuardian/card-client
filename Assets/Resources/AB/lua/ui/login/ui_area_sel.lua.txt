@@ -29,7 +29,7 @@ function UI:refresh()
     end
 end
 function UI:addAreaItem(info)
-    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "areaItem")).transform
+    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "area_item")).transform
     node.parent = self.contentNode
     node.localPosition = {x = 0, y = 0, z = 0}
     node.localScale = {x = 0.75, y = 0.75, z = 0.75}

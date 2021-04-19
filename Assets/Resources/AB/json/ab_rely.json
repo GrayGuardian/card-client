@@ -1,8 +1,21 @@
 {
-    "lua": {
-        "main.lua": [
-            "lua",
-            "json",
+    "prefab1": {
+        "area_item": [
+            "p1"
+        ],
+        "avatar1_item": [
+            "p1"
+        ],
+        "card": [
+            "p10"
+        ],
+        "card_energy_item": [
+            "p10"
+        ],
+        "card_star_item": [
+            "p10"
+        ],
+        "selplayer_item": [
             "p1"
         ]
     },
@@ -13,16 +26,34 @@
         "ui_area_sel": [
             "p1"
         ],
-        "ui_tip": [
+        "ui_bg_login": [
             "p1"
         ],
-        "ui_player_sel": [
+        "ui_bg_main": [
+            "p1"
+        ],
+        "ui_bottom_list": [
+            "p1"
+        ],
+        "ui_input_affirm": [
             "p1"
         ],
         "ui_login": [
             "p1"
         ],
-        "ui_bg_view1": [
+        "ui_player_create": [
+            "p1"
+        ],
+        "ui_player_sel": [
+            "p1"
+        ],
+        "ui_tip": [
+            "p1"
+        ],
+        "ui_top_info": [
+            "p1"
+        ],
+        "ui_top_msg": [
             "p1"
         ]
     }
