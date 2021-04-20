@@ -50,18 +50,24 @@ _G.table.copy = function(copyTable, table)
     if table == nil then
         table = {}
     end
-    if type(copyTable) ~= "table" then
-        table = copyTable
-    else
-        for k, v in pairs(copyTable) do
-            if type(v) ~= "table" then
-                table[k] = v
-            else
-                table[k] = {}
-                copy(v, table[k])
+    local copy = nil
+
+    copy = function(copyTable, table)
+        if type(copyTable) ~= "table" then
+            table = copyTable
+        else
+            for k, v in pairs(copyTable) do
+                if type(v) ~= "table" then
+                    table[k] = v
+                else
+                    table[k] = {}
+                    copy(v, table[k])
+                end
             end
         end
     end
+
+    copy(copyTable, table)
     return table
 end
 _G.table.exist = function(t, value)
@@ -135,4 +141,10 @@ utils.sizeFormat = function(byteSize)
         return string.format("%0.2fKB", byteSize / 1024)
     end
     return string.format("%0.2fBytes", byteSize)
+end
+
+_G.gameLogic = {}
+-- 注销
+gameLogic.logout = function()
+    ui:loadScene("Login")
 end

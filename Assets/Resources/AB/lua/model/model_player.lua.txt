@@ -3,14 +3,30 @@ local Model = class("player", base)
 
 local PlayerCurrency = require("model_player_currency")
 local PlayerStyle = require("model_player_style")
+local Card = require("model_card")
 
 function Model:CLASS_NAME()
     return "Player"
 end
 function Model:onLoad()
-    print("Player onLoad", self.baseInfo)
+    print("Model OnLoad>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
+    self.currency = nil
+    self.cardMap = {}
 
-    self.currency = PlayerCurrency:new()
+    -- 人物货币
+    self.currency = PlayerCurrency:new(self.idx)
+    broadcast:on(
+        BROADCAST_CODE.SOCKET_EVENT("upModelData"),
+        function(data)
+            local baseInfo = data[data.clsName]
+            -- 卡牌
+            if data.clsName == "Card" then
+                if (self.cardMap[data.idx] == nil) then
+                    self.cardMap[data.idx] = Card:new(data.idx, baseInfo)
+                end
+            end
+        end
+    )
 end
 
 -- 获得下级所需经验

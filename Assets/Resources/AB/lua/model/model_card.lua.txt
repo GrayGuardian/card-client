@@ -1,7 +1,7 @@
 local base = require("model_base")
-local Model = class("player_currency", base)
+local Model = class("player_card", base)
 function Model:CLASS_NAME()
-    return "PlayerCurrency"
+    return "Card"
 end
 function Model:onLoad()
     print("Model OnLoad>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)

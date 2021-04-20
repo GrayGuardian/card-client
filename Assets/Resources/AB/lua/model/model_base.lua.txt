@@ -1,4 +1,4 @@
-local ModelBase = class('ModelBase')
+local ModelBase = class("ModelBase")
 ------------------- 继承重写 -------------------
 --类名
 function ModelBase:CLASS_NAME()
@@ -8,16 +8,16 @@ function ModelBase:onLoad()
 end
 
 ------------------- 继承重写 -------------------
-function ModelBase:init(baseInfo)
+function ModelBase:init(idx, baseInfo)
     broadcast:on(
-        BROADCAST_CODE.SOCKET_EVENT('upModelData'),
+        BROADCAST_CODE.SOCKET_EVENT("upModelData"),
         function(data)
-            if data.name == self:CLASS_NAME() then
-                self:upBaseInfo(data[data.name])
+            if data.clsName == self:CLASS_NAME() and data.idx == self.idx then
+                self:upBaseInfo(data[data.clsName])
             end
         end
     )
-
+    self.idx = idx
     if baseInfo ~= nil then
         self:upBaseInfo(baseInfo)
     end
@@ -25,14 +25,14 @@ function ModelBase:init(baseInfo)
 end
 
 function ModelBase:upBaseInfo(baseInfo)
-    print('[Model]' .. self:CLASS_NAME(), 'upBaseInfo>>', utils.serialize(baseInfo))
+    print("[Model]" .. self:CLASS_NAME(), "upBaseInfo>>", utils.serialize(baseInfo))
     self.baseInfo = baseInfo
     for key, value in pairs(self.baseInfo) do
         --print(key, value)
-        self['set_' .. key] = function(o, val)
+        self["set_" .. key] = function(o, val)
             o.baseInfo[key] = val
         end
-        self['get_' .. key] = function(o)
+        self["get_" .. key] = function(o)
             return o.baseInfo[key]
         end
     end

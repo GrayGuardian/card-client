@@ -91,7 +91,11 @@ function UI:closeUI(uiComp)
     end
 end
 function UI:closeAllUI()
+    local tempMap = {}
     for key, uiComp in pairs(self.uiCompMap) do
+        table.insert(tempMap, uiComp)
+    end
+    for key, uiComp in pairs(tempMap) do
         uiComp:close()
     end
 end

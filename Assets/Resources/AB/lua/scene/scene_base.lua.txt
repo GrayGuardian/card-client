@@ -1,4 +1,4 @@
-local SceneBase = class('SceneBase')
+local SceneBase = class("SceneBase")
 
 ------------------- 继承重写 -------------------
 --加载参数二次重写默认值
@@ -29,7 +29,7 @@ function SceneBase:init(info, param, opts)
         end
     end
 
-    print(self.info.name, '>>>>>>>>>>', utils.serialize(self.opts))
+    print(self.info.name, ">>>>>>>>>>", utils.serialize(self.opts))
 
     self.timerMap = {}
     self.broadcastMap = {}
@@ -38,11 +38,11 @@ function SceneBase:init(info, param, opts)
     self:_onLoad()
 end
 function SceneBase:_onLoad()
-    print('卸载场景-' .. self.info.name .. ' >>>>>>>>>>>>>>>>>>>>>>>> onLoad')
+    print("卸载场景-" .. self.info.name .. " >>>>>>>>>>>>>>>>>>>>>>>> onLoad")
     self:onLoad()
 end
 function SceneBase:_onDestroy()
-    print('卸载场景-' .. self.info.name .. ' >>>>>>>>>>>>>>>>>>>>>>>> onDestroy')
+    print("卸载场景-" .. self.info.name .. " >>>>>>>>>>>>>>>>>>>>>>>> onDestroy")
     if self.opts.isCloseAllUI == true then
         ui:closeAllUI()
     end
