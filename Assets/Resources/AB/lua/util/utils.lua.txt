@@ -9,9 +9,9 @@ end
 _G.luaVector3ArrToCsVector3Arr = function(arr)
     local csArr = System.Array.CreateInstance(typeof(UnityEngine.Vector3), #arr)
     for index, luaPos in ipairs(arr) do
-        local x = luaPos.x == nil and 0 or luaPos.x
-        local y = luaPos.y == nil and 0 or luaPos.y
-        local z = luaPos.z == nil and 0 or luaPos.z
+        local x = luaPos.x or 0
+        local y = luaPos.y or 0
+        local z = luaPos.z or 0
         csArr:SetValue(UE.Vector3.New(x, y, z), index - 1)
     end
     return csArr
@@ -19,14 +19,14 @@ end
 _G.luaVector2ArrToCsVector2Arr = function(arr)
     local csArr = System.Array.CreateInstance(typeof(UnityEngine.Vector2), #arr)
     for index, luaPos in ipairs(arr) do
-        local x = luaPos.x == nil and 0 or luaPos.x
-        local y = luaPos.y == nil and 0 or luaPos.y
+        local x = luaPos.x or 0
+        local y = luaPos.y or 0
         csArr:SetValue(UE.Vector2.New(x, y), index - 1)
     end
     return csArr
 end
 _G.luaCSVector2ArrToCsVector3Arr = function(arr, z)
-    z = z == nil and 0 or z
+    z = z or 0
     local csArr = System.Array.CreateInstance(typeof(UnityEngine.Vector3), arr.Length)
     for i = 0, arr.Length - 1 do
         local pos = arr:GetValue(i)

@@ -268,7 +268,7 @@ function UI:downloadABFile(
     errorEvent,
     order)
     print(abInfos)
-    order = order and order or 0
+    order = order or 0
     if abInfos.Length <= order then
         if allDownloadOverEvent ~= nil then
             allDownloadOverEvent()

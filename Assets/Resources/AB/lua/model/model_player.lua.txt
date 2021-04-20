@@ -45,7 +45,7 @@ end
 
 -- 获得下级所需经验
 function Model:getNextLvExp(lv)
-    lv = lv == nil and self:get_lv() or lv
+    lv = lv or self:get_lv()
     local exp = 30 * (Mathf.Pow(lv, 3) + lv * 5) - 80
     return exp
 end

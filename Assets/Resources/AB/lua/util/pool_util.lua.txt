@@ -23,7 +23,7 @@ function Pool:existPool(key)
 end
 --获取池对象
 function Pool:getPool(key, isCreate)
-    isCreate = isCreate == nil and true or isCreate
+    isCreate = isCreate or true
     local node = self.root:Find(key)
     if node == nil and isCreate then
         node = GameObject(key).transform
@@ -70,7 +70,7 @@ function Pool:loadPool(key, prefab, config)
         print("对象池已存在 无法加载>>>", key)
         return nil
     end
-    config = config == nil and table.copy(DEFAULT_CONFIG) or config
+    config = config or table.copy(DEFAULT_CONFIG)
     for key, value in pairs(DEFAULT_CONFIG) do
         if config[key] == nil then
             config[key] = value

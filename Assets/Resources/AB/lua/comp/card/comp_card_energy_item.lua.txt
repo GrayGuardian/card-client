@@ -2,7 +2,7 @@ local base = require("comp_base")
 local Comp = class("card_energy_item", base)
 function Comp:onLoad()
     -- state: 0-空 1-蓝 2-红
-    self.state = self.param.state == nil and 0 or self.param.state
+    self.state = self.param.state or 0
     self:refresh()
 end
 function Comp:refresh()

@@ -67,7 +67,7 @@ function Http:send(router, data, cb)
             t_body = pb:pbToTable(t_body)
             local t_router = t_body.router
             local t_data = t_body[t_router]
-            t_data = t_data and t_data or {}
+            t_data = t_data or {}
 
             if t_router == "error" then
                 --出现业务逻辑错误

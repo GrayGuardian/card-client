@@ -207,14 +207,14 @@ function UIBase:broadcast_clear()
     self.broadcastMap = {}
 end
 function UIBase:load_sprite(key, resName, loadIsClose)
-    loadIsClose = loadIsClose == nil and false or loadIsClose
+    loadIsClose = loadIsClose or false
     local k = {key = key, resName = resName}
     local prefab = resUtil:LoadSprite(key, resName, loadIsClose)
     self.abResMap[k] = prefab
     return prefab
 end
 function UIBase:load_sprite_asyn(key, resName, cb, loadIsClose)
-    loadIsClose = loadIsClose == nil and false or loadIsClose
+    loadIsClose = loadIsClose or false
     resUtil:LoadSpriteAsyn(
         key,
         resName,
@@ -231,14 +231,14 @@ function UIBase:load_sprite_asyn(key, resName, cb, loadIsClose)
     )
 end
 function UIBase:load_gameObject(key, resName, loadIsClose)
-    loadIsClose = loadIsClose == nil and false or loadIsClose
+    loadIsClose = loadIsClose or false
     local k = {key = key, resName = resName}
     local prefab = resUtil:LoadGameObject(key, resName, loadIsClose)
     self.abResMap[k] = prefab
     return prefab
 end
 function UIBase:load_gameObject_asyn(key, resName, cb, loadIsClose)
-    loadIsClose = loadIsClose == nil and false or loadIsClose
+    loadIsClose = loadIsClose or false
     resUtil:LoadGameObjectAsyn(
         key,
         resName,
@@ -255,14 +255,14 @@ function UIBase:load_gameObject_asyn(key, resName, cb, loadIsClose)
     )
 end
 function UIBase:load_animator(key, resName, loadIsClose)
-    loadIsClose = loadIsClose == nil and false or loadIsClose
+    loadIsClose = loadIsClose or false
     local k = {key = key, resName = resName}
     local prefab = resUtil:LoadAnimator(key, resName, loadIsClose)
     self.abResMap[k] = prefab
     return prefab
 end
 function UIBase:load_animator_asyn(key, resName, cb, loadIsClose)
-    loadIsClose = loadIsClose == nil and false or loadIsClose
+    loadIsClose = loadIsClose or false
     resUtil:LoadAnimatorAsyn(
         key,
         resName,

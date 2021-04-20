@@ -12,14 +12,15 @@ function Comp:onLoad()
     node.localPosition = {x = -300, y = -3, z = 0}
     node.localScale = {x = 1.8, y = 1.8, z = 1.8}
     node:SetSiblingIndex(1)
-    self.avatarComp = comp:addComponent(node, "avatar1_item", {id = self.info == nil and -1 or self.info.avatarid})
+
+    self.avatarComp = comp:addComponent(node, "avatar1_item", {id = (self.info and self.info.avatarid or -1)})
 
     self:hideOutLine()
 
     self:refresh()
 end
 function Comp:refresh()
-    self.avatarComp:refresh(self.info == nil and -1 or self.info.avatarid)
+    self.avatarComp:refresh(self.info and self.info.avatarid or -1)
     self.uiComp.Text.createTipText.gameObject:SetActive(self.info == nil)
     self.infoNode.gameObject:SetActive(self.info ~= nil)
 
