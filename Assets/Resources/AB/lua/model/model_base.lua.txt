@@ -9,9 +9,13 @@ end
 
 ------------------- 继承重写 -------------------
 function ModelBase:init(idx, baseInfo)
-    broadcast:on(
+    self.timerMap = {}
+    self.broadcastMap = {}
+
+    self:broadcast_on(
         BROADCAST_CODE.SOCKET_EVENT("upModelData"),
         function(data)
+            -- print("[Base]", "接收到ModelData>>>", data.clsName)
             if data.clsName == self:CLASS_NAME() and data.idx == self.idx then
                 self:upBaseInfo(data[data.clsName])
             end
@@ -21,6 +25,7 @@ function ModelBase:init(idx, baseInfo)
     if baseInfo ~= nil then
         self:upBaseInfo(baseInfo)
     end
+
     self:onLoad()
 end
 
@@ -36,6 +41,60 @@ function ModelBase:upBaseInfo(baseInfo)
             return o.baseInfo[key]
         end
     end
+end
+
+function ModelBase:close()
+    print("[Model] 卸载数据模型>>>", self:CLASS_NAME(), self.idx)
+    self:timer_clear()
+    self:broadcast_clear()
+
+    if (self.onDestroy ~= nil) then
+        self:onDestroy()
+    end
+end
+function ModelBase:timer_on(time, loopCount, onTrigger)
+    local t = timer:on(time, loopCount, onTrigger)
+    table.insert(self.timerMap, t)
+    return t
+end
+function ModelBase:timer_out(t)
+    timer:out(t)
+    table.del(self.timerMap, t)
+end
+function ModelBase:timer_clear()
+    local tempMap = {}
+    for index, t in pairs(self.timerMap) do
+        table.insert(tempMap, t)
+    end
+    for index, t in pairs(tempMap) do
+        self:timer_out(t)
+    end
+    self.timerMap = {}
+end
+function ModelBase:broadcast_on(key, callback, order, isOnce)
+    local flag = broadcast:on(key, callback, order, isOnce)
+    if flag then
+        local info = {key = key, callback = callback}
+        table.insert(self.broadcastMap, info)
+    end
+    return flag
+end
+function ModelBase:broadcast_out(key, callback)
+    local flag = broadcast:out(key, callback)
+    if flag then
+        table.del(self.broadcastMap, {key = key, callback = callback})
+    end
+    return flag
+end
+function ModelBase:broadcast_clear()
+    local tempMap = {}
+    for index, info in pairs(self.broadcastMap) do
+        table.insert(tempMap, info)
+    end
+    for index, info in pairs(tempMap) do
+        print(self:broadcast_out(info.key, info.callback))
+    end
+    self.broadcastMap = {}
 end
 
 return ModelBase

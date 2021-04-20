@@ -1,4 +1,4 @@
-local CompBase = class('CompBase')
+local CompBase = class("CompBase")
 
 ------------------- 继承重写 -------------------
 -- Mono生命周期 OnDestroy、Awake与第一次OnEnable无法监听 OnDestroy可用onDestroy替代
@@ -42,7 +42,7 @@ function CompBase:monoLifecycleInit()
         System.Action_string_objects(
         function(key, param)
             local action = self[key]
-            if key == 'OnDestroy' then
+            if key == "OnDestroy" then
                 action = function()
                     self:_onDestroy()
                 end
@@ -69,7 +69,7 @@ function CompBase:monoLifecycleInit()
 end
 -- ui组件初始化
 function CompBase:uiCompInit()
-    local types = {'Text', 'Image', 'Button', 'InputField', 'ScrollRect'}
+    local types = {"Text", "Image", "Button", "InputField", "ScrollRect"}
 
     for index, t in ipairs(types) do
         self.uiComp[t] = {}
@@ -77,7 +77,7 @@ function CompBase:uiCompInit()
         for i = 0, arr.Length - 1 do
             local comp = arr:GetValue(i)
             local key = comp.name
-            if type(self.uiComp[t][key]) == 'table' then
+            if type(self.uiComp[t][key]) == "table" then
                 table.insert(self.uiComp[t][key], comp)
             else
                 -- body
@@ -99,14 +99,14 @@ function CompBase:uiCompInit()
     for key, comp in pairs(self.uiComp.Button) do
         local sum = 0
         local e = nil
-        if type(comp) == 'table' then
-            e = 'on' .. comp[1].name:gsub('^%l', string.upper) .. 'Click'
+        if type(comp) == "table" then
+            e = "on" .. comp[1].name:gsub("^%l", string.upper) .. "Click"
         else
-            e = 'on' .. comp.name:gsub('^%l', string.upper) .. 'Click'
+            e = "on" .. comp.name:gsub("^%l", string.upper) .. "Click"
         end
-        print(self.name, ' Comp 注册Button事件>', e)
+        print(self.name, " Comp 注册Button事件>", e)
         if self[e] ~= nil then
-            if type(comp) == 'table' then
+            if type(comp) == "table" then
                 sum = #comp
                 for i, comp1 in pairs(comp) do
                     comp1.onClick:AddListener(
@@ -130,11 +130,11 @@ function CompBase:uiCompInit()
 end
 
 function CompBase:_onLoad()
-    print('加载Comp-' .. self.name .. '>>>>>>>>>>>>>>>>>>>>>>>> onLoad')
+    print("加载Comp-" .. self.name .. ">>>>>>>>>>>>>>>>>>>>>>>> onLoad")
     self:onLoad()
 end
 function CompBase:_onDestroy()
-    print('卸载Comp-' .. self.name .. ' >>>>>>>>>>>>>>>>>>>>>>>> onDestroy')
+    print("卸载Comp-" .. self.name .. " >>>>>>>>>>>>>>>>>>>>>>>> onDestroy")
     self:timer_clear()
     self:broadcast_clear()
     self:load_clear()
@@ -147,30 +147,44 @@ end
 function CompBase:timer_on(time, loopCount, onTrigger)
     local t = timer:on(time, loopCount, onTrigger)
     table.insert(self.timerMap, t)
+    return t
 end
 function CompBase:timer_out(t)
     timer:out(t)
     table.del(self.timerMap, t)
 end
 function CompBase:timer_clear()
-    for index, t in ipairs(self.timerMap) do
+    local tempMap = {}
+    for index, t in pairs(self.timerMap) do
+        table.insert(tempMap, t)
+    end
+    for index, t in pairs(tempMap) do
         self:timer_out(t)
     end
     self.timerMap = {}
 end
 function CompBase:broadcast_on(key, callback, order, isOnce)
-    if broadcast:on(key, callback, order, isOnce) then
+    local flag = broadcast:on(key, callback, order, isOnce)
+    if flag then
         local info = {key = key, callback = callback}
         table.insert(self.broadcastMap, info)
     end
+    return flag
 end
 function CompBase:broadcast_out(key, callback)
-    broadcast:out(key, callback)
-    table.del(self.broadcastMap, {key = key, callback = callback})
+    local flag = broadcast:out(key, callback)
+    if flag then
+        table.del(self.broadcastMap, {key = key, callback = callback})
+    end
+    return flag
 end
 function CompBase:broadcast_clear()
-    for index, info in ipairs(self.broadcastMap) do
-        self:broadcast_out(info.key, info.callback)
+    local tempMap = {}
+    for index, info in pairs(self.broadcastMap) do
+        table.insert(tempMap, info)
+    end
+    for index, info in pairs(tempMap) do
+        print(self:broadcast_out(info.key, info.callback))
     end
     self.broadcastMap = {}
 end

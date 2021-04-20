@@ -9,24 +9,38 @@ function Model:CLASS_NAME()
     return "Player"
 end
 function Model:onLoad()
-    print("Model OnLoad>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
+    print("[Model] init>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
     self.currency = nil
     self.cardMap = {}
 
-    -- 人物货币
-    self.currency = PlayerCurrency:new(self.idx)
-    broadcast:on(
-        BROADCAST_CODE.SOCKET_EVENT("upModelData"),
-        function(data)
-            local baseInfo = data[data.clsName]
-            -- 卡牌
-            if data.clsName == "Card" then
-                if (self.cardMap[data.idx] == nil) then
-                    self.cardMap[data.idx] = Card:new(data.idx, baseInfo)
+    print(
+        "添加Plyaer监听事件",
+        self:broadcast_on(
+            BROADCAST_CODE.SOCKET_EVENT("upModelData"),
+            function(data)
+                -- print("[Player]", "接收到ModelData>>>", data.clsName)
+                local baseInfo = data[data.clsName]
+                -- 人物货币
+                if data.clsName == "PlayerCurrency" then
+                    if (self.currency == nil and data.idx == self.idx) then
+                        self.currency = PlayerCurrency:new(self.idx, baseInfo)
+                    end
+                end
+                -- 卡牌
+                if data.clsName == "Card" then
+                    if (self.cardMap[data.idx] == nil) then
+                        self.cardMap[data.idx] = Card:new(data.idx, baseInfo)
+                    end
                 end
             end
-        end
+        )
     )
+end
+function Model:onDestroy()
+    self.currency:close()
+    for key, card in pairs(self.cardMap) do
+        card:close()
+    end
 end
 
 -- 获得下级所需经验

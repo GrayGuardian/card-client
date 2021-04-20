@@ -146,5 +146,6 @@ end
 _G.gameLogic = {}
 -- 注销
 gameLogic.logout = function()
+    player:close()
     ui:loadScene("Login")
 end

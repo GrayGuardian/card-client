@@ -10,7 +10,7 @@ local timerDelTempList = {}
 
 function Timer:update()
     -- 将临时添加队列放入正式队列中
-    for i, timer in ipairs(timerAddTempList) do
+    for i, timer in pairs(timerAddTempList) do
         if table.exist(timerList, timer) == false then
             table.insert(timerList, timer)
         end

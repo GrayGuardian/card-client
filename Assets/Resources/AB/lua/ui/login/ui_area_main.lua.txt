@@ -11,22 +11,30 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
-    self.areaItemComp = comp:addComponent(self.node:Find("area_item"), "area_item", {info = GameData.areaInfo})
-end
-function UI:onAreaItemClick(o, order)
-    ui:showUI(
-        "ui_area_sel",
+    self.areaItemComp =
+        comp:addComponent(
+        self.node:Find("area_item"),
+        "area_item",
         {
-            area = GameData.areaInfo,
-            areas = GameData.areaInfos,
-            onClick = function(info)
-                GameData.areaInfo = info
-                self.areaItemComp.info = GameData.areaInfo
-                self.areaItemComp:refresh()
+            info = GameData.areaInfo,
+            onClick = function(c)
+                ui:showUI(
+                    "ui_area_sel",
+                    {
+                        area = GameData.areaInfo,
+                        areas = GameData.areaInfos,
+                        onClick = function(info)
+                            GameData.areaInfo = info
+                            self.areaItemComp.info = GameData.areaInfo
+                            self.areaItemComp:refresh()
+                        end
+                    }
+                )
             end
         }
     )
 end
+
 function UI:onNextBtnClick(o, order)
     if GameData.areaInfo.ismaintenance == 1 then
         ui:showTip({msg = "区服正在维护"})

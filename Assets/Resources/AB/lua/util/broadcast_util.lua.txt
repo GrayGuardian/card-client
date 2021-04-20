@@ -6,14 +6,14 @@ function Broadcast:notify(key, data)
         return false
     end
     removeList = {}
-    for i, v in ipairs(callBackInfoMap[key]) do
+    for i, v in pairs(callBackInfoMap[key]) do
         v.callback(data)
         if v.isOnce then
             table.insert(removeList, v.callback)
         end
     end
     --将使用一次即删除的卸载
-    for i, v in ipairs(removeList) do
+    for i, v in pairs(removeList) do
         self:out(key, v)
     end
     return true
@@ -35,14 +35,13 @@ function Broadcast:on(key, callback, order, isOnce)
     else
         list = callBackInfoMap[key]
         local index = -1
-        for i = 1, #list do
-            o = list[i]
+        for i, o in pairs(list) do
             if o.order > info.order then
                 index = i
                 break
             end
         end
-        index = index == -1 and #list or index
+        index = index == -1 and table.len(list) or index
         table.insert(list, index, info)
     end
     return true
@@ -53,8 +52,8 @@ function Broadcast:out(key, callback)
         return false
     end
     local list = callBackInfoMap[key]
-    for i = 1, #list do
-        if list[i].callback == callback then
+    for i, v in pairs(list) do
+        if v.callback == callback then
             table.remove(list, i)
             callBackInfoMap[key] = list
             return true
