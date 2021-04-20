@@ -146,6 +146,10 @@ end
 _G.gameLogic = {}
 -- 注销
 gameLogic.logout = function()
-    player:close()
+    if (_G.player ~= nil) then
+        _G.player:close()
+        _G.player = nil
+    end
+
     ui:loadScene("Login")
 end
