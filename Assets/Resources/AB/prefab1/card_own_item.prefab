@@ -870,7 +870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -38}
+  m_AnchoredPosition: {x: 0, y: -11}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8339214925617164284
@@ -893,8 +893,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 150.4, y: 150.4}
-  m_Spacing: {x: 5, y: 5}
+  m_CellSize: {x: 141, y: 141}
+  m_Spacing: {x: 10, y: 10}
   m_Constraint: 2
   m_ConstraintCount: 4
 --- !u!1 &8888512897998356591
@@ -907,7 +907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9022156709399371275}
   m_Layer: 5
-  m_Name: skillHoleLinkBoxNode
+  m_Name: skillLinkBoxNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

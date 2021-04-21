@@ -18,7 +18,9 @@ local getMap = function(name, key)
 end
 
 local template_card = getMap("template_card", "tid")
+local template_skill_gem = getMap("template_skill_gem", "tid")
 
 Template.template_card = template_card
+Template.template_skill_gem = template_skill_gem
 
 return Template

@@ -199,6 +199,8 @@ public static class CustomSettings
         _GT(typeof(ENV_TYPE)),
         _GT(typeof(HttpResult)),
         _GT(typeof(TestConsole)),
+
+        _GT(typeof(UnityEngine.UI.LayoutRebuilder)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

@@ -142,6 +142,23 @@ utils.sizeFormat = function(byteSize)
     end
     return string.format("%0.2fBytes", byteSize)
 end
+-- 更新UGUI布局
+utils.refreshLayout = function(node)
+    local rectTransform = comp:getCSComponent(node, UE.RectTransform)
+    if (rectTransform == nil) then
+        return false
+    end
+    UEUI.LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform)
+    return true
+end
+-- 计算2D向量夹角
+utils.getVectorAngle = function(pos1, pos2)
+    local cos =
+        (pos1.x * pos2.x + pos1.y * pos2.y) /
+        (math.sqrt(pos1.x * pos1.x + pos1.y * pos1.y) * math.sqrt(pos2.x * pos2.x + pos2.y * pos2.y))
+    local angle = math.acos(cos) * 180 / math.pi
+    return angle
+end
 
 _G.gameLogic = {}
 -- 注销

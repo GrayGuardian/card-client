@@ -5,7 +5,11 @@ function Comp:onLoad()
     self.info = self.param.info
     self.tpl = tpl.template_card[self.info:get_tid()]
 
+    self.holeCompMap = {}
+
     self.roleBoxNode = self.node:Find("mask"):Find("roleBoxNode")
+    self.skillLinkBoxNode = self.node:Find("skillLinkBoxNode")
+    self.skillHoleBoxNode = self.node:Find("skillHoleBoxNode")
     self.starBoxNode = self.node:Find("starBoxNode")
     self.energyBoxNode = self.node:Find("energyBoxNode")
     self.starCompMap = {}
@@ -78,6 +82,35 @@ function Comp:refresh()
             comp.state = 0
         end
         comp:refresh()
+    end
+    -- 技能孔
+    self.holeCompMap = {}
+    for i = 0, self.skillHoleBoxNode.childCount - 1 do
+        GameObject.Destroy(self.skillHoleBoxNode:GetChild(i).gameObject)
+    end
+    for i, holeInfo in pairs(self.info:get_skillHoles()) do
+        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_hole_item")).transform
+        node.parent = self.skillHoleBoxNode
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 1.5, y = 1.5, z = 1.5}
+        self.holeCompMap[i] = comp:addComponent(node, "skill_hole_item", {info = holeInfo})
+    end
+    utils.refreshLayout(self.skillHoleBoxNode, UE.RectTransform)
+
+    -- 技能链接
+    for i = 0, self.skillLinkBoxNode.childCount - 1 do
+        GameObject.Destroy(self.skillLinkBoxNode:GetChild(i).gameObject)
+    end
+    for i, linkInfo in pairs(self.info:get_skillLinks()) do
+        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_link_item")).transform
+        node.parent = self.skillLinkBoxNode
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+
+        local firstHoleComp = self.holeCompMap[linkInfo.holeIdxs[1] + 1]
+        local lastHoleComp = self.holeCompMap[linkInfo.holeIdxs[2] + 1]
+        print(linkInfo.holeIdxs[1] + 1, linkInfo.holeIdxs[2] + 1)
+        comp:addComponent(node, "skill_link_item", {firstHoleComp = firstHoleComp, lastHoleComp = lastHoleComp})
     end
 end
 return Comp

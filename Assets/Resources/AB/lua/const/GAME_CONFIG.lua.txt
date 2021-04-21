@@ -1,6 +1,8 @@
 local GAME_CONFIG = {}
 
--- 最大角色栏位数量
+-- 角色栏位最大数量
 GAME_CONFIG.MAX_PLAYER_SUM = 3
+-- 卡牌强化最大等级
+GAME_CONFIG.MAX_CARD_LV = 109
 
 return GAME_CONFIG

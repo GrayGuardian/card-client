@@ -1,0 +1,25 @@
+local base = require("comp_base")
+local Comp = class("skill_link_item", base)
+function Comp:onLoad()
+    self.firstHoleComp = self.param.firstHoleComp
+    self.lastHoleComp = self.param.lastHoleComp
+
+    self.rectTransform = comp:getCSComponent(self.node, UE.RectTransform)
+
+    self:refresh()
+end
+function Comp:refresh()
+    -- 更新位置
+    local pos1 = self.firstHoleComp.node.position
+    local pos2 = self.lastHoleComp.node.position
+    local v1 = {x = pos2.x - pos1.x, y = pos2.y - pos1.y}
+    local v2 = {x = 0, y = -1}
+    self.node.localEulerAngles = {x = 0, y = 0, z = utils.getVectorAngle(v1, v2)}
+    self.node.position = {
+        x = (pos1.x + pos2.x) / 2,
+        y = (pos1.y + pos2.y) / 2,
+        z = (pos1.z + pos2.z) / 2
+    }
+end
+
+return Comp

@@ -17,6 +17,12 @@
         ],
         "selplayer_item": [
             "p1"
+        ],
+        "skill_hole_item": [
+            "p10"
+        ],
+        "skill_link_item": [
+            "p10"
         ]
     },
     "ui1": {
