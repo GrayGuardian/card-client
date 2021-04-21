@@ -4,6 +4,7 @@ local Model = class("player", base)
 local PlayerCurrency = require("model_player_currency")
 local PlayerStyle = require("model_player_style")
 local Card = require("model_card")
+local SkillGem = require("model_skillgem")
 
 function Model:CLASS_NAME()
     return "Player"
@@ -12,6 +13,7 @@ function Model:onLoad()
     print("[Model] init>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
     self.currency = nil
     self.cardMap = {}
+    self.skillGemMap = {}
 
     print(
         "添加Plyaer监听事件",
@@ -32,6 +34,12 @@ function Model:onLoad()
                         self.cardMap[data.idx] = Card:new(data.idx, baseInfo)
                     end
                 end
+                -- 技能宝石
+                if data.clsName == "SkillGem" then
+                    if (self.skillGemMap[data.idx] == nil) then
+                        self.skillGemMap[data.idx] = SkillGem:new(data.idx, baseInfo)
+                    end
+                end
             end
         )
     )
@@ -40,6 +48,9 @@ function Model:onDestroy()
     self.currency:close()
     for key, card in pairs(self.cardMap) do
         card:close()
+    end
+    for key, skillgem in pairs(self.skillGemMap) do
+        skillgem:close()
     end
 end
 

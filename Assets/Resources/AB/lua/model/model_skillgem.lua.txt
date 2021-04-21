@@ -1,0 +1,10 @@
+local base = require("model_base")
+local Model = class("skillgem", base)
+function Model:CLASS_NAME()
+    return "SkillGem"
+end
+function Model:onLoad()
+    print("[Model] init>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
+end
+
+return Model

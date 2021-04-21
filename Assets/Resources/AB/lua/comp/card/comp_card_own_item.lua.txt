@@ -109,7 +109,6 @@ function Comp:refresh()
 
         local firstHoleComp = self.holeCompMap[linkInfo.holeIdxs[1] + 1]
         local lastHoleComp = self.holeCompMap[linkInfo.holeIdxs[2] + 1]
-        print(linkInfo.holeIdxs[1] + 1, linkInfo.holeIdxs[2] + 1)
         comp:addComponent(node, "skill_link_item", {firstHoleComp = firstHoleComp, lastHoleComp = lastHoleComp})
     end
 end
