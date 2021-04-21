@@ -2,9 +2,10 @@ local base = require("comp_base")
 local Comp = class("card_own_item", base)
 
 function Comp:onLoad()
-    self.tid = self.param.tid
-    self.tpl = tpl.template_card[self.tid]
+    self.info = self.param.info
+    self.tpl = tpl.template_card[self.info:get_tid()]
 
+    self.roleBoxNode = self.node:Find("mask"):Find("roleBoxNode")
     self.starBoxNode = self.node:Find("starBoxNode")
     self.energyBoxNode = self.node:Find("energyBoxNode")
     self.starCompMap = {}
@@ -32,10 +33,14 @@ function Comp:refresh()
     -- 背景
     self.uiComp.Image.bg0Image.sprite = self:load_sprite("p10", string.format("bg_%s0", self.tpl.pic_bg))
     self.uiComp.Image.bg1Image.sprite = self:load_sprite("p10", string.format("bg_%s1", self.tpl.pic_bg))
-
     -- 卡牌图
-    self.uiComp.Image.roleImage.sprite = self:load_sprite(self.tpl.pic_ab, self.tid)
-
+    for i = 0, self.roleBoxNode.childCount - 1 do
+        GameObject.Destroy(self.roleBoxNode:GetChild(i).gameObject)
+    end
+    local node = GameObject.Instantiate(self:load_gameObject(self.tpl.pic_ab, self.info:get_tid())).transform
+    node.parent = self.roleBoxNode
+    node.localPosition = {x = 0, y = 0, z = 0}
+    node.localScale = {x = 1.0, y = 1.0, z = 1.0}
     -- 框
     self.uiComp.Image.bgCard0Image.sprite = self:load_sprite("p10", string.format("bg_card_%s0", self.tpl.rank))
     self.uiComp.Image.bgCard1Image.sprite = self:load_sprite("p10", string.format("bg_card_%s1", self.tpl.rank))
@@ -46,9 +51,33 @@ function Comp:refresh()
         self.uiComp.Image.bgCard3Image.gameObject:SetActive(true)
         self.uiComp.Image.bgCard3Image.sprite = self:load_sprite("p10", string.format("bg_card_%s3", self.tpl.rank))
     end
-
     -- 属性
     self.uiComp.Image.attributeIconImage.sprite =
         self:load_sprite("p10", string.format("icon_attribute%s", self.tpl.attribute))
+    -- 强化等级
+    for i, comp in pairs(self.starCompMap) do
+        if (i <= self.info:getEnchLv()) then
+            -- 满
+            comp.state = 1
+        else
+            -- 空
+            comp.state = 0
+        end
+        comp:refresh()
+    end
+    -- 进阶等级
+    for i, comp in pairs(self.energyCompMap) do
+        if (self.info:getAdvLv() >= i + 5) then
+            -- 红
+            comp.state = 2
+        elseif (self.info:getAdvLv() >= i) then
+            -- 蓝
+            comp.state = 1
+        else
+            -- 空
+            comp.state = 0
+        end
+        comp:refresh()
+    end
 end
 return Comp

@@ -82,7 +82,6 @@ function UI:onNextBtnClick(o, order)
                         "enterGame",
                         {},
                         function()
-                            print("删除UI》》》》》》》》》》》》》")
                             self:close()
                         end
                     )

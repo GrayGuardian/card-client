@@ -11,11 +11,6 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
-    -- local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_own_item")).transform
-    -- node.parent = ui.uiCanvas
-    -- node.localPosition = {x = 0, y = 0, z = 0}
-    -- node.localScale = {x = 1.0, y = 1.0, z = 1.0}
-    -- comp:addComponent(node, "card_own_item", {tid = 1})
 end
 
 function UI:onLoginBtnClick(o, order)

@@ -5,7 +5,7 @@ function Broadcast:notify(key, data)
     if self:exist(key) == false then
         return false
     end
-    removeList = {}
+    local removeList = {}
     for i, v in pairs(callBackInfoMap[key]) do
         v.callback(data)
         if v.isOnce then
