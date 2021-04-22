@@ -15,11 +15,11 @@ function UI:onLoad()
     self.bottom_list = ui:showUI("ui_bottom_list")
 
     --卡牌测试
-    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_own_item")).transform
-    node.parent = ui.uiCanvas
-    node.localPosition = {x = 0, y = 0, z = 0}
-    node.localScale = {x = 1.0, y = 1.0, z = 1.0}
-    comp:addComponent(node, "card_own_item", {info = player.cardMap[1]})
+    -- local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_own_item")).transform
+    -- node.parent = ui.uiCanvas
+    -- node.localPosition = {x = 0, y = 0, z = 0}
+    -- node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+    -- comp:addComponent(node, "card_own_item", {info = player.cardMap[1]})
 end
 function UI:onDestroy()
     self.top_msg:close()

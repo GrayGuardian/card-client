@@ -239,7 +239,7 @@ public class ResUtil
                 res = bundle.LoadAsset(resName, type);
                 if (res != default(UnityEngine.Object))
                 {
-                    UnityEngine.Debug.Log(string.Format("通过AB包加载资源 key:{0} resName:{1}", key, resName));
+                    // UnityEngine.Debug.Log(string.Format("通过AB包加载资源 key:{0} resName:{1}", key, resName));
                     var resObject = new ResObject() { name = resName, res = res };
                     foreach (var b in bundles)
                     {
@@ -273,7 +273,7 @@ public class ResUtil
                 res = Resources.Load(resPath, type);
                 if (res != default(UnityEngine.Object))
                 {
-                    UnityEngine.Debug.Log(string.Format("通过伪AB包(Resources)加载资源 key:{0} resName:{1} resPath:{2}", key, resName, resPath));
+                    // UnityEngine.Debug.Log(string.Format("通过伪AB包(Resources)加载资源 key:{0} resName:{1} resPath:{2}", key, resName, resPath));
                 }
             }
         }
@@ -283,7 +283,7 @@ public class ResUtil
             res = Resources.Load("Default/" + key + "/" + resName, type);
             if (res != default(UnityEngine.Object))
             {
-                UnityEngine.Debug.Log(string.Format("通过默认文件夹加载资源 key:{0} resName:{1}", key, resName));
+                // UnityEngine.Debug.Log(string.Format("通过默认文件夹加载资源 key:{0} resName:{1}", key, resName));
             }
 
         }
@@ -292,7 +292,7 @@ public class ResUtil
             res = Resources.Load(key + "/" + resName, type);
             if (res != default(UnityEngine.Object))
             {
-                UnityEngine.Debug.Log(string.Format("通过Base文件夹加载资源 key:{0} resName:{1}", key, resName));
+                // UnityEngine.Debug.Log(string.Format("通过Base文件夹加载资源 key:{0} resName:{1}", key, resName));
             }
         }
 

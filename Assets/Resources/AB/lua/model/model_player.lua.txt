@@ -2,55 +2,58 @@ local base = require("model_base")
 local Model = class("player", base)
 
 local PlayerCurrency = require("model_player_currency")
-local PlayerStyle = require("model_player_style")
 local Card = require("model_card")
 local SkillGem = require("model_skillgem")
+local TAB = {
+    {name = "currency", cls = PlayerCurrency, isArray = false},
+    {name = "card", cls = Card, isArray = true},
+    {name = "skillGem", cls = SkillGem, isArray = true}
+}
 
 function Model:CLASS_NAME()
     return "Player"
 end
 function Model:onLoad()
     print("[Model] init>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
-    self.currency = nil
-    self.cardMap = {}
-    self.skillGemMap = {}
 
-    print(
-        "添加Plyaer监听事件",
-        self:broadcast_on(
-            BROADCAST_CODE.SOCKET_EVENT("upModelData"),
-            function(data)
-                -- print("[Player]", "接收到ModelData>>>", data.clsName)
-                local baseInfo = data[data.clsName]
-                -- 人物货币
-                if data.clsName == "PlayerCurrency" then
-                    if (self.currency == nil and data.idx == self.idx) then
-                        self.currency = PlayerCurrency:new(self.idx, baseInfo)
-                    end
-                end
-                -- 卡牌
-                if data.clsName == "Card" then
-                    if (self.cardMap[data.idx] == nil) then
-                        self.cardMap[data.idx] = Card:new(data.idx, baseInfo)
-                    end
-                end
-                -- 技能宝石
-                if data.clsName == "SkillGem" then
-                    if (self.skillGemMap[data.idx] == nil) then
-                        self.skillGemMap[data.idx] = SkillGem:new(data.idx, baseInfo)
+    for key, info in pairs(TAB) do
+        if (info.isArray) then
+            self[string.format("%sMap", info.name)] = {}
+        end
+    end
+    self:broadcast_on(
+        BROADCAST_CODE.SOCKET_EVENT("upModelData"),
+        function(data)
+            -- print("[Player]", "接收到ModelData>>>", data.clsName)
+            local baseInfo = data[data.clsName]
+            for key, info in pairs(TAB) do
+                if data.clsName == info.cls.CLASS_NAME() then
+                    if (info.isArray) then
+                        if (self[string.format("%sMap", info.name)][data.idx] == nil) then
+                            self[string.format("%sMap", info.name)][data.idx] = info.cls:new(data.idx, baseInfo)
+                        end
+                    else
+                        if (self[info.name] == nil and data.idx == self.idx) then
+                            self[info.name] = info.cls:new(self.idx, baseInfo)
+                        end
                     end
                 end
             end
-        )
+        end,
+        1
     )
 end
 function Model:onDestroy()
-    self.currency:close()
-    for key, card in pairs(self.cardMap) do
-        card:close()
-    end
-    for key, skillgem in pairs(self.skillGemMap) do
-        skillgem:close()
+    for key, info in pairs(TAB) do
+        if (info.isArray) then
+            for idx, model in pairs(self[string.format("%sMap", info.name)]) do
+                model:close()
+            end
+        else
+            if (self[info.name] ~= nil) then
+                self[info.name]:close()
+            end
+        end
     end
 end
 

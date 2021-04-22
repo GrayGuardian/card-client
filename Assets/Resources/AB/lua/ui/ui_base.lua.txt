@@ -202,7 +202,7 @@ function UIBase:broadcast_clear()
         table.insert(tempMap, info)
     end
     for index, info in pairs(tempMap) do
-        print(self:broadcast_out(info.key, info.callback))
+        self:broadcast_out(info.key, info.callback)
     end
     self.broadcastMap = {}
 end
