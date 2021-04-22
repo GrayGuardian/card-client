@@ -104,7 +104,7 @@ function CompBase:uiCompInit()
         else
             e = "on" .. comp.name:gsub("^%l", string.upper) .. "Click"
         end
-        print(self.name, " Comp 注册Button事件>", e)
+        -- print(self.name, " Comp 注册Button事件>", e)
         if self[e] ~= nil then
             if type(comp) == "table" then
                 sum = #comp
@@ -130,11 +130,11 @@ function CompBase:uiCompInit()
 end
 
 function CompBase:_onLoad()
-    print("加载Comp-" .. self.name .. ">>>>>>>>>>>>>>>>>>>>>>>> onLoad")
+    -- print("加载Comp-" .. self.name .. ">>>>>>>>>>>>>>>>>>>>>>>> onLoad")
     self:onLoad()
 end
 function CompBase:_onDestroy()
-    print("卸载Comp-" .. self.name .. " >>>>>>>>>>>>>>>>>>>>>>>> onDestroy")
+    -- print("卸载Comp-" .. self.name .. " >>>>>>>>>>>>>>>>>>>>>>>> onDestroy")
     self:timer_clear()
     self:broadcast_clear()
     self:load_clear()

@@ -28,7 +28,12 @@ function Scene:onLoad()
     )
 
     ui:showUI("ui_bg_login")
-    ui:showUI("ui_login")
+
+    if (self.param.defaultUI == nil) then
+        ui:showUI("ui_login")
+    else
+        ui:showUI(self.param.defaultUI)
+    end
 end
 
 return Scene

@@ -161,13 +161,21 @@ utils.getVectorAngle = function(pos1, pos2)
 end
 
 _G.gameLogic = {}
--- 注销
-gameLogic.logout = function()
+-- 数据层面注销
+local logout = function()
     network:disconn()
     if (_G.player ~= nil) then
         _G.player:close()
         _G.player = nil
     end
-
+end
+-- 重新登录
+gameLogic.reelectUser = function()
+    logout()
     ui:loadScene("Login")
+end
+-- 重选角色
+gameLogic.reelectPlayer = function()
+    logout()
+    ui:loadScene("Login", {defaultUI = "ui_player_sel"})
 end

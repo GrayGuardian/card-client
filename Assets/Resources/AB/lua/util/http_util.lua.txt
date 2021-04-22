@@ -14,7 +14,7 @@ function Http:init()
                         msg = error.msg .. "，请重新登录！",
                         isClose = false,
                         onClick = function()
-                            gameLogic.logout()
+                            gameLogic.reelectUser()
                         end
                     }
                 )

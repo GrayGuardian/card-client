@@ -33,7 +33,7 @@ function Network:init()
                     msg = "网络连接错误，请重新登录！",
                     isClose = false,
                     onClick = function()
-                        gameLogic.logout()
+                        gameLogic.reelectUser()
                         self.errorTipUI = nil
                     end
                 }
@@ -85,7 +85,7 @@ function Network:init()
                     msg = data.error.msg .. "，请重新登录！",
                     isClose = false,
                     onClick = function()
-                        gameLogic.logout()
+                        gameLogic.reelectUser()
                     end
                 }
             )
