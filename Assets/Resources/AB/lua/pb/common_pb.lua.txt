@@ -49,7 +49,6 @@ localTable.CARDINFO_SKILLLINKS_FIELD = protobuf.FieldDescriptor()
 SKILLHOLE = protobuf.Descriptor()
 localTable.SKILLHOLE_IDX_FIELD = protobuf.FieldDescriptor()
 localTable.SKILLHOLE_COLOR_FIELD = protobuf.FieldDescriptor()
-localTable.SKILLHOLE_SKID_FIELD = protobuf.FieldDescriptor()
 SKILLLINK = protobuf.Descriptor()
 localTable.SKILLLINK_IDX_FIELD = protobuf.FieldDescriptor()
 localTable.SKILLLINK_HOLEIDXS_FIELD = protobuf.FieldDescriptor()
@@ -58,6 +57,11 @@ localTable.SKILLGEMINFO_SKID_FIELD = protobuf.FieldDescriptor()
 localTable.SKILLGEMINFO_PID_FIELD = protobuf.FieldDescriptor()
 localTable.SKILLGEMINFO_TID_FIELD = protobuf.FieldDescriptor()
 localTable.SKILLGEMINFO_COLOR_FIELD = protobuf.FieldDescriptor()
+localTable.SKILLGEMINFO_INLAY_FIELD = protobuf.FieldDescriptor()
+localTable.SKILLGEMINFO_TTTT_FIELD = protobuf.FieldDescriptor()
+SKILLINLAY = protobuf.Descriptor()
+localTable.SKILLINLAY_CID_FIELD = protobuf.FieldDescriptor()
+localTable.SKILLINLAY_HOLEIDX_FIELD = protobuf.FieldDescriptor()
 
 
 localTable.ERROR_CODE_FIELD.name = "code"
@@ -474,21 +478,11 @@ localTable.SKILLHOLE_COLOR_FIELD.default_value = ""
 localTable.SKILLHOLE_COLOR_FIELD.type = 9
 localTable.SKILLHOLE_COLOR_FIELD.cpp_type = 9
 
-localTable.SKILLHOLE_SKID_FIELD.name = "skid"
-localTable.SKILLHOLE_SKID_FIELD.full_name = ".common.SkillHole.skid"
-localTable.SKILLHOLE_SKID_FIELD.number = 3
-localTable.SKILLHOLE_SKID_FIELD.index = 2
-localTable.SKILLHOLE_SKID_FIELD.label = 2
-localTable.SKILLHOLE_SKID_FIELD.has_default_value = false
-localTable.SKILLHOLE_SKID_FIELD.default_value = 0
-localTable.SKILLHOLE_SKID_FIELD.type = 5
-localTable.SKILLHOLE_SKID_FIELD.cpp_type = 1
-
 SKILLHOLE.name = "SkillHole"
 SKILLHOLE.full_name = ".common.SkillHole"
 SKILLHOLE.nested_types = {}
 SKILLHOLE.enum_types = {}
-SKILLHOLE.fields = {localTable.SKILLHOLE_IDX_FIELD, localTable.SKILLHOLE_COLOR_FIELD, localTable.SKILLHOLE_SKID_FIELD}
+SKILLHOLE.fields = {localTable.SKILLHOLE_IDX_FIELD, localTable.SKILLHOLE_COLOR_FIELD}
 SKILLHOLE.is_extendable = false
 SKILLHOLE.extensions = {}
 localTable.SKILLLINK_IDX_FIELD.name = "idx"
@@ -558,13 +552,61 @@ localTable.SKILLGEMINFO_COLOR_FIELD.default_value = ""
 localTable.SKILLGEMINFO_COLOR_FIELD.type = 9
 localTable.SKILLGEMINFO_COLOR_FIELD.cpp_type = 9
 
+localTable.SKILLGEMINFO_INLAY_FIELD.name = "inlay"
+localTable.SKILLGEMINFO_INLAY_FIELD.full_name = ".common.SkillGemInfo.inlay"
+localTable.SKILLGEMINFO_INLAY_FIELD.number = 5
+localTable.SKILLGEMINFO_INLAY_FIELD.index = 4
+localTable.SKILLGEMINFO_INLAY_FIELD.label = 1
+localTable.SKILLGEMINFO_INLAY_FIELD.has_default_value = false
+localTable.SKILLGEMINFO_INLAY_FIELD.default_value = nil
+localTable.SKILLGEMINFO_INLAY_FIELD.message_type = SKILLINLAY
+localTable.SKILLGEMINFO_INLAY_FIELD.type = 11
+localTable.SKILLGEMINFO_INLAY_FIELD.cpp_type = 10
+
+localTable.SKILLGEMINFO_TTTT_FIELD.name = "tttt"
+localTable.SKILLGEMINFO_TTTT_FIELD.full_name = ".common.SkillGemInfo.tttt"
+localTable.SKILLGEMINFO_TTTT_FIELD.number = 6
+localTable.SKILLGEMINFO_TTTT_FIELD.index = 5
+localTable.SKILLGEMINFO_TTTT_FIELD.label = 3
+localTable.SKILLGEMINFO_TTTT_FIELD.has_default_value = false
+localTable.SKILLGEMINFO_TTTT_FIELD.default_value = {}
+localTable.SKILLGEMINFO_TTTT_FIELD.type = 5
+localTable.SKILLGEMINFO_TTTT_FIELD.cpp_type = 1
+
 SKILLGEMINFO.name = "SkillGemInfo"
 SKILLGEMINFO.full_name = ".common.SkillGemInfo"
 SKILLGEMINFO.nested_types = {}
 SKILLGEMINFO.enum_types = {}
-SKILLGEMINFO.fields = {localTable.SKILLGEMINFO_SKID_FIELD, localTable.SKILLGEMINFO_PID_FIELD, localTable.SKILLGEMINFO_TID_FIELD, localTable.SKILLGEMINFO_COLOR_FIELD}
+SKILLGEMINFO.fields = {localTable.SKILLGEMINFO_SKID_FIELD, localTable.SKILLGEMINFO_PID_FIELD, localTable.SKILLGEMINFO_TID_FIELD, localTable.SKILLGEMINFO_COLOR_FIELD, localTable.SKILLGEMINFO_INLAY_FIELD, localTable.SKILLGEMINFO_TTTT_FIELD}
 SKILLGEMINFO.is_extendable = false
 SKILLGEMINFO.extensions = {}
+localTable.SKILLINLAY_CID_FIELD.name = "cid"
+localTable.SKILLINLAY_CID_FIELD.full_name = ".common.SkillInlay.cid"
+localTable.SKILLINLAY_CID_FIELD.number = 1
+localTable.SKILLINLAY_CID_FIELD.index = 0
+localTable.SKILLINLAY_CID_FIELD.label = 2
+localTable.SKILLINLAY_CID_FIELD.has_default_value = false
+localTable.SKILLINLAY_CID_FIELD.default_value = 0
+localTable.SKILLINLAY_CID_FIELD.type = 5
+localTable.SKILLINLAY_CID_FIELD.cpp_type = 1
+
+localTable.SKILLINLAY_HOLEIDX_FIELD.name = "holeIdx"
+localTable.SKILLINLAY_HOLEIDX_FIELD.full_name = ".common.SkillInlay.holeIdx"
+localTable.SKILLINLAY_HOLEIDX_FIELD.number = 2
+localTable.SKILLINLAY_HOLEIDX_FIELD.index = 1
+localTable.SKILLINLAY_HOLEIDX_FIELD.label = 2
+localTable.SKILLINLAY_HOLEIDX_FIELD.has_default_value = false
+localTable.SKILLINLAY_HOLEIDX_FIELD.default_value = 0
+localTable.SKILLINLAY_HOLEIDX_FIELD.type = 5
+localTable.SKILLINLAY_HOLEIDX_FIELD.cpp_type = 1
+
+SKILLINLAY.name = "SkillInlay"
+SKILLINLAY.full_name = ".common.SkillInlay"
+SKILLINLAY.nested_types = {}
+SKILLINLAY.enum_types = {}
+SKILLINLAY.fields = {localTable.SKILLINLAY_CID_FIELD, localTable.SKILLINLAY_HOLEIDX_FIELD}
+SKILLINLAY.is_extendable = false
+SKILLINLAY.extensions = {}
 
 AreaInfo = protobuf.Message(AREAINFO)
 CardInfo = protobuf.Message(CARDINFO)
@@ -573,6 +615,7 @@ PlayerCurrencyInfo = protobuf.Message(PLAYERCURRENCYINFO)
 PlayerInfo = protobuf.Message(PLAYERINFO)
 SkillGemInfo = protobuf.Message(SKILLGEMINFO)
 SkillHole = protobuf.Message(SKILLHOLE)
+SkillInlay = protobuf.Message(SKILLINLAY)
 SkillLink = protobuf.Message(SKILLLINK)
 UserInfo = protobuf.Message(USERINFO)
 
