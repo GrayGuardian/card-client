@@ -32,8 +32,9 @@ public class SocketUtil
     {
         if (_onListenEvent != null) _onListenEvent("onError", new object[] { error });
     }
-    private void OnEvent(string key,byte[] data){
-        if (_onListenEvent != null) _onListenEvent("onMessage", new object[] { key,data });
+    private void OnEvent(string key, byte[] data)
+    {
+        if (_onListenEvent != null) _onListenEvent("onMessage", new object[] { key, data });
     }
     public SocketIO Conn(string url)
     {
@@ -48,6 +49,13 @@ public class SocketUtil
         return _socket;
     }
 
+    public void DisConn()
+    {
+        if (_socket != null)
+        {
+            _socket.Close();
+        }
+    }
     public void Emit(string ev, byte[] data)
     {
         if (_socket == null) return;

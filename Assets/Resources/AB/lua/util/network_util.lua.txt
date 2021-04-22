@@ -128,6 +128,9 @@ function Network:conn(url, connData, cb)
         true
     )
 end
+function Network:disconn()
+    socket:disconn()
+end
 function Network:emit(router, data, cb)
     data = data or {}
     local body = {router = router}

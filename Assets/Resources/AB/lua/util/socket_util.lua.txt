@@ -1,4 +1,4 @@
-local Socket = class('Socket')
+local Socket = class("Socket")
 CSSocketUtil = Util.Socket
 
 function Socket:init()
@@ -6,7 +6,7 @@ function Socket:init()
         System.Action_string_objects(
         function(key, param)
             local action = self[key]
-            if key == 'OnDestroy' then
+            if key == "OnDestroy" then
                 action = function()
                     self:_onDestroy()
                 end
@@ -31,6 +31,9 @@ end
 function Socket:conn(url)
     self.socket = CSSocketUtil:Conn(url)
     return self.socket
+end
+function Socket:disconn()
+    CSSocketUtil:DisConn()
 end
 function Socket:onConnect()
     broadcast:notify(BROADCAST_CODE.SOCKET_CONNECT)

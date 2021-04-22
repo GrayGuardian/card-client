@@ -10,6 +10,7 @@ public class SocketUtilWrap
 		L.RegFunction("AddListenEvent", AddListenEvent);
 		L.RegFunction("DelListenEvent", DelListenEvent);
 		L.RegFunction("Conn", Conn);
+		L.RegFunction("DisConn", DisConn);
 		L.RegFunction("Emit", Emit);
 		L.RegFunction("New", _CreateSocketUtil);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -85,6 +86,22 @@ public class SocketUtilWrap
 			Dpoch.SocketIO.SocketIO o = obj.Conn(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DisConn(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			SocketUtil obj = (SocketUtil)ToLua.CheckObject<SocketUtil>(L, 1);
+			obj.DisConn();
+			return 0;
 		}
 		catch (Exception e)
 		{
