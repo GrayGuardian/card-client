@@ -172,6 +172,7 @@ end
 -- 重新登录
 gameLogic.reelectUser = function()
     logout()
+    network.token = ""
     ui:loadScene("Login")
 end
 -- 重选角色

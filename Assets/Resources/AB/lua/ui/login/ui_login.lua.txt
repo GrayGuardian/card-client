@@ -25,7 +25,11 @@ function UI:onLoginBtnClick(o, order)
         {username = username, password = password},
         function(data)
             GameData.areaInfo = data.areaInfo
-            GameData.areaInfos = data.areaInfos
+
+            GameData.areaInfoMap = {}
+            for key, info in pairs(data.areaInfos) do
+                GameData.areaInfoMap[info.aid] = info
+            end
 
             ui:showUI("ui_area_main")
             self:close()

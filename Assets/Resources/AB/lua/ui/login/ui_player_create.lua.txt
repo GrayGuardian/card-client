@@ -62,7 +62,7 @@ function UI:onCreateBtnClick(o, order)
         {name = name, avatarid = avatarid},
         function(data)
             print("人物创建成功>>>", utils.serialize(data.info))
-            table.insert(GameData.players, data.info)
+            GameData.playerMap[data.info.pid] = data.info
             ui:showUI("ui_player_sel")
             self:close()
         end

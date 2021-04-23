@@ -11,16 +11,15 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
-    -- broadcast:on(
-    --     BROADCAST_CODE.SOCKET_EVENT("error"),
-    --     function(error)
-    --         if (error.code == ERROR_CODE.AREA_MAINTENANCE) then
-    --             GameData.areaInfo.ismaintenance = 1
-    --             self.areaItemComp.info = GameData.areaInfo
-    --             self.areaItemComp:refresh()
-    --         end
-    --     end
-    -- )
+    self:broadcast_on(
+        BROADCAST_CODE.ERROR_EVENT(ERROR_CODE.AREA_MAINTENANCE),
+        function(error)
+            GameData.areaInfoMap[GameData.areaInfo.aid].ismaintenance = 1
+            GameData.areaInfo.ismaintenance = 1
+            print(">>>>>>>>>>>>>>>", utils.serialize(GameData.areaInfo))
+            self.areaItemComp:refresh(GameData.areaInfo)
+        end
+    )
 
     self.areaItemComp =
         comp:addComponent(
@@ -33,11 +32,10 @@ function UI:onLoad()
                     "ui_area_sel",
                     {
                         area = GameData.areaInfo,
-                        areas = GameData.areaInfos,
+                        areas = GameData.areaInfoMap,
                         onClick = function(info)
                             GameData.areaInfo = info
-                            self.areaItemComp.info = GameData.areaInfo
-                            self.areaItemComp:refresh()
+                            self.areaItemComp:refresh(GameData.areaInfo)
                         end
                     }
                 )
@@ -51,12 +49,15 @@ function UI:onNextBtnClick(o, order)
         "nextArea",
         {aid = GameData.areaInfo.aid},
         function(data)
-            -- GameData.areaInfo.ismaintenance = 0
-            -- self.areaItemComp.info = GameData.areaInfo
-            -- self.areaItemComp:refresh()
+            GameData.areaInfoMap[GameData.areaInfo.aid].ismaintenance = 0
+            GameData.areaInfo.ismaintenance = 0
+            self.areaItemComp:refresh(GameData.areaInfo)
 
             print("进入选人界面")
-            GameData.players = data.players
+            GameData.playerMap = {}
+            for key, player in pairs(data.players) do
+                GameData.playerMap[player.pid] = player
+            end
             ui:showUI("ui_player_sel")
             self:close()
         end

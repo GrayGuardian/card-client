@@ -29,5 +29,8 @@ BROADCAST_CODE.SOCKET_MESSAGE = "SOCKET_MESSAGE"
 BROADCAST_CODE.SOCKET_EVENT = function(key)
     return "SOCKET_EVENT_" .. string.upper(key)
 end
+BROADCAST_CODE.ERROR_EVENT = function(code)
+    return "ERROR_EVENT_" .. code
+end
 
 return BROADCAST_CODE

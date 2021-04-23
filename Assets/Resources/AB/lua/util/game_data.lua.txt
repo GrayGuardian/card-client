@@ -1,0 +1,7 @@
+local GameData = {}
+
+GameData.areaInfo = nil
+GameData.areaInfoMap = {}
+GameData.playerMap = {}
+
+return GameData

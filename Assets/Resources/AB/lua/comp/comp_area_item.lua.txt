@@ -9,7 +9,10 @@ function Comp:onLoad()
 
     self:hideOutLine()
 end
-function Comp:refresh()
+function Comp:refresh(info)
+    if info ~= nil then
+        self.info = info
+    end
     self.uiComp.Text.nameText.text = self.info.name
     self.uiComp.Image.stateIcon.sprite =
         self:load_sprite("p1", self.info.ismaintenance == 0 and "icon_red_point" or "icon_gray_point")

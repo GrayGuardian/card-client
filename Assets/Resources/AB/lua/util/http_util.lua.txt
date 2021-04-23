@@ -21,8 +21,8 @@ function Http:init()
 
                 return
             end
-
             ui:showOnlyTip("NETWORK_ERROR", {msg = error.msg})
+            broadcast:notify(BROADCAST_CODE.ERROR_EVENT(error.code), error)
         end
     )
     broadcast:on(

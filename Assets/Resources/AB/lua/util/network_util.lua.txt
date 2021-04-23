@@ -96,6 +96,7 @@ function Network:init()
         function(error)
             print("收到逻辑错误>>", tostring(error))
             ui:showOnlyTip("NETWORK_ERROR", {msg = error.msg})
+            broadcast:notify(BROADCAST_CODE.ERROR_EVENT(error.code), error)
         end
     )
 

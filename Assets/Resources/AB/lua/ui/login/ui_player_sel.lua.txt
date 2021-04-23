@@ -11,6 +11,17 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
+    self:broadcast_on(
+        BROADCAST_CODE.ERROR_EVENT(ERROR_CODE.PLAYER_NOTEXIST),
+        function()
+            if (self.lastSelComp ~= nil) then
+                local pid = self.lastSelComp.info.pid
+                GameData.playerMap[pid] = nil
+                self:refresh()
+            end
+        end
+    )
+
     self.contentNode = self.uiComp.ScrollRect.ScrollView.transform:Find("Viewport"):Find("Content")
 
     self:refresh()
@@ -21,11 +32,11 @@ function UI:refresh()
         GameObject.Destroy(self.contentNode:GetChild(i).gameObject)
     end
 
-    for index, info in ipairs(GameData.players) do
+    for pid, info in pairs(GameData.playerMap) do
         self:addSelPlayerItem(info)
     end
 
-    if #GameData.players < GAME_CONFIG.MAX_PLAYER_SUM then
+    if table.len(GameData.playerMap) < GAME_CONFIG.MAX_PLAYER_SUM then
         self:addSelPlayerItem(nil)
     end
 end
@@ -69,6 +80,7 @@ function UI:onNextBtnClick(o, order)
     end
 
     local pid = self.lastSelComp.info.pid
+
     http:send(
         "enterGame",
         {pid = pid},
@@ -108,11 +120,7 @@ function UI:onDelBtnClick(o, order)
                     {pid = pid},
                     function(data)
                         --删除人物列表
-                        for index, info in ipairs(GameData.players) do
-                            if info.pid == data.pid then
-                                table.remove(GameData.players, index)
-                            end
-                        end
+                        GameData.playerMap[data.pid] = nil
                         self.lastSelComp = nil
                         self:refresh()
                     end
