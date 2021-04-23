@@ -6,6 +6,9 @@ end
 --加载完毕
 function ModelBase:onLoad()
 end
+--更新baseInfo
+function ModelBase:loadDataed()
+end
 
 ------------------- 继承重写 -------------------
 function ModelBase:init(idx, baseInfo)
@@ -41,6 +44,7 @@ function ModelBase:upBaseInfo(baseInfo)
             return o.baseInfo[key]
         end
     end
+    self:loadDataed()
 end
 
 function ModelBase:close()

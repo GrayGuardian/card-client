@@ -89,11 +89,12 @@ function Comp:refresh()
         GameObject.Destroy(self.skillHoleBoxNode:GetChild(i).gameObject)
     end
     for i, holeInfo in pairs(self.info:get_skillHoles()) do
+        holeInfo.cid = self.info:get_cid()
         local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_hole_item")).transform
         node.parent = self.skillHoleBoxNode
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.5, y = 1.5, z = 1.5}
-        self.holeCompMap[i] = comp:addComponent(node, "skill_hole_item", {info = holeInfo})
+        self.holeCompMap[holeInfo.idx] = comp:addComponent(node, "skill_hole_item", {info = holeInfo})
     end
     utils.refreshLayout(self.skillHoleBoxNode, UE.RectTransform)
 
@@ -107,8 +108,8 @@ function Comp:refresh()
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
 
-        local firstHoleComp = self.holeCompMap[linkInfo.holeIdxs[1] + 1]
-        local lastHoleComp = self.holeCompMap[linkInfo.holeIdxs[2] + 1]
+        local firstHoleComp = self.holeCompMap[linkInfo.holeIdxs[1]]
+        local lastHoleComp = self.holeCompMap[linkInfo.holeIdxs[2]]
         comp:addComponent(node, "skill_link_item", {firstHoleComp = firstHoleComp, lastHoleComp = lastHoleComp})
     end
 end

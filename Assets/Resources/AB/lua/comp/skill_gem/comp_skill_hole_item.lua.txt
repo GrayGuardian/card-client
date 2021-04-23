@@ -11,13 +11,24 @@ function Comp:refresh()
     -- 背景图
     self.uiComp.Image.bgImage.sprite = self:load_sprite("p10", string.format("bg_%s0", self.info.color))
     -- 技能宝石
-    -- for i = 0, self.skillGemBoxNode.childCount - 1 do
-    --     GameObject.Destroy(self.skillGemBoxNode:GetChild(i).gameObject)
-    -- end
-    -- local node = GameObject.Instantiate(self:load_gameObject("gem", "skill_gem_blue1")).transform
-    -- node.parent = self.skillGemBoxNode
-    -- node.localPosition = {x = 0, y = 0, z = 0}
-    -- node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+    self.uiComp.Image.maskImage.gameObject:SetActive(false)
+    for i = 0, self.skillGemBoxNode.childCount - 1 do
+        GameObject.Destroy(self.skillGemBoxNode:GetChild(i).gameObject)
+    end
+    local skillGem = player:getCardSkillGem(self.info.cid, self.info.idx)
+    if (skillGem ~= nil) then
+        self.uiComp.Image.maskImage.gameObject:SetActive(true)
+        local node =
+            GameObject.Instantiate(
+            self:load_gameObject(
+                "gem",
+                string.format("skill_gem_%s%s", skillGem:get_color(), skillGem.tpl.pic_icon_type)
+            )
+        ).transform
+        node.parent = self.skillGemBoxNode
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+    end
 end
 
 return Comp

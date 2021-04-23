@@ -63,5 +63,32 @@ function Model:getNextLvExp(lv)
     local exp = 30 * (Mathf.Pow(lv, 3) + lv * 5) - 80
     return exp
 end
+-- 获取卡牌上的镶嵌宝石
+function Model:getCardSkillGem(cid, holeIdx)
+    local cardInfo = self.cardMap[cid]
+    if (cardInfo == nil) then
+        return {}
+    end
+    for key, info in pairs(self.skillGemMap) do
+        if (info:get_inlay() ~= nil and info:get_inlay().cid == cid and info:get_inlay().holeIdx == holeIdx) then
+            return info
+        end
+    end
+    return nil
+end
+-- 获取卡牌上的镶嵌宝石
+function Model:getCardSkillGems(cid)
+    local cardInfo = self.cardMap[cid]
+    if (cardInfo == nil) then
+        return {}
+    end
+    local infoMap = {}
+    for key, info in pairs(self.skillGemMap) do
+        if (info:get_inlay() ~= nil and info:get_inlay().cid == cid) then
+            infoMap[info:get_skid()] = info
+        end
+    end
+    return infoMap
+end
 
 return Model

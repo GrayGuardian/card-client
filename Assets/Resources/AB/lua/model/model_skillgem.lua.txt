@@ -6,5 +6,7 @@ end
 function Model:onLoad()
     print("[Model] init>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
 end
-
+function Model:loadDataed()
+    self.tpl = tpl.template_skill_gem[self:get_tid()]
+end
 return Model
