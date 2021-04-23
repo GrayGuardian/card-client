@@ -31,7 +31,7 @@ UIBase.static.DEFAULT_OPTS = {order = 0, blockInput = true, blackMask = 30}
 
 function UIBase:init(name, param, opts)
     self.name = name
-    self.param = param
+    self.param = param or {}
 
     self.opts = self:GET_DEFAULT_OPTS()
     if opts ~= nil then

@@ -7,7 +7,6 @@ public class UtilWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(Util), typeof(System.Object));
-		L.RegFunction("SizeFormat", SizeFormat);
 		L.RegFunction("New", _CreateUtil);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Http", get_Http, set_Http);
@@ -36,23 +35,6 @@ public class UtilWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: Util.New");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SizeFormat(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 1);
-			long arg0 = LuaDLL.tolua_checkint64(L, 1);
-			string o = Util.SizeFormat(arg0);
-			LuaDLL.lua_pushstring(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{

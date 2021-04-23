@@ -15,7 +15,7 @@ SceneBase.static.DEFAULT_OPTS = {isCloseAllUI = true}
 
 function SceneBase:init(info, param, opts)
     self.info = info
-    self.param = param
+    self.param = param or {}
 
     self.opts = self:GET_DEFAULT_OPTS()
     if opts ~= nil then
