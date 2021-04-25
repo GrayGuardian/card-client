@@ -1,5 +1,8 @@
 local UI = class("UI")
 
+-- 开发分辨率 做适配用
+local DEFAULT_SCREEN = {width = 1080, height = 2340}
+
 function UI:init()
     broadcast:on(
         BROADCAST_CODE.SCENE_LOADED,
@@ -16,6 +19,9 @@ function UI:init()
 
     self.mainCamera = nil
     self.mapComp = nil
+
+    self.SCREEN = {width = UE.Screen.width, height = UE.Screen.height}
+    self.SCREEN_SCALE = (self.SCREEN.width / self.SCREEN.height) / (DEFAULT_SCREEN.width / DEFAULT_SCREEN.height)
 
     self:createUIRoot()
 end
