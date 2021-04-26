@@ -1,4 +1,4 @@
-local Comp = class('Comp')
+local Comp = class("Comp")
 
 function Comp:init()
     self.compMap = {}
@@ -34,7 +34,7 @@ function Comp:addComponent(node, compName, param)
         return comp
     end
 
-    local compType = require('comp_' .. compName)
+    local compType = require("comp_" .. compName)
     local csComp = self:addCSComponent(node, MonoComponent)
     comp = compType:new(compName, param)
 
@@ -48,7 +48,7 @@ function Comp:getComponent(node, compName)
     if compList == nil then
         return nil
     end
-    for index, comp in ipairs(compList) do
+    for index, comp in pairs(compList) do
         if comp.name == compName then
             return comp
         end

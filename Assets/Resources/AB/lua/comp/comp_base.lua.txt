@@ -71,7 +71,7 @@ end
 function CompBase:uiCompInit()
     local types = {"Text", "Image", "Button", "InputField", "ScrollRect"}
 
-    for index, t in ipairs(types) do
+    for index, t in pairs(types) do
         self.uiComp[t] = {}
         local arr = comp:getCSComponentsInChildren(self.node, UEUI[t])
         for i = 0, arr.Length - 1 do

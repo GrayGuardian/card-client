@@ -12,11 +12,20 @@ end
 function UI:GET_PAGE()
     return 1
 end
+
 function UI:onLoad()
-    self.info_view = ui:showUI("ui_info")
+    self.param.page = self.param.page or 0
+
+    self.card_view = ui:showUI("ui_card")
+
+    self:refreshView(self.param)
 end
 function UI:onDestroy()
-    self.info_view:close()
+    self.card_view:close()
+end
+
+function UI:refreshView(viewParam)
+    self.card_view:refreshView(viewParam)
 end
 
 return UI

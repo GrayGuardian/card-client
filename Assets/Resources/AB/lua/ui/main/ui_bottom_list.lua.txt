@@ -11,4 +11,7 @@ end
 ----------------UI配置------------------
 function UI:onLoad()
 end
+function UI:onBottomBtnClick(o, order)
+    mainComp:refreshView({page = order - 1})
+end
 return UI

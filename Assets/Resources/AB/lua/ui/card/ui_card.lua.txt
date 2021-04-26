@@ -1,0 +1,37 @@
+local base = require("ui_base")
+local UI = class("card", base)
+
+----------------UI配置------------------
+function UI:GET_AB()
+    return "ui1"
+end
+function UI:GET_DEFAULT_OPTS()
+    return {order = -10, blockInput = false, blackMask = 0}
+end
+----------------UI配置------------------
+function UI:GET_PAGE_VIEWS()
+    return {"ui_card_main"}
+end
+
+function UI:onLoad()
+    self.param.page = self.param.page or 0
+end
+function UI:onDestroy()
+    if (self.page_view ~= nil) then
+        self.page_view:close()
+    end
+end
+function UI:refreshView(viewParam)
+    self.page = viewParam.page or self.page
+    local viewParam = viewParam.viewParam or {}
+
+    if (self.page_view ~= nil) then
+        if (self.page == self.page_view:GET_PAGE()) then
+            -- 避免重复加载
+            return
+        end
+        self.page_view:close()
+    end
+    self.page_view = ui:showUI(self:GET_PAGE_VIEWS()[self.page + 1], viewParam)
+end
+return UI

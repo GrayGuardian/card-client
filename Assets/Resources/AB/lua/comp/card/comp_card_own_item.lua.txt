@@ -7,16 +7,16 @@ function Comp:onLoad()
 
     self.holeCompMap = {}
 
-    self.roleBoxNode = self.node:Find("mask"):Find("roleBoxNode")
-    self.skillLinkBoxNode = self.node:Find("skillLinkBoxNode")
-    self.skillHoleBoxNode = self.node:Find("skillHoleBoxNode")
-    self.starBoxNode = self.node:Find("starBoxNode")
-    self.energyBoxNode = self.node:Find("energyBoxNode")
+    self.roleLayout = self.node:Find("mask"):Find("roleLayout")
+    self.skillLinksLayout = self.node:Find("skillLinksLayout")
+    self.skillHolesLayout = self.node:Find("skillHolesLayout")
+    self.starsLayout = self.node:Find("starsLayout")
+    self.energysLayout = self.node:Find("energysLayout")
     self.starCompMap = {}
     self.energyCompMap = {}
     for i = 1, 9 do
         local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_star_item")).transform
-        node.parent = self.starBoxNode
+        node.parent = self.starsLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
         local c = comp:addComponent(node, "card_star_item", {state = 0})
@@ -24,7 +24,7 @@ function Comp:onLoad()
     end
     for i = 1, 5 do
         local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_energy_item")).transform
-        node.parent = self.energyBoxNode
+        node.parent = self.energysLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
         local c = comp:addComponent(node, "card_energy_item", {state = 0})
@@ -38,11 +38,11 @@ function Comp:refresh()
     self.uiComp.Image.bg0Image.sprite = self:load_sprite("p10", string.format("bg_%s0", self.tpl.pic_bg))
     self.uiComp.Image.bg1Image.sprite = self:load_sprite("p10", string.format("bg_%s1", self.tpl.pic_bg))
     -- 卡牌图
-    for i = 0, self.roleBoxNode.childCount - 1 do
-        GameObject.Destroy(self.roleBoxNode:GetChild(i).gameObject)
+    for i = 0, self.roleLayout.childCount - 1 do
+        GameObject.Destroy(self.roleLayout:GetChild(i).gameObject)
     end
     local node = GameObject.Instantiate(self:load_gameObject(self.tpl.pic_ab, self.info:get_tid())).transform
-    node.parent = self.roleBoxNode
+    node.parent = self.roleLayout
     node.localPosition = {x = 0, y = 0, z = 0}
     node.localScale = {x = 1.0, y = 1.0, z = 1.0}
     -- 框
@@ -85,26 +85,30 @@ function Comp:refresh()
     end
     -- 技能孔
     self.holeCompMap = {}
-    for i = 0, self.skillHoleBoxNode.childCount - 1 do
-        GameObject.Destroy(self.skillHoleBoxNode:GetChild(i).gameObject)
+    for i = 0, self.skillHolesLayout.childCount - 1 do
+        GameObject.Destroy(self.skillHolesLayout:GetChild(i).gameObject)
     end
     for i, holeInfo in pairs(self.info:get_skillHoles()) do
         holeInfo.cid = self.info:get_cid()
         local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_hole_item")).transform
-        node.parent = self.skillHoleBoxNode
+        node.parent = self.skillHolesLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.5, y = 1.5, z = 1.5}
-        self.holeCompMap[holeInfo.idx] = comp:addComponent(node, "skill_hole_item", {info = holeInfo})
+        local c = comp:addComponent(node, "skill_hole_item", {info = holeInfo})
+        self.holeCompMap[holeInfo.idx] = c
+        -- 技能宝石
+        local skillGemInfo = player:getCardSkillGem(holeInfo.cid, holeInfo.idx)
+        c:refreshSkillGem(skillGemInfo)
     end
-    utils.refreshLayout(self.skillHoleBoxNode, UE.RectTransform)
+    utils.refreshLayout(self.skillHolesLayout, UE.RectTransform)
 
     -- 技能链接
-    for i = 0, self.skillLinkBoxNode.childCount - 1 do
-        GameObject.Destroy(self.skillLinkBoxNode:GetChild(i).gameObject)
+    for i = 0, self.skillLinksLayout.childCount - 1 do
+        GameObject.Destroy(self.skillLinksLayout:GetChild(i).gameObject)
     end
     for i, linkInfo in pairs(self.info:get_skillLinks()) do
         local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_link_item")).transform
-        node.parent = self.skillLinkBoxNode
+        node.parent = self.skillLinksLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
 

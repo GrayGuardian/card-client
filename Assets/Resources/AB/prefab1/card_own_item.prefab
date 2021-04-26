@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3840423517945988241}
   m_Layer: 5
-  m_Name: roleBoxNode
+  m_Name: roleLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 3176958217438905121}
   - component: {fileID: 3176958217438905120}
   m_Layer: 5
-  m_Name: starBoxNode
+  m_Name: starsLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 3176958218206256707}
   - component: {fileID: 3176958218206256708}
   m_Layer: 5
-  m_Name: energyBoxNode
+  m_Name: energysLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 5713792923171262847}
   - component: {fileID: 8339214925617164284}
   m_Layer: 5
-  m_Name: skillHoleBoxNode
+  m_Name: skillHolesLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -907,7 +907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9022156709399371275}
   m_Layer: 5
-  m_Name: skillLinkBoxNode
+  m_Name: skillLinksLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

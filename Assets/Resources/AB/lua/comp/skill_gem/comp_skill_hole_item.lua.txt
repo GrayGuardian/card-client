@@ -3,29 +3,33 @@ local Comp = class("skill_hole_item", base)
 function Comp:onLoad()
     self.info = self.param.info
 
-    self.skillGemBoxNode = self.node:Find("mask"):Find("skillGemBoxNode")
+    self.skillGemLayout = self.node:Find("mask"):Find("skillGemLayout")
 
     self:refresh()
 end
 function Comp:refresh()
     -- 背景图
     self.uiComp.Image.bgImage.sprite = self:load_sprite("p10", string.format("bg_%s0", self.info.color))
-    -- 技能宝石
+
+    self:refreshSkillGem()
+end
+function Comp:refreshSkillGem(skillGemInfo)
+    self.skillGemInfo = skillGemInfo or self.skillGemInfo
+
     self.uiComp.Image.maskImage.gameObject:SetActive(false)
-    for i = 0, self.skillGemBoxNode.childCount - 1 do
-        GameObject.Destroy(self.skillGemBoxNode:GetChild(i).gameObject)
+    for i = 0, self.skillGemLayout.childCount - 1 do
+        GameObject.Destroy(self.skillGemLayout:GetChild(i).gameObject)
     end
-    local skillGem = player:getCardSkillGem(self.info.cid, self.info.idx)
-    if (skillGem ~= nil) then
+    if (self.skillGemInfo ~= nil) then
         self.uiComp.Image.maskImage.gameObject:SetActive(true)
         local node =
             GameObject.Instantiate(
             self:load_gameObject(
                 "gem",
-                string.format("skill_gem_%s%s", skillGem:get_color(), skillGem.tpl.pic_icon_type)
+                string.format("skill_gem_%s%s", self.skillGemInfo:get_color(), self.skillGemInfo.tpl.pic_icon_type)
             )
         ).transform
-        node.parent = self.skillGemBoxNode
+        node.parent = self.skillGemLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
     end

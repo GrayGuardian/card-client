@@ -106,8 +106,19 @@ function UI:closeAllUI()
     end
 end
 function UI:getRelaOrder(order)
-    local index = #self.uiCompMap
-    for i, uiComp in ipairs(self.uiCompMap) do
+    local tempArr = {}
+    for key, uiComp in pairs(self.uiCompMap) do
+        table.insert(tempArr, uiComp)
+    end
+    table.sort(
+        tempArr,
+        function(a, b)
+            return a.opts.order < b.opts.order
+        end
+    )
+    local index = #tempArr
+    for i, uiComp in ipairs(tempArr) do
+        -- print(i, uiComp.opts.order, order)
         if uiComp.opts.order > order then
             index = i
             break

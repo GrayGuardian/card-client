@@ -19,4 +19,7 @@ function UI:onDestroy()
     self.top_info_view:close()
 end
 
+function UI:refreshView()
+    -- body
+end
 return UI
