@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -5,6 +6,8 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using System.Data;
 
 public class ResTool : MonoBehaviour
 {
@@ -290,26 +293,97 @@ public class ResTool : MonoBehaviour
         }
         AssetDatabase.Refresh();
     }
-    // [MenuItem("Tools/资源管理/Format Lua File Name")]
-    // static void FormatLuaFileName()
-    // {
-    //     string root = Path.Combine(GameConst.RESOURCES, "./AB/lua");
-    //     FileInfo[] files = Util.File.GetChildFiles(root, "*");
-    //     foreach (var file in files)
-    //     {
-    //         Debug.Log(Path.GetExtension(file.FullName));
-    //         switch (Path.GetExtension(file.FullName))
-    //         {
-    //             case ".meta":
-    //                 print("meta文件需要删除>>" + file.Name);
-    //                 File.Delete(file.FullName);
-    //                 break;
-    //             case ".lua":
-    //                 print("lua文件需要格式化>>" + file.Name);
-    //                 file.MoveTo(Path.Combine(file.Directory.FullName, file.Name + ".txt"));
-    //                 break;
-    //         }
-    //     }
-    //     AssetDatabase.Refresh();
-    // }
+
+    [MenuItem("Tools/资源管理/Update ab_rely.json")]
+    static void test()
+    {
+        var abRoots = new DirectoryInfo(Path.Combine(GameConst.RESOURCES, "./AB")).GetDirectories();
+
+        JObject jObject = new JObject();
+
+        foreach (var abRoot in abRoots)
+        {
+            string abName = abRoot.Name;
+            string abPath = abRoot.FullName;
+            FileInfo[] assetFileInfos = Util.File.GetChildFiles(abPath);
+
+            JObject assets = new JObject();
+
+            foreach (var assetFileInfo in assetFileInfos)
+            {
+                if (".mat|.anim|.prefab|.unity|.asset|.guiskin|.fontsettings|.controller".IndexOf(Path.GetExtension(assetFileInfo.FullName)) != -1)
+                {
+                    var relyAssetFilePaths = GetRelyAssetFilePaths(assetFileInfo.FullName);
+                    if (relyAssetFilePaths.Length > 0)
+                    {
+                        List<string> relyABs = new List<string>();
+                        foreach (var item in relyAssetFilePaths)
+                        {
+                            string ab = Regex.Match(item, @"Assets/Resources/AB/(.+)/").Groups[1].Value;
+                            if (ab != abName)
+                            {
+                                if (relyABs.IndexOf(ab) == -1)
+                                {
+                                    relyABs.Add(ab);
+                                }
+
+                            }
+                        }
+                        if (relyABs.Count > 0)
+                        {
+                            JArray arr = new JArray();
+                            foreach (var ab in relyABs)
+                            {
+                                arr.Add(ab);
+                            }
+
+                            assets.Add(Path.GetFileNameWithoutExtension(assetFileInfo.FullName), arr);
+                            jObject[abName] = assets;
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        string json = jObject.ToString();
+        string filePath = Path.Combine(GameConst.RESOURCES, "./AB", "./json", "./ab_rely.json");
+        Util.File.WriteString(filePath, json);
+        Debug.Log("更新ab_rely.json>>>>>" + json);
+    }
+    /// <summary>
+    /// 获取依赖资源文件路径集
+    /// </summary>
+    /// <returns></returns>
+    static string[] GetRelyAssetFilePaths(string filePath, List<string> filePathList = null)
+    {
+        if (filePathList == null)
+        {
+            filePathList = new List<string>();
+        }
+
+        if (filePath.IndexOf("Assets/Resources/AB/") != -1 && filePathList.IndexOf(filePath) == -1)
+        {
+            filePathList.Add(filePath);
+        }
+        if (".mat|.anim|.prefab|.unity|.asset|.guiskin|.fontsettings|.controller".IndexOf(Path.GetExtension(filePath)) == -1)
+        {
+            return filePathList.ToArray();
+        }
+
+
+        string str = Util.File.ReadString(filePath);
+        foreach (Match match in Regex.Matches(str, @"guid: (.+),"))
+        {
+            if (match.Groups.Count > 1)
+            {
+                string guid = match.Groups[1].Value;
+
+                GetRelyAssetFilePaths(AssetDatabase.GUIDToAssetPath(guid), filePathList);
+            }
+        }
+
+        return filePathList.ToArray();
+    }
 }

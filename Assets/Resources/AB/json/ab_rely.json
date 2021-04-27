@@ -1,72 +1,76 @@
 {
-    "prefab1": {
-        "area_item": [
-            "p1"
-        ],
-        "avatar1_item": [
-            "p1"
-        ],
-        "card_own_item": [
-            "p10"
-        ],
-        "card_energy_item": [
-            "p10"
-        ],
-        "card_star_item": [
-            "p10"
-        ],
-        "selplayer_item": [
-            "p1"
-        ],
-        "skill_hole_item": [
-            "p10"
-        ],
-        "skill_link_item": [
-            "p10"
-        ]
-    },
-    "ui1": {
-        "ui_bg_login": [
-            "p1"
-        ],
-        "ui_bg_main": [
-            "p1"
-        ],
-        "ui_input_affirm": [
-            "p1"
-        ],
-        "ui_tip": [
-            "p1"
-        ],
-        "ui_area_main": [
-            "p1"
-        ],
-        "ui_area_sel": [
-            "p1"
-        ],
-        "ui_login": [
-            "p1"
-        ],
-        "ui_player_create": [
-            "p1"
-        ],
-        "ui_player_sel": [
-            "p1"
-        ],
-        "ui_bottom_list": [
-            "p1"
-        ],
-        "ui_top_msg": [
-            "p1"
-        ],
-        "ui_top_info": [
-            "p1"
-        ],
-        "ui_card": [
-            "p2"
-        ],
-        "ui_role": [
-            "p2"
-        ]
-    }
+  "prefab1": {
+    "area_item": [
+      "p1"
+    ],
+    "avatar1_item": [
+      "p1"
+    ],
+    "card_energy_item": [
+      "p10"
+    ],
+    "card_own_item": [
+      "p10"
+    ],
+    "card_star_item": [
+      "p10"
+    ],
+    "selplayer_item": [
+      "p1"
+    ],
+    "skill_hole_item": [
+      "p10"
+    ],
+    "skill_link_item": [
+      "p10"
+    ]
+  },
+  "ui1": {
+    "ui_bg_login": [
+      "p1"
+    ],
+    "ui_bg_main": [
+      "p1"
+    ],
+    "ui_input_affirm": [
+      "p1"
+    ],
+    "ui_tip": [
+      "p1"
+    ],
+    "ui_area_main": [
+      "p1",
+      "prefab1"
+    ],
+    "ui_area_sel": [
+      "p1"
+    ],
+    "ui_login": [
+      "p1"
+    ],
+    "ui_player_create": [
+      "p1"
+    ],
+    "ui_player_sel": [
+      "p1"
+    ],
+    "ui_bottom_list": [
+      "p2",
+      "p1"
+    ],
+    "ui_top_msg": [
+      "p1"
+    ],
+    "ui_top_info": [
+      "p1"
+    ],
+    "ui_card": [
+      "p2",
+      "prefab1",
+      "p10"
+    ],
+    "ui_role": [
+      "p2"
+    ]
+  }
 }
