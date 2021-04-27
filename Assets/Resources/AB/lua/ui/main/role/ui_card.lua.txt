@@ -1,5 +1,5 @@
 local base = require("ui_base")
-local UI = class("card_main", base)
+local UI = class("card", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()

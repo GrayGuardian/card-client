@@ -9,6 +9,13 @@ function UI:GET_DEFAULT_OPTS()
     return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
+function UI:GET_VIEWS()
+    return {
+        {key = "majoy", name = "主城", view = "ui_majoy"},
+        {key = "role", name = "人物", view = "ui_role"}
+    }
+end
+
 function UI:onLoad()
     self.param.page = self.param.page or 0
 
@@ -34,20 +41,23 @@ function UI:onDestroy()
 end
 
 function UI:refreshView(viewParam, isForce)
-    self.page = viewParam.page or self.page
+    local page = viewParam.page or 0
     local viewParam = viewParam.viewParam or {}
 
     if (self.page_view ~= nil) then
-        if (self.page == self.page_view:GET_PAGE()) then
+        if (self.page == page) then
             -- 避免重复加载
-            if (isForce) then
+            if (self.page_view.refreshView ~= nil and isForce) then
                 self.page_view:refreshView(viewParam)
             end
             return
         end
+        -- self:unselectPageBtn(self.page)
         self.page_view:close()
     end
-    self.page_view = ui:showUI(string.format("ui_main_page%s", self.page), viewParam)
+    self.page = page
+    -- self:selectPageBtn(self.page)
+    self.page_view = ui:showUI(self:GET_VIEWS()[self.page + 1].view, viewParam)
 end
 
 function UI:onLogoutBtnClick()

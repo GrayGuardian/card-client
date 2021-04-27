@@ -11,7 +11,7 @@ end
 ----------------UI配置------------------
 
 function UI:onLoad()
-    self.contentNode = self.uiComp.ScrollRect.ScrollView.transform:Find("Viewport"):Find("Content")
+    self.contentNode = self.uiComp.ScrollRect.scrollView.transform:Find("Viewport"):Find("Content")
 
     self:refresh()
 end

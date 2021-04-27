@@ -26,22 +26,22 @@
         ]
     },
     "ui1": {
-        "ui_area_main": [
-            "p1"
-        ],
-        "ui_area_sel": [
-            "p1"
-        ],
         "ui_bg_login": [
             "p1"
         ],
         "ui_bg_main": [
             "p1"
         ],
-        "ui_bottom_list": [
+        "ui_input_affirm": [
             "p1"
         ],
-        "ui_input_affirm": [
+        "ui_tip": [
+            "p1"
+        ],
+        "ui_area_main": [
+            "p1"
+        ],
+        "ui_area_sel": [
             "p1"
         ],
         "ui_login": [
@@ -53,14 +53,20 @@
         "ui_player_sel": [
             "p1"
         ],
-        "ui_tip": [
+        "ui_bottom_list": [
+            "p1"
+        ],
+        "ui_top_msg": [
             "p1"
         ],
         "ui_top_info": [
             "p1"
         ],
-        "ui_top_msg": [
-            "p1"
+        "ui_card": [
+            "p2"
+        ],
+        "ui_role": [
+            "p2"
         ]
     }
 }
