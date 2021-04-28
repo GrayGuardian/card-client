@@ -95,6 +95,7 @@ _G.table.len = function(t)
     end
     return num
 end
+
 _G.utils = {}
 utils.serialize = function(obj)
     local lua = ""

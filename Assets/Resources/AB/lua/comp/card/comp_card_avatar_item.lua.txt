@@ -1,0 +1,26 @@
+local base = require("comp_base")
+local Comp = class("card_avatar_item", base)
+function Comp:onLoad()
+    self.info = self.param.info
+    self.onClick = self.param.onClick
+
+    self:unselect()
+    self:refresh()
+end
+function Comp:refresh()
+    self.uiComp.Image.bgImage.sprite = self:load_sprite("p10", string.format("bg_%s0", self.info.tpl.pic_bg))
+    self.uiComp.Image.iconImage.sprite =
+        self:load_sprite(self.info.tpl.pic_ab, string.format("%s_avatar", self.info:get_cid()))
+end
+function Comp:select()
+    self.uiComp.Image.selectImage.gameObject:SetActive(true)
+end
+function Comp:unselect()
+    self.uiComp.Image.selectImage.gameObject:SetActive(false)
+end
+function Comp:onBtnClick()
+    if (self.onClick ~= nil) then
+        self.onClick(self)
+    end
+end
+return Comp

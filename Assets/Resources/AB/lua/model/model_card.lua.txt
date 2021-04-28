@@ -6,6 +6,10 @@ end
 function Model:onLoad()
     print("[Model] init>>>>", self:CLASS_NAME(), self.idx, self.baseInfo)
 end
+function Model:loadDataed()
+    self.tpl = tpl.template_card[self:get_tid()]
+    print(tpl.template_card, self:get_tid())
+end
 -- 获取强化等级
 function Model:getEnchLv()
     return self:get_lv() % 10

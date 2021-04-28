@@ -319,7 +319,7 @@ public class ResTool : MonoBehaviour
                         List<string> relyABs = new List<string>();
                         foreach (var item in relyAssetFilePaths)
                         {
-                            string ab = Regex.Match(item, @"Assets/Resources/AB/(.+)/").Groups[1].Value;
+                            string ab = Regex.Match(item, @"Assets/Resources/AB/([_a-zA-Z0-9]+)/").Groups[1].Value;
                             if (ab != abName)
                             {
                                 if (relyABs.IndexOf(ab) == -1)

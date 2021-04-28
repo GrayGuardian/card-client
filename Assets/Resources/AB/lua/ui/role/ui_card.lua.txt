@@ -1,0 +1,76 @@
+local base = require("ui_base")
+local UI = class("card", base)
+
+----------------UI配置------------------
+function UI:GET_AB()
+    return "ui1"
+end
+function UI:GET_DEFAULT_OPTS()
+    return {order = -10, blockInput = false, blackMask = 0}
+end
+----------------UI配置------------------
+
+function UI:onLoad()
+    self.cardAvatarCompMap = {}
+    self.cardAvatarItemLayout = self.uiComp.ScrollRect.cardAvatarsScrollView.transform:Find("Viewport"):Find("Content")
+    self.cardLayout = self.node:Find("cardLayout")
+end
+function UI:onDestroy()
+end
+
+function UI:refreshView(viewParam)
+    print("更新界面>>>", utils.serialize(viewParam))
+
+    -- 更新卡牌头像框
+    self.cardAvatarCompMap = {}
+    local cardList = player:getCardList()
+    for i = 0, self.cardAvatarItemLayout.childCount - 1 do
+        GameObject.Destroy(self.cardAvatarItemLayout:GetChild(i).gameObject)
+    end
+    for index, cardInfo in pairs(cardList) do
+        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_avatar_item")).transform
+        node.parent = self.cardAvatarItemLayout
+        node.localPosition = {x = 0, y = 0, z = 0}
+        node.localScale = {x = 1, y = 1, z = 1}
+        local c =
+            comp:addComponent(
+            node,
+            "card_avatar_item",
+            {
+                info = cardInfo,
+                onClick = function(o)
+                    self:onCardAvatarClick(o)
+                end
+            }
+        )
+        self.cardAvatarCompMap[cardInfo:get_cid()] = c
+    end
+
+    -- 更新卡牌内容
+    if (self.cardInfo ~= nil) then
+        self.cardAvatarCompMap[self.cardInfo:get_cid()]:unselect()
+    end
+    if (viewParam.cid == nil or player.cardMap[viewParam.cid] == nil) then
+        self.cardInfo = cardList[1]
+    else
+        self.cardInfo = player.cardMap[viewParam.cid]
+    end
+    self.cardAvatarCompMap[self.cardInfo:get_cid()]:select()
+
+    -- 更新卡牌
+    for i = 0, self.cardLayout.childCount - 1 do
+        GameObject.Destroy(self.cardLayout:GetChild(i).gameObject)
+    end
+    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_own_item")).transform
+    node.parent = self.cardLayout
+    node.localPosition = {x = 0, y = 0, z = 0}
+    node.localScale = {x = 1.0, y = 1.0, z = 1.0}
+    comp:addComponent(node, "card_own_item", {info = self.cardInfo})
+end
+-- 点击卡牌头像框
+function UI:onCardAvatarClick(o)
+    local info = o.info
+    print("点击头像框>>>>", utils.serialize(info.baseInfo))
+    self:refreshView({cid = o.info:get_cid()})
+end
+return UI

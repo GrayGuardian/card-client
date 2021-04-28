@@ -4,7 +4,8 @@ function Scene:onLoad()
     print(utils.serialize(player.baseInfo))
 
     ui:showUI("ui_bg_main")
-    _G.mainComp = ui:showUI("ui_main")
+    _G.mainComp = ui:showUI("ui_main", {page = 1, viewParam = {page = 0, viewParam = {cid = 0}}})
+    -- mainComp:refreshView({page = 1, viewParam = {page = 0, viewParam = {cid = 1}}})
     -- mainComp:close()
 end
 

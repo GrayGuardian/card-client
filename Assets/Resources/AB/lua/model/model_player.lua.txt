@@ -90,5 +90,35 @@ function Model:getCardSkillGems(cid)
     end
     return infoMap
 end
+-- 获取卡牌数组
+function Model:getCardList()
+    local arr = {}
+    local arr1 = {}
+    for key, cardInfo in pairs(self.cardMap) do
+        if (cardInfo.baseInfo.squad == nil) then
+            table.insert(arr1, cardInfo)
+        else
+            table.insert(arr, cardInfo)
+        end
+    end
+    -- 卡牌阵容顺序从低到高
+    table.sort(
+        arr,
+        function(a, b)
+            return a:get_squad().idx < b:get_squad().idx
+        end
+    )
+    -- 卡牌级别从高到低
+    table.sort(
+        arr1,
+        function(a, b)
+            return a.tpl.rank > b.tpl.rank
+        end
+    )
+    for key, cardInfo in pairs(arr1) do
+        table.insert(arr, cardInfo)
+    end
+    return arr
+end
 
 return Model
