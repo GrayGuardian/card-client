@@ -45,10 +45,17 @@ function UI:refreshLayout()
 
     -- 背包适配
     -- 背包格子适配
-    node = self.uiComp.ScrollRect.bagItemsScrollView.transform:Find("Viewport"):Find("Content")
+    node = self.node:Find("bagLayout"):Find("bagItemsLayout"):Find("Content")
+    rectTransform = comp:getCSComponent(node, UE.RectTransform)
     group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
-    group.cellSize = {x = group.cellSize.x * ui.SCREEN_SCALE, y = group.cellSize.y * ui.SCREEN_SCALE}
-    group.spacing = {x = group.spacing.x * ui.SCREEN_SCALE, y = group.spacing.y * ui.SCREEN_SCALE}
+    -- print(utils.serialize(rectTransform.sizeDelta))
+    local BAG_BOX_WIDTH = 160
+    local BAG_BOX_ROW = 2
+    local BAG_BOX_COLUMN = 5
+    local defaultWIDTH = BAG_BOX_WIDTH * BAG_BOX_COLUMN + group.spacing.x * (BAG_BOX_COLUMN - 1)
+    local newWidth = defaultWIDTH * ui.SCREEN_SCALE
+    local newColumn = math.floor((newWidth / BAG_BOX_WIDTH) + 0.5)
+    print(newWidth, newColumn)
 end
 
 function UI:onDestroy()
