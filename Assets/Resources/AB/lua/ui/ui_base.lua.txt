@@ -72,38 +72,38 @@ function UIBase:bind(node)
     self.node.offsetMin = {x = 0, y = 0}
 
     -- 宽度适配
-    for i = 0, self.node.childCount - 1 do
-        local rectTransform = comp:getCSComponent(self.node:GetChild(i), UE.RectTransform)
-        if (rectTransform ~= nil) then
-            local width = rectTransform.sizeDelta.x
-            local posX = nil
-            if (rectTransform.anchorMin.x == 0 and rectTransform.anchorMax.x == 0) then
-                posX = rectTransform.offsetMax.x - width / 2
-            -- print("需要调整左边间距>>>PosX：" , posX)
-            end
-            if (rectTransform.anchorMin.x == 1 and rectTransform.anchorMax.x == 1) then
-                posX = rectTransform.offsetMin.x + width / 2
-            -- print("需要调整右边间距>>>PosX：" , posX)
-            end
-            if (posX ~= nil) then
-                posX = posX * ui.SCREEN_SCALE
-                if (rectTransform.anchorMin.x == 0 and rectTransform.anchorMax.x == 0) then
-                    local minX = posX + width / 2 - width
-                    local maxX = minX + width
-                    rectTransform.offsetMin = {x = minX, y = rectTransform.offsetMin.y}
-                    rectTransform.offsetMax = {x = maxX, y = rectTransform.offsetMax.y}
-                -- print("需要调整左边间距>>>PosX：" , posX)
-                end
-                if (rectTransform.anchorMin.x == 1 and rectTransform.anchorMax.x == 1) then
-                    local maxX = posX - width / 2 + width
-                    local minX = maxX - width
-                    rectTransform.offsetMin = {x = minX, y = rectTransform.offsetMin.y}
-                    rectTransform.offsetMax = {x = maxX, y = rectTransform.offsetMax.y}
-                -- print("需要调整右边间距>>>PosX：" , posX)
-                end
-            end
-        end
-    end
+    -- for i = 0, self.node.childCount - 1 do
+    --     local rectTransform = comp:getCSComponent(self.node:GetChild(i), UE.RectTransform)
+    --     if (rectTransform ~= nil) then
+    --         local width = rectTransform.sizeDelta.x
+    --         local posX = nil
+    --         if (rectTransform.anchorMin.x == 0 and rectTransform.anchorMax.x == 0) then
+    --             posX = rectTransform.offsetMax.x - width / 2
+    --         -- print("需要调整左边间距>>>PosX：" , posX)
+    --         end
+    --         if (rectTransform.anchorMin.x == 1 and rectTransform.anchorMax.x == 1) then
+    --             posX = rectTransform.offsetMin.x + width / 2
+    --         -- print("需要调整右边间距>>>PosX：" , posX)
+    --         end
+    --         if (posX ~= nil) then
+    --             posX = posX * ui.SCREEN_SCALE
+    --             if (rectTransform.anchorMin.x == 0 and rectTransform.anchorMax.x == 0) then
+    --                 local minX = posX + width / 2 - width
+    --                 local maxX = minX + width
+    --                 rectTransform.offsetMin = {x = minX, y = rectTransform.offsetMin.y}
+    --                 rectTransform.offsetMax = {x = maxX, y = rectTransform.offsetMax.y}
+    --             -- print("需要调整左边间距>>>PosX：" , posX)
+    --             end
+    --             if (rectTransform.anchorMin.x == 1 and rectTransform.anchorMax.x == 1) then
+    --                 local maxX = posX - width / 2 + width
+    --                 local minX = maxX - width
+    --                 rectTransform.offsetMin = {x = minX, y = rectTransform.offsetMin.y}
+    --                 rectTransform.offsetMax = {x = maxX, y = rectTransform.offsetMax.y}
+    --             -- print("需要调整右边间距>>>PosX：" , posX)
+    --             end
+    --         end
+    --     end
+    -- end
     --加载配置设置
     local maskImage = comp:addCSComponent(self.node, UEUI.Image)
     maskImage.raycastTarget = self.opts.blockInput

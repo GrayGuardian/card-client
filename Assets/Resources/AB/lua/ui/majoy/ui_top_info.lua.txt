@@ -13,6 +13,8 @@ function UI:onLoad()
     self:refresh()
 end
 function UI:refresh()
+    utils.refreshWidthNodes(self.node)
+
     self.uiComp.Image.avatarIconImage.sprite = self:load_sprite("avatar", player:get_avatarid())
     self.uiComp.Text.nameText.text = player:get_name()
 
