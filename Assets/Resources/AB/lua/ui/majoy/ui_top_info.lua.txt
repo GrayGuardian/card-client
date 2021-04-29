@@ -12,9 +12,22 @@ end
 function UI:onLoad()
     self:refresh()
 end
-function UI:refresh()
-    utils.refreshWidthNodes(self.node)
+-- 视图重适应
+function UI:refreshLayout()
+    local avatarItemNode = comp:getCSComponent(self.node:Find("avatarItem"), UE.RectTransform)
+    local vipItemNode = comp:getCSComponent(self.node:Find("vipItem"), UE.RectTransform)
+    local infoItemLayout = comp:getCSComponent(self.node:Find("infoItemLayout"), UE.RectTransform)
 
+    avatarItemNode.offsetMin = {x = avatarItemNode.offsetMin.x * ui.SCREEN_SCALE, y = avatarItemNode.offsetMin.y}
+    avatarItemNode.offsetMax = {x = avatarItemNode.offsetMax.x * ui.SCREEN_SCALE, y = avatarItemNode.offsetMax.y}
+
+    vipItemNode.offsetMin = {x = vipItemNode.offsetMin.x * ui.SCREEN_SCALE, y = vipItemNode.offsetMin.y}
+    vipItemNode.offsetMax = {x = vipItemNode.offsetMax.x * ui.SCREEN_SCALE, y = vipItemNode.offsetMax.y}
+
+    infoItemLayout.offsetMin = {x = infoItemLayout.offsetMin.x * ui.SCREEN_SCALE, y = infoItemLayout.offsetMin.y}
+    infoItemLayout.offsetMax = {x = infoItemLayout.offsetMax.x * ui.SCREEN_SCALE, y = infoItemLayout.offsetMax.y}
+end
+function UI:refresh()
     self.uiComp.Image.avatarIconImage.sprite = self:load_sprite("avatar", player:get_avatarid())
     self.uiComp.Text.nameText.text = player:get_name()
 

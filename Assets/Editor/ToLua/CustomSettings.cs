@@ -181,6 +181,10 @@ public static class CustomSettings
         _GT(typeof(UnityEngine.UI.Button.ButtonClickedEvent)),
         _GT(typeof(UnityEngine.UI.InputField)),
         _GT(typeof(UnityEngine.UI.ScrollRect)),
+        _GT(typeof(UnityEngine.UI.GridLayoutGroup)),
+        _GT(typeof(UnityEngine.UI.VerticalLayoutGroup)),
+        _GT(typeof(UnityEngine.UI.HorizontalLayoutGroup)),
+        _GT(typeof(UnityEngine.UI.HorizontalOrVerticalLayoutGroup)),
 
         _GT(typeof(Dpoch.SocketIO.SocketIO)),
 

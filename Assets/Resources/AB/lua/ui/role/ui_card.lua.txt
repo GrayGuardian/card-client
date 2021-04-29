@@ -15,6 +15,42 @@ function UI:onLoad()
     self.cardAvatarItemLayout = self.uiComp.ScrollRect.cardAvatarsScrollView.transform:Find("Viewport"):Find("Content")
     self.cardLayout = self.node:Find("cardLayout")
 end
+-- 视图重适应
+function UI:refreshLayout()
+    local width
+    local node
+    local rectTransform
+    local group
+    -- 装备栏适配
+    width = (1080 * ui.SCREEN_SCALE - 720 * 0.85) / 2
+    rectTransform = comp:getCSComponent(self.node:Find("equipsRightLayout"), UE.RectTransform)
+    rectTransform.sizeDelta = {
+        x = width,
+        y = rectTransform.sizeDelta.y
+    }
+    rectTransform = comp:getCSComponent(self.node:Find("equipsLeftLayout"), UE.RectTransform)
+    rectTransform.sizeDelta = {
+        x = width,
+        y = rectTransform.sizeDelta.y
+    }
+    -- 按钮适配
+    node = self.node:Find("cardBtnLayout")
+    rectTransform = comp:getCSComponent(node, UE.RectTransform)
+    group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
+    rectTransform.sizeDelta = {
+        x = rectTransform.sizeDelta.x * ui.SCREEN_SCALE,
+        y = rectTransform.sizeDelta.y
+    }
+    group.cellSize = {x = group.cellSize.x * ui.SCREEN_SCALE, y = group.cellSize.y}
+
+    -- 背包适配
+    -- 背包格子适配
+    node = self.uiComp.ScrollRect.bagItemsScrollView.transform:Find("Viewport"):Find("Content")
+    group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
+    group.cellSize = {x = group.cellSize.x * ui.SCREEN_SCALE, y = group.cellSize.y * ui.SCREEN_SCALE}
+    group.spacing = {x = group.spacing.x * ui.SCREEN_SCALE, y = group.spacing.y * ui.SCREEN_SCALE}
+end
+
 function UI:onDestroy()
 end
 
