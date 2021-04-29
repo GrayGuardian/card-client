@@ -1,0 +1,56 @@
+local base = require("ui_base")
+local UI = class("debug", base)
+
+----------------UI配置------------------
+function UI:GET_AB()
+    return "ui1"
+end
+function UI:GET_DEFAULT_OPTS()
+    return {order = 999, blockInput = false, blackMask = 0}
+end
+----------------UI配置------------------
+
+function UI:onLoad()
+    self.isShow = false
+
+    self.contentNode = comp:getCSComponent(self.node:Find("contentNode"), UE.RectTransform)
+    self.width = comp:getCSComponent(self.node:Find("contentNode"):Find("bgImage"), UE.RectTransform).sizeDelta.x
+    print(self.width)
+end
+function UI:onDestroy()
+end
+function UI:show()
+    print("show")
+    self.isShow = true
+
+    self.contentNode.offsetMin = {x = -self.width, y = self.contentNode.offsetMin.y}
+    self.contentNode.offsetMax = {x = -self.width, y = self.contentNode.offsetMax.y}
+end
+function UI:hide()
+    print("hide")
+    self.isShow = false
+
+    self.contentNode.offsetMin = {x = 0, y = self.contentNode.offsetMin.y}
+    self.contentNode.offsetMax = {x = 0, y = self.contentNode.offsetMax.y}
+end
+function UI:onBtnClick()
+    if (not self.isShow) then
+        self:show()
+    else
+        self:hide()
+    end
+end
+
+function UI:onLogoutBtnClick()
+    print("注销")
+    gameLogic.reelectUser()
+end
+function UI:onReelectPlayerBtnClick()
+    print("重选角色")
+    gameLogic.reelectPlayer()
+end
+function UI:onRefreshLayoutBtnClick()
+    print("视图重适应")
+    ui:refreshLayout()
+end
+return UI

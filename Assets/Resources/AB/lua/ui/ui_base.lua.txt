@@ -85,7 +85,17 @@ function UIBase:bind(node)
 end
 -- ui组件初始化
 function UIBase:uiCompInit()
-    local types = {"Text", "Image", "Button", "InputField", "ScrollRect"}
+    local types = {
+        "Text",
+        "Image",
+        "Button",
+        "InputField",
+        "ScrollRect",
+        "GridLayoutGroup",
+        "VerticalLayoutGroup",
+        "HorizontalLayoutGroup",
+        "HorizontalOrVerticalLayoutGroup"
+    }
 
     for index, t in ipairs(types) do
         self.uiComp[t] = {}

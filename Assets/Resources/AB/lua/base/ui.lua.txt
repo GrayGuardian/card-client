@@ -25,6 +25,16 @@ function UI:init()
 
     self:createUIRoot()
 end
+-- 更新所有UI布局
+function UI:refreshLayout()
+    self.SCREEN = {width = UE.Screen.width, height = UE.Screen.height}
+    self.SCREEN_SCALE = (self.SCREEN.width / self.SCREEN.height) / (DEFAULT_SCREEN.width / DEFAULT_SCREEN.height)
+    for key, uiComp in pairs(self.uiCompMap) do
+        if (uiComp.refreshLayout ~= nil) then
+            uiComp:refreshLayout()
+        end
+    end
+end
 -- 场景lua文件加载
 function UI:sceneLoad(info)
     local param = table.copy(self.scaneParam)
@@ -162,32 +172,6 @@ function UI:showOnlyTip(key, param, opts)
         return
     end
     self.onlyUIMap[key] = self:showTip(param, opts)
-end
-
-function UI:createPlayer(info)
-    local node = pool:loadPoolObject("role")
-    node.localScale = {x = 2.5, y = 2.5, z = 2.5}
-    local comp = comp:addComponent(node, "player", info)
-    return comp
-end
-function UI:createRole(info)
-    local node = pool:loadPoolObject("role")
-    node.localScale = {x = 2.5, y = 2.5, z = 2.5}
-    local comp = comp:addComponent(node, "role", info)
-    return comp
-end
-
-function UI:loadMap(mid)
-    if self.mapComp ~= nil then
-        print("关闭地图>>>", mid)
-        self.mapComp.node.gameObject:Destroy()
-    end
-    print("加载地图>>>", mid)
-    local node = GameObject("map" .. mid).transform
-    node.localPosition = {x = 0, y = 0, z = 10}
-    node.tag = "map"
-    self.mapComp = comp:addComponent(node, "map" .. mid)
-    return self.mapComp
 end
 
 return UI

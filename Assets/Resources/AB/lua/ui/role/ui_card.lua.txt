@@ -36,7 +36,7 @@ function UI:refreshLayout()
     -- 按钮适配
     node = self.node:Find("cardBtnLayout")
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
-    group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
+    group = self.uiComp.GridLayoutGroup.cardBtnLayout
     rectTransform.sizeDelta = {
         x = rectTransform.sizeDelta.x * ui.SCREEN_SCALE,
         y = rectTransform.sizeDelta.y

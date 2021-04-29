@@ -56,12 +56,4 @@ function UI:refreshView(viewParam, isForce)
     end
 end
 
-function UI:onLogoutBtnClick()
-    print("注销")
-    gameLogic.reelectUser()
-end
-function UI:onReelectBtnClick()
-    print("重选角色")
-    gameLogic.reelectPlayer()
-end
 return UI

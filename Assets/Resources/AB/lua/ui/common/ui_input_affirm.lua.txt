@@ -1,5 +1,5 @@
 local base = require("ui_base")
-local UI = class("tip", base)
+local UI = class("input_affirm", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
