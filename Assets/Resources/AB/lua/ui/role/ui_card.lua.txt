@@ -49,9 +49,8 @@ function UI:refreshLayout()
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
     group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
     -- print(utils.serialize(rectTransform.sizeDelta))
-    local BAG_BOX_WIDTH = 160
-    local BAG_BOX_ROW = 2
-    local BAG_BOX_COLUMN = 5
+    local BAG_LAYOUT_CONFIG = {}
+
     local defaultWIDTH = BAG_BOX_WIDTH * BAG_BOX_COLUMN + group.spacing.x * (BAG_BOX_COLUMN - 1)
     local newWidth = defaultWIDTH * ui.SCREEN_SCALE
     local newColumn = math.floor((newWidth / BAG_BOX_WIDTH) + 0.5)
