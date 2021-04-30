@@ -65,7 +65,7 @@ function UI:refreshLayout()
         DEFAULT_BAG_LAYOUT_CONFIG.WIDTH * DEFAULT_BAG_LAYOUT_CONFIG.COLUMN +
         group.spacing.x * (DEFAULT_BAG_LAYOUT_CONFIG.COLUMN - 1)
     local newWidth = width * GAME_CONFIG.SCREEN_SCALE
-    local newColumn = math.floor((newWidth / DEFAULT_BAG_LAYOUT_CONFIG.WIDTH) + 0.5)
+    local newColumn = math.floor((newWidth / DEFAULT_BAG_LAYOUT_CONFIG.WIDTH) + 0.3)
     self.BAG_LAYOUT_CONFIG = {
         WIDTH = DEFAULT_BAG_LAYOUT_CONFIG.WIDTH,
         ROW = DEFAULT_BAG_LAYOUT_CONFIG.ROW,

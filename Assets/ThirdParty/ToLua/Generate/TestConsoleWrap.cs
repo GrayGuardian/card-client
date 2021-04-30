@@ -16,6 +16,7 @@ public class TestConsoleWrap
 		L.RegVar("shakeAcceleration", get_shakeAcceleration, set_shakeAcceleration);
 		L.RegVar("restrictLogCount", get_restrictLogCount, set_restrictLogCount);
 		L.RegVar("maxLogs", get_maxLogs, set_maxLogs);
+		L.RegVar("visible", get_visible, set_visible);
 		L.EndClass();
 	}
 
@@ -165,6 +166,25 @@ public class TestConsoleWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_visible(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			TestConsole obj = (TestConsole)o;
+			bool ret = obj.visible;
+			LuaDLL.lua_pushboolean(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index visible on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_toggleKey(IntPtr L)
 	{
 		object o = null;
@@ -256,6 +276,25 @@ public class TestConsoleWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index maxLogs on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_visible(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			TestConsole obj = (TestConsole)o;
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			obj.visible = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index visible on a nil value");
 		}
 	}
 }

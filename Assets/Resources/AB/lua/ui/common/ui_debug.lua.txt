@@ -40,7 +40,15 @@ function UI:onBtnClick()
         self:hide()
     end
 end
-
+function UI:onDebugViewBtnClick()
+    print("开关控制台视图")
+    local comp = comp:getCSComponent(mono.monoNode, TestConsole) or comp:addCSComponent(mono.monoNode, TestConsole)
+    if (not comp.visible) then
+        comp:Show()
+    else
+        comp:Hide()
+    end
+end
 function UI:onLogoutBtnClick()
     print("注销")
     gameLogic.reelectUser()
@@ -50,7 +58,7 @@ function UI:onReelectPlayerBtnClick()
     gameLogic.reelectPlayer()
 end
 function UI:onRefreshLayoutBtnClick()
-    print("视图重适应")
     ui:refreshLayout()
+    print("视图重适应", GAME_CONFIG.SCREEN_SCALE)
 end
 return UI
