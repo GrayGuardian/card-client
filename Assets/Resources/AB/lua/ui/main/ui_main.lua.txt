@@ -16,7 +16,7 @@ function UI:GET_VIEWS()
     }
 end
 
-function UI:onLoad()
+function UI:awake()
     self.param.page = self.param.page or 0
 
     self.top_msg_view = ui:showUI("ui_top_msg")

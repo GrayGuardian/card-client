@@ -10,10 +10,19 @@ function UI:GET_DEFAULT_OPTS()
 end
 ----------------UI配置------------------
 
-function UI:onLoad()
+function UI:awake()
     self.cardAvatarCompMap = {}
     self.cardAvatarItemLayout = self.uiComp.ScrollRect.cardAvatarsScrollView.transform:Find("Viewport"):Find("Content")
     self.cardLayout = self.node:Find("cardLayout")
+
+    self.equipsRightLayout = self.node:Find("equipsRightLayout")
+    self.equipsLeftLayout = self.node:Find("equipsLeftLayout")
+
+    self.bagLayout = self.node:Find("bagLayout")
+    self.bagContentLayout = self.bagLayout:Find("bagContentLayout")
+    self.bagItemsLayout = self.bagContentLayout:Find("bagItemsLayout")
+
+    self.bagItemCompMap = {}
 end
 -- 视图重适应
 function UI:refreshLayout()
@@ -22,13 +31,13 @@ function UI:refreshLayout()
     local rectTransform
     local group
     -- 装备栏适配
-    width = (1080 * ui.SCREEN_SCALE - 720 * 0.85) / 2
-    rectTransform = comp:getCSComponent(self.node:Find("equipsRightLayout"), UE.RectTransform)
+    width = (1080 * GAME_CONFIG.SCREEN_SCALE - 720 * 0.85) / 2
+    rectTransform = comp:getCSComponent(self.equipsRightLayout, UE.RectTransform)
     rectTransform.sizeDelta = {
         x = width,
         y = rectTransform.sizeDelta.y
     }
-    rectTransform = comp:getCSComponent(self.node:Find("equipsLeftLayout"), UE.RectTransform)
+    rectTransform = comp:getCSComponent(self.equipsLeftLayout, UE.RectTransform)
     rectTransform.sizeDelta = {
         x = width,
         y = rectTransform.sizeDelta.y
@@ -38,23 +47,43 @@ function UI:refreshLayout()
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
     group = self.uiComp.GridLayoutGroup.cardBtnLayout
     rectTransform.sizeDelta = {
-        x = rectTransform.sizeDelta.x * ui.SCREEN_SCALE,
+        x = rectTransform.sizeDelta.x * GAME_CONFIG.SCREEN_SCALE,
         y = rectTransform.sizeDelta.y
     }
-    group.cellSize = {x = group.cellSize.x * ui.SCREEN_SCALE, y = group.cellSize.y}
+    group.cellSize = {x = group.cellSize.x * GAME_CONFIG.SCREEN_SCALE, y = group.cellSize.y}
 
     -- 背包适配
-    -- 背包格子适配
-    node = self.node:Find("bagLayout"):Find("bagItemsLayout"):Find("Content")
+    node = self.bagItemsLayout
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
     group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
-    -- print(utils.serialize(rectTransform.sizeDelta))
-    local BAG_LAYOUT_CONFIG = {}
+    local DEFAULT_BAG_LAYOUT_CONFIG = {
+        WIDTH = 160,
+        ROW = 2,
+        COLUMN = 5
+    }
+    width =
+        DEFAULT_BAG_LAYOUT_CONFIG.WIDTH * DEFAULT_BAG_LAYOUT_CONFIG.COLUMN +
+        group.spacing.x * (DEFAULT_BAG_LAYOUT_CONFIG.COLUMN - 1)
+    local newWidth = width * GAME_CONFIG.SCREEN_SCALE
+    local newColumn = math.floor((newWidth / DEFAULT_BAG_LAYOUT_CONFIG.WIDTH) + 0.5)
+    self.BAG_LAYOUT_CONFIG = {
+        WIDTH = DEFAULT_BAG_LAYOUT_CONFIG.WIDTH,
+        ROW = DEFAULT_BAG_LAYOUT_CONFIG.ROW,
+        COLUMN = newColumn
+    }
+    GAME_CONFIG.BAG_CONFIG.PAGE_SUM = self.BAG_LAYOUT_CONFIG.ROW * self.BAG_LAYOUT_CONFIG.COLUMN
 
-    local defaultWIDTH = BAG_BOX_WIDTH * BAG_BOX_COLUMN + group.spacing.x * (BAG_BOX_COLUMN - 1)
-    local newWidth = defaultWIDTH * ui.SCREEN_SCALE
-    local newColumn = math.floor((newWidth / BAG_BOX_WIDTH) + 0.5)
-    print(newWidth, newColumn)
+    for i = 0, node.childCount - 1 do
+        GameObject.Destroy(node:GetChild(i).gameObject)
+    end
+    for i = 1, GAME_CONFIG.BAG_CONFIG.PAGE_SUM do
+        local n = GameObject.Instantiate(self:load_gameObject("prefab1", "bag_item")).transform
+        n.parent = node
+        n.localPosition = {x = 0, y = 0, z = 0}
+        n.localScale = {x = 1, y = 1, z = 1}
+        self.bagItemCompMap[i] = comp:addComponent(n, "bag_item")
+    end
+    -- print(utils.serialize(self.BAG_LAYOUT_CONFIG))
 end
 
 function UI:onDestroy()

@@ -9,6 +9,6 @@ function UI:GET_DEFAULT_OPTS()
     return {order = -999}
 end
 ----------------UI配置------------------
-function UI:onLoad()
+function UI:awake()
 end
 return UI

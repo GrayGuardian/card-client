@@ -9,7 +9,7 @@ function UI:GET_DEFAULT_OPTS()
     return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
-function UI:onLoad()
+function UI:awake()
     self:refresh()
 end
 -- 视图重适应
@@ -18,14 +18,26 @@ function UI:refreshLayout()
     local vipItemNode = comp:getCSComponent(self.node:Find("vipItem"), UE.RectTransform)
     local infoItemLayout = comp:getCSComponent(self.node:Find("infoItemLayout"), UE.RectTransform)
 
-    avatarItemNode.offsetMin = {x = avatarItemNode.offsetMin.x * ui.SCREEN_SCALE, y = avatarItemNode.offsetMin.y}
-    avatarItemNode.offsetMax = {x = avatarItemNode.offsetMax.x * ui.SCREEN_SCALE, y = avatarItemNode.offsetMax.y}
+    avatarItemNode.offsetMin = {
+        x = avatarItemNode.offsetMin.x * GAME_CONFIG.SCREEN_SCALE,
+        y = avatarItemNode.offsetMin.y
+    }
+    avatarItemNode.offsetMax = {
+        x = avatarItemNode.offsetMax.x * GAME_CONFIG.SCREEN_SCALE,
+        y = avatarItemNode.offsetMax.y
+    }
 
-    vipItemNode.offsetMin = {x = vipItemNode.offsetMin.x * ui.SCREEN_SCALE, y = vipItemNode.offsetMin.y}
-    vipItemNode.offsetMax = {x = vipItemNode.offsetMax.x * ui.SCREEN_SCALE, y = vipItemNode.offsetMax.y}
+    vipItemNode.offsetMin = {x = vipItemNode.offsetMin.x * GAME_CONFIG.SCREEN_SCALE, y = vipItemNode.offsetMin.y}
+    vipItemNode.offsetMax = {x = vipItemNode.offsetMax.x * GAME_CONFIG.SCREEN_SCALE, y = vipItemNode.offsetMax.y}
 
-    infoItemLayout.offsetMin = {x = infoItemLayout.offsetMin.x * ui.SCREEN_SCALE, y = infoItemLayout.offsetMin.y}
-    infoItemLayout.offsetMax = {x = infoItemLayout.offsetMax.x * ui.SCREEN_SCALE, y = infoItemLayout.offsetMax.y}
+    infoItemLayout.offsetMin = {
+        x = infoItemLayout.offsetMin.x * GAME_CONFIG.SCREEN_SCALE,
+        y = infoItemLayout.offsetMin.y
+    }
+    infoItemLayout.offsetMax = {
+        x = infoItemLayout.offsetMax.x * GAME_CONFIG.SCREEN_SCALE,
+        y = infoItemLayout.offsetMax.y
+    }
 end
 function UI:refresh()
     self.uiComp.Image.avatarIconImage.sprite = self:load_sprite("avatar", player:get_avatarid())

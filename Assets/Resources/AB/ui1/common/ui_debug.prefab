@@ -430,7 +430,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u89C6\u56FE\u91CD\u9002\u5E94\n(\u9002\u7528\u4E8E\u65B0\u521B\u5EFA\u7684UI)"
+  m_Text: "\u89C6\u56FE\u91CD\u9002\u5E94\n(\u5207\u6362\u754C\u9762\u65F6\u751F\u6548)"
 --- !u!114 &3010864447753089595
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ function UI:GET_AB()
 end
 ----------------UI配置------------------
 -- msg type title btnTitle isClose isClickClose onClick onClose onYes onNo
-function UI:onLoad()
+function UI:awake()
     self.onClick = self.param.onClick
     self.onClose = self.param.onClose
     self.onYes = self.param.onYes or self.param.onClick

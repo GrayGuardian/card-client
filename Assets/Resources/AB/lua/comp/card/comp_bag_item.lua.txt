@@ -1,0 +1,16 @@
+local base = require("comp_base")
+local Comp = class("bag_item", base)
+function Comp:onLoad()
+    self.info = self.param.info
+    self.onClick = self.param.onClick
+
+    self:refresh()
+end
+function Comp:refresh()
+end
+function Comp:onBtnClick()
+    if (self.onClick ~= nil) then
+        self.onClick(self)
+    end
+end
+return Comp

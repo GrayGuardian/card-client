@@ -9,6 +9,6 @@ function UI:GET_DEFAULT_OPTS()
     return {blockInput = false, blackMask = 0}
 end
 ----------------UI配置------------------
-function UI:onLoad()
+function UI:awake()
 end
 return UI

@@ -10,7 +10,7 @@ function UI:GET_DEFAULT_OPTS()
 end
 ----------------UI配置------------------
 
-function UI:onLoad()
+function UI:awake()
     self.areaInfo = self.param.area
     self.areaInfos = self.param.areas
     self.onClick = self.param.onClick

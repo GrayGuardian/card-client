@@ -6,7 +6,7 @@ function UI:GET_AB()
     return "ui1"
 end
 ----------------UI配置------------------
-function UI:onLoad()
+function UI:awake()
     self.affirmStr = self.param.affirmStr
 
     self.onAffirm = self.param.onAffirm

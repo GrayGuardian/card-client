@@ -18,6 +18,8 @@ end
 -- function UITip:on[UIComp_Button_Name]Click(o,order)
 
 -- end
+function UIBase:awake()
+end
 function UIBase:onLoad()
 end
 function UIBase:onDestroy()
@@ -78,6 +80,8 @@ function UIBase:bind(node)
     maskImage.raycastTarget = self.opts.blockInput
     maskImage.color = {r = 0, g = 0, b = 0, a = self.opts.blackMask / 100}
     self:uiCompInit()
+
+    self:awake()
 
     self:refreshLayout()
 

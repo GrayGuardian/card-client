@@ -176,7 +176,7 @@ end
 --         -- print("需要调整右边间距>>>PosX：" , posX)
 --         end
 --         if (posX ~= nil) then
---             posX = posX * ui.SCREEN_SCALE
+--             posX = posX * GAME_CONFIG.SCREEN_SCALE
 --             if (rectTransform.anchorMin.x == 0 and rectTransform.anchorMax.x == 0) then
 --                 local minX = posX + width / 2 - width
 --                 local maxX = minX + width
