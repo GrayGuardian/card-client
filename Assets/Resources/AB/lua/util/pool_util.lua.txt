@@ -179,7 +179,7 @@ function Pool:upPoolObjectCnt()
             end
         end
         --清理数据
-        for index, node in ipairs(self.usePoolObject[key]) do
+        for index, node in pairs(self.usePoolObject[key]) do
             if node == nil then
                 self.usePoolObject[key][index] = nil
             end
