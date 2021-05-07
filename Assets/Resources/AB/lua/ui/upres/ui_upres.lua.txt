@@ -62,6 +62,7 @@ end
 
 function UI:upResLoad()
     self.refdata = refUtil:GetRefData()
+    self.isRestart = self.refdata.data.IsRestart -- 是否需要重启
     print(string.format("更新状态：%s refdata:%s", self.refdata.type, self.refdata.data:toString()))
     if self.refdata.type == 0 then
         self:upResOver()
@@ -77,6 +78,7 @@ function UI:upResLoad()
             }
         )
     elseif self.refdata.type == 2 then
+        self.isRestart = true
         ui:showTip(
             {
                 msg = string.format("首次下载资源文件，共计需要下载%s资源文件", utils.sizeFormat(self.refdata.size)),
@@ -144,24 +146,23 @@ function UI:downloadRes()
             self:setBarVal(size / count)
             self:setBarDesc(
                 string.format(
-                    "正在下载文件[%s]：%s/%s    [%s/%s]",
-                    abInfo.name,
-                    utils.sizeFormat(size),
-                    utils.sizeFormat(count),
-                    order + 1,
-                    self.refdata.data.ABs.Length
-                )
-            )
-            print(
-                string.format(
-                    "AB包[%s]正在下载：[%s/%s]：%s/%s",
-                    abInfo.name,
+                    "正在下载资源[%s/%s]：%s/%s",
                     order + 1,
                     self.refdata.data.ABs.Length,
                     utils.sizeFormat(size),
                     utils.sizeFormat(count)
                 )
             )
+            -- print(
+            --     string.format(
+            --         "AB包[%s]正在下载：[%s/%s]：%s/%s",
+            --         abInfo.name,
+            --         order + 1,
+            --         self.refdata.data.ABs.Length,
+            --         utils.sizeFormat(size),
+            --         utils.sizeFormat(count)
+            --     )
+            -- )
         end,
         function()
             self:hideBarNode()
@@ -182,7 +183,7 @@ end
 function UI:downloadResOver()
     print("资源全部下载完毕")
     self:hideBarNode()
-    if self.refdata.data.IsRestart then
+    if self.isRestart then
         refUtil:UpVersion()
         ui:showTip(
             {

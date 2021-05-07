@@ -3,7 +3,7 @@ local UI = class("tip", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return "ui1"
+    return "ui"
 end
 ----------------UI配置------------------
 -- msg type title btnTitle isClose isClickClose onClick onClose onYes onNo

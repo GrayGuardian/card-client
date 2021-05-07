@@ -15,7 +15,7 @@ public enum ENV_TYPE
 public class GameConst
 {
     /// <summary>
-    /// 开发环境
+    /// 运行环境
     /// </summary>
 #if UNITY_EDITOR
     public static ENV_TYPE PRO_ENV = ENV_TYPE.DEV;

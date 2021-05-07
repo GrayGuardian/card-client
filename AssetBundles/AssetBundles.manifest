@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2581254714
+CRC: 3766996658
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -12,16 +12,34 @@ AssetBundleManifest:
       Name: json
       Dependencies: {}
     Info_3:
-      Name: ui1
-      Dependencies:
-        Dependency_0: p1
-    Info_4:
       Name: upres
       Dependencies: {}
-    Info_5:
+    Info_4:
       Name: prefab1
       Dependencies:
         Dependency_0: p1
-    Info_6:
+        Dependency_1: gem
+        Dependency_2: p2
+        Dependency_3: p10
+    Info_5:
       Name: avatar
+      Dependencies: {}
+    Info_6:
+      Name: ui
+      Dependencies:
+        Dependency_0: p1
+        Dependency_1: prefab1
+        Dependency_2: gem
+        Dependency_3: p2
+    Info_7:
+      Name: card1
+      Dependencies: {}
+    Info_8:
+      Name: gem
+      Dependencies: {}
+    Info_9:
+      Name: p2
+      Dependencies: {}
+    Info_10:
+      Name: p10
       Dependencies: {}

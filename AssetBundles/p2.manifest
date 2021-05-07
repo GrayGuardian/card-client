@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 2368872405
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a444507d4e58cf78cf7bca9ee01bab1e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AB/p2/icon_lock.png
+- Assets/Resources/AB/p2/bg_btn1_off.png
+- Assets/Resources/AB/p2/bg_page_btn1_on.png
+- Assets/Resources/AB/p2/bg_view1.jpg
+- Assets/Resources/AB/p2/bg_btn2_disabled.png
+- Assets/Resources/AB/p2/bg_arrow_btn1.png
+- Assets/Resources/AB/p2/bg_btn1_on.png
+- Assets/Resources/AB/p2/bg_bag.png
+- Assets/Resources/AB/p2/bg_btn2_yellow.png
+- Assets/Resources/AB/p2/bg_bag_content.png
+- Assets/Resources/AB/p2/bg_arrow_btn2.png
+- Assets/Resources/AB/p2/bg_page_btn1_off.png
+- Assets/Resources/AB/p2/bg_bag_box.png
+- Assets/Resources/AB/p2/bg_main_bottom_btn.png
+- Assets/Resources/AB/p2/bg_btn4.png
+- Assets/Resources/AB/p2/bg_line1.png
+- Assets/Resources/AB/p2/bg_equip_box.png
+- Assets/Resources/AB/p2/bg_btn2_red.png
+Dependencies: []

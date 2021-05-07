@@ -3,7 +3,7 @@ local UI = class("area_main", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return "ui1"
+    return "ui"
 end
 function UI:GET_DEFAULT_OPTS()
     return {blockInput = false, blackMask = 0}

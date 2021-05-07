@@ -1,0 +1,63 @@
+ManifestFileVersion: 0
+CRC: 527325633
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 536f52d05d7cddad996102cc28baa16c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 42ac18d68e44b8c9405b04c81332a19e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AB/card1/12_avatar.png
+- Assets/Resources/AB/card1/1_avatar.png
+- Assets/Resources/AB/card1/11.prefab
+- Assets/Resources/AB/card1/10_avatar.png
+- Assets/Resources/AB/card1/7.png
+- Assets/Resources/AB/card1/9.png
+- Assets/Resources/AB/card1/3.prefab
+- Assets/Resources/AB/card1/2.prefab
+- Assets/Resources/AB/card1/7.prefab
+- Assets/Resources/AB/card1/6_avatar.png
+- Assets/Resources/AB/card1/5.prefab
+- Assets/Resources/AB/card1/5.png
+- Assets/Resources/AB/card1/5_avatar.png
+- Assets/Resources/AB/card1/12.png
+- Assets/Resources/AB/card1/1.prefab
+- Assets/Resources/AB/card1/8.png
+- Assets/Resources/AB/card1/1.png
+- Assets/Resources/AB/card1/3_avatar.png
+- Assets/Resources/AB/card1/7_avatar.png
+- Assets/Resources/AB/card1/10.png
+- Assets/Resources/AB/card1/4.png
+- Assets/Resources/AB/card1/4_avatar.png
+- Assets/Resources/AB/card1/2_avatar.png
+- Assets/Resources/AB/card1/8.prefab
+- Assets/Resources/AB/card1/6.prefab
+- Assets/Resources/AB/card1/9.prefab
+- Assets/Resources/AB/card1/6.png
+- Assets/Resources/AB/card1/9_avatar.png
+- Assets/Resources/AB/card1/4.prefab
+- Assets/Resources/AB/card1/3.png
+- Assets/Resources/AB/card1/12.prefab
+- Assets/Resources/AB/card1/2.png
+- Assets/Resources/AB/card1/8_avatar.png
+- Assets/Resources/AB/card1/11.png
+- Assets/Resources/AB/card1/10.prefab
+- Assets/Resources/AB/card1/11_avatar.png
+Dependencies: []

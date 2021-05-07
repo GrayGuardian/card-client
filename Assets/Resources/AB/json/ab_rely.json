@@ -1,5 +1,9 @@
 {
   "prefab1": {
+    "bag_item": [
+      "p2",
+      "gem"
+    ],
     "card_avatar_item": [
       "p10"
     ],
@@ -28,12 +32,16 @@
       "p10"
     ]
   },
-  "ui1": {
+  "ui": {
     "ui_bg_login": [
       "p1"
     ],
     "ui_bg_main": [
       "p1"
+    ],
+    "ui_debug": [
+      "p1",
+      "p2"
     ],
     "ui_input_affirm": [
       "p1"
@@ -68,7 +76,9 @@
       "p1"
     ],
     "ui_card": [
-      "p2"
+      "p2",
+      "prefab1",
+      "gem"
     ],
     "ui_role": [
       "p2"

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1715233085
+CRC: 2266725184
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ab9ea14c94f745329e456c6641349ad6
+    Hash: d07197e8d8fb71a8c3374261284d7263
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -15,10 +15,14 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/jit/p.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/encoder.lua.txt
 - Assets/Resources/AB/lua/ui/common/ui_input_affirm.lua.txt
+- Assets/Resources/AB/lua/ui/majoy/ui_majoy.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/coroutine.lua.txt
+- Assets/Resources/AB/lua/comp/card/comp_card_star_item.lua.txt
 - Assets/Resources/AB/lua/util/timer/timer_util.lua.txt
+- Assets/Resources/AB/lua/comp/login/comp_selplayer_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/containers.lua.txt
 - Assets/Resources/AB/lua/const/ERROR_INFO.lua.txt
+- Assets/Resources/AB/lua/template/template_card.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Touch.lua.txt
 - Assets/Resources/AB/lua/base/tolua/ltn12.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/smtp.lua.txt
@@ -28,9 +32,13 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm64be.lua.txt
 - Assets/Resources/AB/lua/ui/bg_view/ui_bg_login.lua.txt
 - Assets/Resources/AB/lua/template/tpl.lua.txt
+- Assets/Resources/AB/lua/ui/majoy/ui_top_info.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dump.lua.txt
+- Assets/Resources/AB/lua/model/model_skillgem.lua.txt
 - Assets/Resources/AB/lua/scene/scene_login.lua.txt
+- Assets/Resources/AB/lua/ui/role/ui_role.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/url.lua.txt
+- Assets/Resources/AB/lua/comp/skill_gem/comp_skill_link_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/type_checkers.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mipsel.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Bounds.lua.txt
@@ -41,25 +49,28 @@ Assets:
 - Assets/Resources/AB/lua/ui/upres/ui_upres.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Vector2.lua.txt
+- Assets/Resources/AB/lua/ui/common/ui_debug.lua.txt
 - Assets/Resources/AB/lua/scene/scene_upres.lua.txt
 - Assets/Resources/AB/lua/const/BROADCAST_CODE.lua.txt
 - Assets/Resources/AB/lua/util/socket_util.lua.txt
 - Assets/Resources/AB/lua/ui/upres/ui_upres_tip.lua.txt
+- Assets/Resources/AB/lua/util/game_data.lua.txt
 - Assets/Resources/AB/lua/model/model_player.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Ray.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Vector4.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/RaycastHit.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/mbox.lua.txt
+- Assets/Resources/AB/lua/comp/card/comp_card_avatar_item.lua.txt
 - Assets/Resources/AB/lua/util/broadcast_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Time.lua.txt
+- Assets/Resources/AB/lua/comp/login/comp_avatar1_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/misc/utf8.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Quaternion.lua.txt
-- Assets/Resources/AB/lua/ui/main/ui_top_info.lua.txt
 - Assets/Resources/AB/lua/base/tolua/tolua.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/Timer.lua.txt
+- Assets/Resources/AB/lua/template/template_skill_gem.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm64.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mips64.lua.txt
-- Assets/Resources/AB/lua/comp/comp_avatar1_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_x64.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/Profiler.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/Reflection/BindingFlags.lua.txt
@@ -71,9 +82,11 @@ Assets:
 - Assets/Resources/AB/lua/ui/main/ui_main.lua.txt
 - Assets/Resources/AB/lua/util/json_util.lua.txt
 - Assets/Resources/AB/lua/util/pb_util.lua.txt
+- Assets/Resources/AB/lua/ui/role/ui_card.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/v.lua.txt
 - Assets/Resources/AB/lua/ui/bg_view/ui_bg_main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_mips.lua.txt
+- Assets/Resources/AB/lua/model/model_card.lua.txt
 - Assets/Resources/AB/lua/base/tolua/event.lua.txt
 - Assets/Resources/AB/lua/base/tolua/lpeg/re.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/tp.lua.txt
@@ -86,9 +99,10 @@ Assets:
 - Assets/Resources/AB/lua/ui/login/ui_area_main.lua.txt
 - Assets/Resources/AB/lua/ui/ui_base.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/dis_arm.lua.txt
-- Assets/Resources/AB/lua/comp/comp_selplayer_item.lua.txt
+- Assets/Resources/AB/lua/comp/card/comp_card_own_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/descriptor.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/decoder.lua.txt
+- Assets/Resources/AB/lua/comp/login/comp_area_item.lua.txt
 - Assets/Resources/AB/lua/scene/scene_base.lua.txt
 - Assets/Resources/AB/lua/base/tolua/list.lua.txt
 - Assets/Resources/AB/lua/base/tolua/typeof.lua.txt
@@ -104,6 +118,7 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/misc/strict.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/ftp.lua.txt
 - Assets/Resources/AB/lua/base/tolua/socket/headers.lua.txt
+- Assets/Resources/AB/lua/comp/card/comp_bag_item.lua.txt
 - Assets/Resources/AB/lua/base/tolua/cjson/util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/zone.lua.txt
 - Assets/Resources/AB/lua/base/tolua/mime.lua.txt
@@ -113,7 +128,6 @@ Assets:
 - Assets/Resources/AB/lua/util/mono_util.lua.txt
 - Assets/Resources/AB/lua/base/tolua/UnityEngine/LayerMask.lua.txt
 - Assets/Resources/AB/lua/ui/common/ui_tip.lua.txt
-- Assets/Resources/AB/lua/comp/comp_area_item.lua.txt
 - Assets/Resources/AB/lua/ui/login/ui_player_sel.lua.txt
 - Assets/Resources/AB/lua/main.lua.txt
 - Assets/Resources/AB/lua/base/tolua/jit/bcsave.lua.txt
@@ -123,6 +137,7 @@ Assets:
 - Assets/Resources/AB/lua/comp/comp_base.lua.txt
 - Assets/Resources/AB/lua/model/model_base.lua.txt
 - Assets/Resources/AB/lua/base/base.lua.txt
+- Assets/Resources/AB/lua/comp/card/comp_card_energy_item.lua.txt
 - Assets/Resources/AB/lua/ui/login/ui_login.lua.txt
 - Assets/Resources/AB/lua/scene/scene_game.lua.txt
 - Assets/Resources/AB/lua/base/ui.lua.txt
@@ -130,4 +145,5 @@ Assets:
 - Assets/Resources/AB/lua/pb/server_pb.lua.txt
 - Assets/Resources/AB/lua/base/tolua/protobuf/text_format.lua.txt
 - Assets/Resources/AB/lua/ui/main/ui_bottom_list.lua.txt
+- Assets/Resources/AB/lua/comp/skill_gem/comp_skill_hole_item.lua.txt
 Dependencies: []

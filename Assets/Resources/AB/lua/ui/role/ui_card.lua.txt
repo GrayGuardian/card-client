@@ -3,7 +3,7 @@ local UI = class("card", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return "ui1"
+    return "ui"
 end
 function UI:GET_DEFAULT_OPTS()
     return {order = -10, blockInput = false, blackMask = 0}
@@ -19,8 +19,8 @@ function UI:awake()
     self.equipsLeftLayout = self.node:Find("equipsLeftLayout")
 
     self.bagLayout = self.node:Find("bagLayout")
-    self.bagContentLayout = self.bagLayout:Find("bagContentLayout")
-    self.bagItemsLayout = self.bagContentLayout:Find("bagItemsLayout")
+    self.bagItemsLayout = self.uiComp.ScrollRect.bagContentScrollView.transform:Find("Viewport"):Find("Content")
+    self.bagItemsGroup = comp:getCSComponent(self.bagItemsLayout, UEUI.GridLayoutGroup)
 
     self.bagItemCompMap = {}
 end
@@ -45,6 +45,7 @@ function UI:refreshLayout()
     -- 按钮适配
     node = self.node:Find("cardBtnLayout")
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
+
     group = self.uiComp.GridLayoutGroup.cardBtnLayout
     rectTransform.sizeDelta = {
         x = rectTransform.sizeDelta.x * GAME_CONFIG.SCREEN_SCALE,
@@ -55,35 +56,20 @@ function UI:refreshLayout()
     -- 背包适配
     node = self.bagItemsLayout
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
-    group = comp:getCSComponent(node, UEUI.GridLayoutGroup)
-    local DEFAULT_BAG_LAYOUT_CONFIG = {
-        WIDTH = 160,
-        ROW = 2,
-        COLUMN = 5
-    }
-    width =
-        DEFAULT_BAG_LAYOUT_CONFIG.WIDTH * DEFAULT_BAG_LAYOUT_CONFIG.COLUMN +
-        group.spacing.x * (DEFAULT_BAG_LAYOUT_CONFIG.COLUMN - 1)
-    local newWidth = width * GAME_CONFIG.SCREEN_SCALE
-    local newColumn = math.floor((newWidth / DEFAULT_BAG_LAYOUT_CONFIG.WIDTH) + 0.3)
-    self.BAG_LAYOUT_CONFIG = {
-        WIDTH = DEFAULT_BAG_LAYOUT_CONFIG.WIDTH,
-        ROW = DEFAULT_BAG_LAYOUT_CONFIG.ROW,
-        COLUMN = newColumn
-    }
-    GAME_CONFIG.BAG_CONFIG.PAGE_SUM = self.BAG_LAYOUT_CONFIG.ROW * self.BAG_LAYOUT_CONFIG.COLUMN
+    group = self.bagItemsGroup
 
-    for i = 0, node.childCount - 1 do
-        GameObject.Destroy(node:GetChild(i).gameObject)
-    end
-    for i = 1, GAME_CONFIG.BAG_CONFIG.PAGE_SUM do
-        local n = GameObject.Instantiate(self:load_gameObject("prefab1", "bag_item")).transform
-        n.parent = node
-        n.localPosition = {x = 0, y = 0, z = 0}
-        n.localScale = {x = 1, y = 1, z = 1}
-        self.bagItemCompMap[i] = comp:addComponent(n, "bag_item")
-    end
-    -- print(utils.serialize(self.BAG_LAYOUT_CONFIG))
+    local def_item_width = group.cellSize.x
+    local def_group_spacing = group.spacing.x
+    local def_group_column = group.constraintCount
+
+    width = def_item_width * def_group_column + def_group_spacing * (def_group_column - 1)
+    width = width * GAME_CONFIG.SCREEN_SCALE
+
+    local column = math.floor(width / def_item_width)
+    local spacing = (width - column * def_item_width) / (column - 1)
+
+    group.spacing = {x = spacing, y = spacing}
+    group.constraintCount = column
 end
 
 function UI:onDestroy()

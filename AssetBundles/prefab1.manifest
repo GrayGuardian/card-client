@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1803993230
+CRC: 3732442247
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 77816e7d14966e3e154004279129bfdd
+    Hash: 6b0a0a91e0b1b74e1c36e040b0d703a1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8a570746516f189d9d770fad1d875c81
+    Hash: 5ef1af8ad14c77a6c79f14d6e0da2f9a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,6 +21,8 @@ ClassTypes:
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -42,11 +44,18 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/AB/prefab1/area_item.prefab
-- Assets/Resources/AB/prefab1/card_star_item.prefab
-- Assets/Resources/AB/prefab1/avatar1_item.prefab
-- Assets/Resources/AB/prefab1/card_energy_item.prefab
-- Assets/Resources/AB/prefab1/card.prefab
-- Assets/Resources/AB/prefab1/selplayer_item.prefab
+- Assets/Resources/AB/prefab1/login/area_item.prefab
+- Assets/Resources/AB/prefab1/card/card_avatar_item.prefab
+- Assets/Resources/AB/prefab1/card/card_star_item.prefab
+- Assets/Resources/AB/prefab1/card/bag_item.prefab
+- Assets/Resources/AB/prefab1/login/avatar1_item.prefab
+- Assets/Resources/AB/prefab1/card/card_energy_item.prefab
+- Assets/Resources/AB/prefab1/skill_gem/skill_hole_item.prefab
+- Assets/Resources/AB/prefab1/card/card_own_item.prefab
+- Assets/Resources/AB/prefab1/login/selplayer_item.prefab
+- Assets/Resources/AB/prefab1/skill_gem/skill_link_item.prefab
 Dependencies:
 - D:/Demo/Unity/card-game/card-client/AssetBundles/p1
+- D:/Demo/Unity/card-game/card-client/AssetBundles/gem
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p2
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p10
