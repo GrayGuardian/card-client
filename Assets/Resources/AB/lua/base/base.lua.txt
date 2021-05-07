@@ -22,6 +22,7 @@ _G.tpl = require("tpl")
 _G.pb = require("pb_util"):new()
 _G.json = require("json_util"):new()
 
+_G.actionList = require("actionList_util"):new()
 _G.broadcast = require("broadcast_util"):new()
 _G.mono = require("mono_util"):new()
 _G.timer = require("timer_util"):new()
