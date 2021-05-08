@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 420628243
+CRC: 2899670085
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c3bd8c0c89461533e779141fab346852
+    Hash: a0cbdc68ad0e7fd2dd66832cc59d0778
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -15,12 +15,12 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/AB/p1/btn_close1.png
+- Assets/Resources/AB/p1/bg_card_avatar_select.png
 - Assets/Resources/AB/p1/bg_top_msg.png
 - Assets/Resources/AB/p1/gold2.png
 - Assets/Resources/AB/p1/bg_bottom_list.png
 - Assets/Resources/AB/p1/gold1.png
 - Assets/Resources/AB/p1/bg_item1_outline.png
-- Assets/Resources/AB/p1/bg_view1.jpg
 - Assets/Resources/AB/p1/bg_content1.png
 - Assets/Resources/AB/p1/icon_red_point.png
 - Assets/Resources/AB/p1/bg_avatar2_mask.png
@@ -40,7 +40,6 @@ Assets:
 - Assets/Resources/AB/p1/bg_avatar1_outline.png
 - Assets/Resources/AB/p1/icon_vit.png
 - Assets/Resources/AB/p1/bg_item2_outline.png
-- Assets/Resources/AB/p1/bg_view2.jpg
 - Assets/Resources/AB/p1/bar1_val.png
 - Assets/Resources/AB/p1/bg_item3.png
 - Assets/Resources/AB/p1/bar2_val.png
@@ -52,4 +51,5 @@ Assets:
 - Assets/Resources/AB/p1/bg_btn2.png
 - Assets/Resources/AB/p1/bg_avatar2.png
 - Assets/Resources/AB/p1/bg_item1.png
+- Assets/Resources/AB/p1/bg_card_avatar.png
 Dependencies: []

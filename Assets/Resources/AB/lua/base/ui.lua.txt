@@ -19,11 +19,7 @@ function UI:init()
 
     self:createUIRoot()
 end
--- 更新所有UI布局
-function UI:refreshLayout()
-    GAME_CONFIG.SCREEN_SCALE =
-        (UE.Screen.width / UE.Screen.height) / (GAME_CONFIG.DEFAULT_SCREEN.WIDTH / GAME_CONFIG.DEFAULT_SCREEN.HEIGHT)
-end
+
 -- 场景lua文件加载
 function UI:sceneLoad(info)
     local param = table.copy(self.scaneParam)

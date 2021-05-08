@@ -35,8 +35,8 @@ function Comp:onLoad()
 end
 function Comp:refresh()
     -- 背景
-    self.uiComp.Image.bg0Image.sprite = self:load_sprite("p10", string.format("bg_%s0", self.tpl.pic_bg))
-    self.uiComp.Image.bg1Image.sprite = self:load_sprite("p10", string.format("bg_%s1", self.tpl.pic_bg))
+    self.uiComp.Image.bg0Image.sprite = self:load_sprite("p12", string.format("bg_%s0", self.tpl.pic_bg))
+    self.uiComp.Image.bg1Image.sprite = self:load_sprite("p12", string.format("bg_%s1", self.tpl.pic_bg))
     -- 卡牌图
     for i = 0, self.roleLayout.childCount - 1 do
         GameObject.Destroy(self.roleLayout:GetChild(i).gameObject)

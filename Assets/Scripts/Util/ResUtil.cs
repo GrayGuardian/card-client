@@ -117,14 +117,15 @@ public class ResUtil
     public string[] GetRelyABs(string key, string resName)
     {
         if (key == "json" && resName == "ab_rely") return new string[] { };
-
         List<string> relyABList = new List<string>();
         string json = Util.Res.LoadString("json", "ab_rely", true);
         JObject jObject = JObject.Parse(json);
+
         var temp = jObject[key];
         if (temp != null)
         {
             var jtoken = temp[resName];
+            // UnityEngine.Debug.LogFormat("{0} {1} {2}", key, resName, jtoken);
             if (jtoken != null)
             {
                 foreach (var ab in jtoken.Values<string>())
@@ -174,15 +175,20 @@ public class ResUtil
         {
             yield break;
         }
+
         UnityEngine.Debug.Log("加载AB包：" + key);
         byte[] data = null;
+        float time = Time.time;
         Util.Encrypt.ReadBytesAsyn(filePath, (d) =>
         {
+            UnityEngine.Debug.Log(">Time 解密>>" + (Time.time - time));
             data = d;
         });
         yield return new WaitUntil(() => { return data != null; });
+        time = Time.time;
         var assetLoadRequest = AssetBundle.LoadFromMemoryAsync(data);
         yield return assetLoadRequest;
+        UnityEngine.Debug.Log(">Time 加载>>" + (Time.time - time));
         bundle = assetLoadRequest.assetBundle;
 
         _abMap.Add(bundle, new List<ResObject>());

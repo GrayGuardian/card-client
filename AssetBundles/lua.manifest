@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1784583687
+CRC: 2849961836
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5a13800c99ad4e622f02fc313290c4e8
+    Hash: b7e5f682ab79105ff35184a91a4f8efe
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -53,6 +53,7 @@ Assets:
 - Assets/Resources/AB/lua/scene/scene_upres.lua.txt
 - Assets/Resources/AB/lua/const/BROADCAST_CODE.lua.txt
 - Assets/Resources/AB/lua/util/socket_util.lua.txt
+- Assets/Resources/AB/lua/util/actionList_util.lua.txt
 - Assets/Resources/AB/lua/ui/upres/ui_upres_tip.lua.txt
 - Assets/Resources/AB/lua/util/game_data.lua.txt
 - Assets/Resources/AB/lua/model/model_player.lua.txt

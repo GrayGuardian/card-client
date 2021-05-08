@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3773080876
+CRC: 3200875741
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5e73fab504593c32b95d2cf4d0ae708f
+    Hash: 2beb238460a9135eb5c87fe019b3bdfb
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -14,24 +14,16 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/AB/p10/bg_card_avatar_select.png
 - Assets/Resources/AB/p10/bg_card_1_0.png
-- Assets/Resources/AB/p10/bg_blue1.png
-- Assets/Resources/AB/p10/bg_purple1.png
 - Assets/Resources/AB/p10/icon_attribute2.png
 - Assets/Resources/AB/p10/bg_card_1_2.png
 - Assets/Resources/AB/p10/bg_card_2_1.png
 - Assets/Resources/AB/p10/bg_skill_hole_link.png
 - Assets/Resources/AB/p10/bg_star.png
-- Assets/Resources/AB/p10/bg_purple0.png
 - Assets/Resources/AB/p10/bg_card_0_2.png
 - Assets/Resources/AB/p10/icon_energy_blue.png
 - Assets/Resources/AB/p10/bg_card_1_1.png
-- Assets/Resources/AB/p10/bg_green0.png
 - Assets/Resources/AB/p10/icon_star.png
-- Assets/Resources/AB/p10/bg_green1.png
-- Assets/Resources/AB/p10/bg_red1.png
-- Assets/Resources/AB/p10/bg_red0.png
 - Assets/Resources/AB/p10/icon_attribute1.png
 - Assets/Resources/AB/p10/bg_card_2_3.png
 - Assets/Resources/AB/p10/icon_energy_red.png
@@ -41,8 +33,6 @@ Assets:
 - Assets/Resources/AB/p10/bg_card_0_1.png
 - Assets/Resources/AB/p10/bg_skill_hole.png
 - Assets/Resources/AB/p10/bg_card_1_3.png
-- Assets/Resources/AB/p10/bg_blue0.png
 - Assets/Resources/AB/p10/bg_card_0_0.png
 - Assets/Resources/AB/p10/icon_attribute0.png
-- Assets/Resources/AB/p10/bg_card_avatar.png
 Dependencies: []

@@ -209,7 +209,7 @@ function UI:loadAsset()
     print("预加载资源")
 
     --需要预加载的AB包名
-    -- local abs = {"map"}
+    -- local abs = {"card1"}
     -- for index, ab in ipairs(abs) do
     --     resUtil:LoadAssetBundleAsyn(
     --         ab,

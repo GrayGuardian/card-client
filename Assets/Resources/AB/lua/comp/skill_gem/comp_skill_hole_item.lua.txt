@@ -9,7 +9,7 @@ function Comp:onLoad()
 end
 function Comp:refresh()
     -- 背景图
-    self.uiComp.Image.bgImage.sprite = self:load_sprite("p10", string.format("bg_%s0", self.info.color))
+    self.uiComp.Image.bgImage.sprite = self:load_sprite("p12", string.format("bg_%s0", self.info.color))
 
     self:refreshSkillGem()
 end

@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+CRC: 115986541
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3340f7ae2c57d2aaeed42a724e385240
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AB/p12/bg_blue1.png
+- Assets/Resources/AB/p12/bg_purple1.png
+- Assets/Resources/AB/p12/bg_purple0.png
+- Assets/Resources/AB/p12/bg_green0.png
+- Assets/Resources/AB/p12/bg_green1.png
+- Assets/Resources/AB/p12/bg_red1.png
+- Assets/Resources/AB/p12/bg_red0.png
+- Assets/Resources/AB/p12/bg_blue0.png
+Dependencies: []

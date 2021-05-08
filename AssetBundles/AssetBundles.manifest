@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 342273276
+CRC: 707902832
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -21,6 +21,7 @@ AssetBundleManifest:
         Dependency_1: gem
         Dependency_2: p2
         Dependency_3: p10
+        Dependency_4: p12
     Info_5:
       Name: avatar
       Dependencies: {}
@@ -31,6 +32,7 @@ AssetBundleManifest:
         Dependency_1: prefab1
         Dependency_2: gem
         Dependency_3: p2
+        Dependency_4: p11
     Info_7:
       Name: card1
       Dependencies: {}
@@ -42,4 +44,19 @@ AssetBundleManifest:
       Dependencies: {}
     Info_10:
       Name: p10
+      Dependencies: {}
+    Info_11:
+      Name: card2
+      Dependencies: {}
+    Info_12:
+      Name: card3
+      Dependencies: {}
+    Info_13:
+      Name: card4
+      Dependencies: {}
+    Info_14:
+      Name: p11
+      Dependencies: {}
+    Info_15:
+      Name: p12
       Dependencies: {}

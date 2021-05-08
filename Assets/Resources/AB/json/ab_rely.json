@@ -5,13 +5,14 @@
       "gem"
     ],
     "card_avatar_item": [
-      "p10"
+      "p1"
     ],
     "card_energy_item": [
       "p10"
     ],
     "card_own_item": [
-      "p10"
+      "p10",
+      "p12"
     ],
     "card_star_item": [
       "p10"
@@ -26,6 +27,7 @@
       "p1"
     ],
     "skill_hole_item": [
+      "p12",
       "p10"
     ],
     "skill_link_item": [
@@ -34,10 +36,10 @@
   },
   "ui": {
     "ui_bg_login": [
-      "p1"
+      "p11"
     ],
     "ui_bg_main": [
-      "p1"
+      "p11"
     ],
     "ui_debug": [
       "p1",
