@@ -1,5 +1,5 @@
-local base = require("scene_base")
-local Scene = class("login", base)
+local base = require('scene_base')
+local Scene = class('login', base)
 
 function Scene:onLoad()
     ------------快速登录测试代码------------
@@ -19,18 +19,18 @@ function Scene:onLoad()
     ------------快速登录测试代码------------
 
     broadcast:on(
-        BROADCAST_CODE.SOCKET_EVENT("enterGameRet"),
+        BROADCAST_CODE.SOCKET_EVENT('enterGameRet'),
         function()
-            ui:loadScene("Game")
+            ui:loadScene('Game')
         end,
         0,
         true
     )
 
-    ui:showUI("ui_bg_login")
+    ui:showUI('ui_bg_login')
 
     if (self.param.defaultUI == nil) then
-        ui:showUI("ui_login")
+        ui:showUI('ui_login')
     else
         ui:showUI(self.param.defaultUI)
     end

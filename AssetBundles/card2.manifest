@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1798280437
+CRC: 4062411506
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e20fe6591738328891b1f244e17303e7
+    Hash: fc1f41a62e3e5d3229a812817039b95c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 42ac18d68e44b8c9405b04c81332a19e
@@ -24,16 +24,7 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/AB/card2/3.prefab
-- Assets/Resources/AB/card2/6_avatar.png
-- Assets/Resources/AB/card2/5.prefab
-- Assets/Resources/AB/card2/5.png
-- Assets/Resources/AB/card2/5_avatar.png
-- Assets/Resources/AB/card2/3_avatar.png
-- Assets/Resources/AB/card2/4.png
-- Assets/Resources/AB/card2/4_avatar.png
-- Assets/Resources/AB/card2/6.prefab
-- Assets/Resources/AB/card2/6.png
-- Assets/Resources/AB/card2/4.prefab
-- Assets/Resources/AB/card2/3.png
+- Assets/Resources/AB/card2/2.prefab
+- Assets/Resources/AB/card2/2_avatar.png
+- Assets/Resources/AB/card2/2.png
 Dependencies: []

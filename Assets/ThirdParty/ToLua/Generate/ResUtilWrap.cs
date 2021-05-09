@@ -14,6 +14,9 @@ public class ResUtilWrap
 		L.RegFunction("GetResObjectByResName", GetResObjectByResName);
 		L.RegFunction("GetResObjectsByRes", GetResObjectsByRes);
 		L.RegFunction("GetRelyABs", GetRelyABs);
+		L.RegFunction("ExistAssetBundle", ExistAssetBundle);
+		L.RegFunction("DecryptAssetBundle", DecryptAssetBundle);
+		L.RegFunction("DecryptAssetBundleAsyn", DecryptAssetBundleAsyn);
 		L.RegFunction("LoadAssetBundle", LoadAssetBundle);
 		L.RegFunction("LoadAssetBundleAsyn", LoadAssetBundleAsyn);
 		L.RegFunction("UnLoadAssetBundle", UnLoadAssetBundle);
@@ -196,6 +199,60 @@ public class ResUtilWrap
 			string[] o = obj.GetRelyABs(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ExistAssetBundle(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			bool o = obj.ExistAssetBundle(arg0);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DecryptAssetBundle(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			byte[] o = obj.DecryptAssetBundle(arg0);
+			ToLua.Push(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DecryptAssetBundleAsyn(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			System.Action<byte[]> arg1 = (System.Action<byte[]>)ToLua.CheckDelegate<System.Action<byte[]>>(L, 3);
+			obj.DecryptAssetBundleAsyn(arg0, arg1);
+			return 0;
 		}
 		catch (Exception e)
 		{

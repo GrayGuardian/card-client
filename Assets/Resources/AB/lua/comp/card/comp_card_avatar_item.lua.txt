@@ -1,5 +1,5 @@
-local base = require("comp_base")
-local Comp = class("card_avatar_item", base)
+local base = require('comp_base')
+local Comp = class('card_avatar_item', base)
 function Comp:onLoad()
     self.info = self.param.info
     self.onClick = self.param.onClick
@@ -8,23 +8,25 @@ function Comp:onLoad()
     self:refresh()
 end
 function Comp:refresh()
-    self:load_sprite_asyn(
-        "p12",
-        string.format("bg_%s0", self.info.tpl.pic_bg),
-        function(sp)
-            self.uiComp.Image.bgImage.sprite = sp
-        end
-    )
-    self:load_sprite_asyn(
-        self.info.tpl.pic_ab,
-        string.format("%s_avatar", self.info:get_cid()),
-        function(sp)
-            self.uiComp.Image.iconImage.sprite = sp
-        end
-    )
-    -- self.uiComp.Image.bgImage.sprite = self:load_sprite("p12", string.format("bg_%s0", self.info.tpl.pic_bg))
-    -- self.uiComp.Image.iconImage.sprite =
-    --     self:load_sprite(self.info.tpl.pic_ab, string.format("%s_avatar", self.info:get_cid()))
+    -- self:load_sprite_asyn(
+    --     'p12',
+    --     string.format('bg_%s0', self.info.tpl.pic_bg),
+    --     function(sp)
+    --         self.uiComp.Image.bgImage.sprite = sp
+    --     end
+    -- )
+    -- local time = UE.Time.time
+    -- self:load_sprite_asyn(
+    --     'card1',
+    --     string.format('%s_avatar', 1),
+    --     function(sp)
+    --         print('>>>>>>>>>>>>>>>>>', UE.Time.time - time)
+    --         self.uiComp.Image.iconImage.sprite = sp
+    --     end
+    -- )
+    self.uiComp.Image.bgImage.sprite = self:load_sprite('p12', string.format('bg_%s0', self.info.tpl.pic_bg))
+    self.uiComp.Image.iconImage.sprite =
+        self:load_sprite(self.info.tpl.pic_ab, string.format('%s_avatar', self.info:get_cid()))
 end
 function Comp:select()
     self.uiComp.Image.selectImage.gameObject:SetActive(true)

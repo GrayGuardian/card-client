@@ -10,8 +10,8 @@ public class ResObject
 }
 public class ResUtil
 {
+    private Dictionary<string, byte[]> _abByteMap = new Dictionary<string, byte[]>();
     private Dictionary<AssetBundle, List<ResObject>> _abMap = new Dictionary<AssetBundle, List<ResObject>>();
-
     public AssetBundle GetBundleByName(string name)
     {
         foreach (var bundle in _abMap.Keys)
@@ -137,16 +137,48 @@ public class ResUtil
 
         return relyABList.ToArray();
     }
+    public bool ExistAssetBundle(string key)
+    {
+        string filePath = Path.Combine(GameConst.RES_LOCAL_ROOT, "./AssetBundles", "./" + key);
+        if (!File.Exists(filePath)) return false;
+        return true;
+    }
+    public byte[] DecryptAssetBundle(string key)
+    {
+        string filePath = Path.Combine(GameConst.RES_LOCAL_ROOT, "./AssetBundles", "./" + key);
+        if (!File.Exists(filePath)) return null;
+        byte[] data = Util.Encrypt.ReadBytes(filePath);
+        _abByteMap.Add(key, data);
+        return data;
+    }
+    public void DecryptAssetBundleAsyn(string key, Action<byte[]> cb)
+    {
+        string filePath = Path.Combine(GameConst.RES_LOCAL_ROOT, "./AssetBundles", "./" + key);
+        if (!File.Exists(filePath)) return;
+        float time = Time.time;
+        Util.Encrypt.ReadBytesAsyn(filePath, (data) =>
+        {
+            UnityEngine.Debug.Log(key + ">Time 解密>>" + (Time.time - time));
+            _abByteMap.Add(key, data);
+            cb(data);
+        });
+    }
     public AssetBundle LoadAssetBundle(string key)
     {
         if (GameConst.PRO_ENV != ENV_TYPE.MASTER) return null;
         AssetBundle bundle = GetBundleByName(key);
         if (bundle != null) return bundle;
-        string filePath = Path.Combine(GameConst.RES_LOCAL_ROOT, "./AssetBundles", "./" + key);
-        if (!File.Exists(filePath)) return null;
         UnityEngine.Debug.Log("加载AB包：" + key);
-
-        var data = Util.Encrypt.ReadBytes(filePath);
+        byte[] data = null;
+        if (_abByteMap.ContainsKey(key))
+        {
+            data = _abByteMap[key];
+        }
+        else
+        {
+            data = DecryptAssetBundle(key);
+        }
+        if (data == null) return null;
 
         bundle = AssetBundle.LoadFromMemory(data);
         _abMap.Add(bundle, new List<ResObject>());
@@ -170,25 +202,30 @@ public class ResUtil
             if (cb != null) cb(bundle);
             yield break;
         }
-        string filePath = Path.Combine(GameConst.RES_LOCAL_ROOT, "./AssetBundles", "./" + key);
-        if (!File.Exists(filePath))
-        {
-            yield break;
-        }
-
         UnityEngine.Debug.Log("加载AB包：" + key);
         byte[] data = null;
-        float time = Time.time;
-        Util.Encrypt.ReadBytesAsyn(filePath, (d) =>
+
+        if (_abByteMap.ContainsKey(key))
         {
-            UnityEngine.Debug.Log(">Time 解密>>" + (Time.time - time));
-            data = d;
-        });
+            data = _abByteMap[key];
+        }
+        else
+        {
+            if (!ExistAssetBundle(key))
+            {
+                yield break;
+            }
+            DecryptAssetBundleAsyn(key, (d) =>
+            {
+                data = d;
+            });
+        }
+
         yield return new WaitUntil(() => { return data != null; });
-        time = Time.time;
+        float time = Time.time;
         var assetLoadRequest = AssetBundle.LoadFromMemoryAsync(data);
         yield return assetLoadRequest;
-        UnityEngine.Debug.Log(">Time 加载>>" + (Time.time - time));
+        UnityEngine.Debug.Log(key + ">Time 加载>>" + (Time.time - time));
         bundle = assetLoadRequest.assetBundle;
 
         _abMap.Add(bundle, new List<ResObject>());
@@ -316,6 +353,7 @@ public class ResUtil
             AssetBundle bundle = GetBundleByName(key);
             if (bundle == null)
             {
+                Debug.Log("不存在 需要加载>>>" + key);
                 yield return MonoSingleton.Instance.StartCoroutine(_loadAssetBundleAsyn(key, (val) => { bundle = val; }));
             }
             if (bundle != null)

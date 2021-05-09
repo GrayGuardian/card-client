@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1590068492
+CRC: 1315119669
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f2458b11fcd049501a19a94e128e83a0
+    Hash: 21f09a10ea346c3ee96dbf704a04c335
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9b7043cd111d5d11357a61dc0f123b6e
@@ -68,8 +68,8 @@ Assets:
 - Assets/Resources/AB/ui/majoy/ui_top_info.prefab
 - Assets/Resources/AB/ui/common/ui_tip.prefab
 Dependencies:
-- D:/Demo/Unity/card-game/card-client/AssetBundles/p1
-- D:/Demo/Unity/card-game/card-client/AssetBundles/prefab1
-- D:/Demo/Unity/card-game/card-client/AssetBundles/gem
-- D:/Demo/Unity/card-game/card-client/AssetBundles/p2
-- D:/Demo/Unity/card-game/card-client/AssetBundles/p11
+- F:/Git/card/card-client/AssetBundles/p1
+- F:/Git/card/card-client/AssetBundles/prefab1
+- F:/Git/card/card-client/AssetBundles/p2
+- F:/Git/card/card-client/AssetBundles/gem
+- F:/Git/card/card-client/AssetBundles/p11
