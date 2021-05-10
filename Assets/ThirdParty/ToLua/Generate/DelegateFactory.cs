@@ -28,6 +28,7 @@ public class DelegateFactory
 		dict.Add(typeof(System.Action<string>), factory.System_Action_string);
 		dict.Add(typeof(System.Action<byte[]>), factory.System_Action_bytes);
 		dict.Add(typeof(System.Action<UnityEngine.AssetBundle>), factory.System_Action_UnityEngine_AssetBundle);
+		dict.Add(typeof(System.Action<UnityEngine.AssetBundle[]>), factory.System_Action_UnityEngine_AssetBundles);
 		dict.Add(typeof(System.Action<UnityEngine.Object>), factory.System_Action_UnityEngine_Object);
 		dict.Add(typeof(System.Action<UnityEngine.Sprite>), factory.System_Action_UnityEngine_Sprite);
 		dict.Add(typeof(System.Action<UnityEngine.GameObject>), factory.System_Action_UnityEngine_GameObject);
@@ -96,6 +97,7 @@ public class DelegateFactory
 		DelegateTraits<System.Action<string>>.Init(factory.System_Action_string);
 		DelegateTraits<System.Action<byte[]>>.Init(factory.System_Action_bytes);
 		DelegateTraits<System.Action<UnityEngine.AssetBundle>>.Init(factory.System_Action_UnityEngine_AssetBundle);
+		DelegateTraits<System.Action<UnityEngine.AssetBundle[]>>.Init(factory.System_Action_UnityEngine_AssetBundles);
 		DelegateTraits<System.Action<UnityEngine.Object>>.Init(factory.System_Action_UnityEngine_Object);
 		DelegateTraits<System.Action<UnityEngine.Sprite>>.Init(factory.System_Action_UnityEngine_Sprite);
 		DelegateTraits<System.Action<UnityEngine.GameObject>>.Init(factory.System_Action_UnityEngine_GameObject);
@@ -164,6 +166,7 @@ public class DelegateFactory
 		TypeTraits<System.Action<string>>.Init(factory.Check_System_Action_string);
 		TypeTraits<System.Action<byte[]>>.Init(factory.Check_System_Action_bytes);
 		TypeTraits<System.Action<UnityEngine.AssetBundle>>.Init(factory.Check_System_Action_UnityEngine_AssetBundle);
+		TypeTraits<System.Action<UnityEngine.AssetBundle[]>>.Init(factory.Check_System_Action_UnityEngine_AssetBundles);
 		TypeTraits<System.Action<UnityEngine.Object>>.Init(factory.Check_System_Action_UnityEngine_Object);
 		TypeTraits<System.Action<UnityEngine.Sprite>>.Init(factory.Check_System_Action_UnityEngine_Sprite);
 		TypeTraits<System.Action<UnityEngine.GameObject>>.Init(factory.Check_System_Action_UnityEngine_GameObject);
@@ -232,6 +235,7 @@ public class DelegateFactory
 		StackTraits<System.Action<string>>.Push = factory.Push_System_Action_string;
 		StackTraits<System.Action<byte[]>>.Push = factory.Push_System_Action_bytes;
 		StackTraits<System.Action<UnityEngine.AssetBundle>>.Push = factory.Push_System_Action_UnityEngine_AssetBundle;
+		StackTraits<System.Action<UnityEngine.AssetBundle[]>>.Push = factory.Push_System_Action_UnityEngine_AssetBundles;
 		StackTraits<System.Action<UnityEngine.Object>>.Push = factory.Push_System_Action_UnityEngine_Object;
 		StackTraits<System.Action<UnityEngine.Sprite>>.Push = factory.Push_System_Action_UnityEngine_Sprite;
 		StackTraits<System.Action<UnityEngine.GameObject>>.Push = factory.Push_System_Action_UnityEngine_GameObject;
@@ -1032,6 +1036,63 @@ public class DelegateFactory
 	}
 
 	void Push_System_Action_UnityEngine_AssetBundle(IntPtr L, System.Action<UnityEngine.AssetBundle> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Action_UnityEngine_AssetBundles_Event : LuaDelegate
+	{
+		public System_Action_UnityEngine_AssetBundles_Event(LuaFunction func) : base(func) { }
+		public System_Action_UnityEngine_AssetBundles_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(UnityEngine.AssetBundle[] param0)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(UnityEngine.AssetBundle[] param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public System.Action<UnityEngine.AssetBundle[]> System_Action_UnityEngine_AssetBundles(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<UnityEngine.AssetBundle[]> fn = delegate(UnityEngine.AssetBundle[] param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Action_UnityEngine_AssetBundles_Event target = new System_Action_UnityEngine_AssetBundles_Event(func);
+			System.Action<UnityEngine.AssetBundle[]> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Action_UnityEngine_AssetBundles_Event target = new System_Action_UnityEngine_AssetBundles_Event(func, self);
+			System.Action<UnityEngine.AssetBundle[]> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Action_UnityEngine_AssetBundles(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<UnityEngine.AssetBundle[]>), L, pos);
+	}
+
+	void Push_System_Action_UnityEngine_AssetBundles(IntPtr L, System.Action<UnityEngine.AssetBundle[]> o)
 	{
 		ToLua.Push(L, o);
 	}

@@ -208,6 +208,70 @@ end
 function UI:loadAsset()
     print("预加载资源")
 
+    --通过虚假进度条加载
+    local t = 1 --预计需要时间
+    self:showBarNode()
+    self:setBarDesc("加载资源。。。")
+    local num = 0
+    local updateCb = nil
+    updateCb = function()
+        num = num + UE.Time.deltaTime / t
+        self:setBarVal(num)
+        if num > 1 then
+        -- 进度条结束
+        -- self:hideBarNode()
+        -- self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
+
+        -- self:allOver()
+        end
+    end
+    self:broadcast_on(BROADCAST_CODE.MONO_UPDATE, updateCb)
+
+    --预加载资源
+    ActionList:new():on(
+        function(continue)
+            -- 加载所有AB包
+            resUtil:LoadAllAssetBundleAsyn(
+                System.Action_UnityEngine_AssetBundles(
+                    function(bundles)
+                        print("异步加载所有AB包完毕>>>", bundles.Length)
+                        continue()
+                    end
+                )
+            )
+        end
+    ):on(
+        function(continue)
+            RES_INFO.preloadAllRes(
+                function(ress)
+                    print("异步预加载所有资源>>>", #ress)
+                    print("同步加载", RES_INFO.load(RES_CODE.AREA_ITEM_STATE_RED))
+                    RES_INFO.loadAsyn(
+                        RES_CODE.AREA_ITEM_STATE_RED,
+                        function(res)
+                            print("异步加载", res)
+                        end
+                    )
+                    continue()
+                end
+            )
+        end
+    ):on(
+        function(continue)
+            -- 卸载所有AB包
+            resUtil:UnLoadAllAssetBundle()
+            continue()
+        end
+    ):on(
+        function()
+            --进入下一个场景
+            self:hideBarNode()
+            self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
+
+            self:allOver()
+        end
+    ):show()
+
     --需要预加载的AB包名
     -- local abs = {"card1"}
     -- for index, ab in ipairs(abs) do
@@ -234,24 +298,6 @@ function UI:loadAsset()
     --         end
     --     )
     -- end
-
-    --通过虚假进度条加载
-    self:showBarNode()
-    self:setBarDesc("加载资源。。。")
-    local num = 0
-    local t = 1 --预计需要时间
-    local updateCb = nil
-    updateCb = function()
-        num = num + UE.Time.deltaTime / t
-        self:setBarVal(num)
-        if num > 1 then
-            self:hideBarNode()
-            self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
-
-            self:allOver()
-        end
-    end
-    self:broadcast_on(BROADCAST_CODE.MONO_UPDATE, updateCb)
 end
 
 function UI:allOver()

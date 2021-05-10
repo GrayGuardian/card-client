@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3376617713
+CRC: 3862811824
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 09a50cf912d47fbcea58ad87c5227e88
+    Hash: ea2c0cf89eb66b225f7fa563e1a5e1dc
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ef1af8ad14c77a6c79f14d6e0da2f9a
@@ -55,8 +55,8 @@ Assets:
 - Assets/Resources/AB/prefab1/login/selplayer_item.prefab
 - Assets/Resources/AB/prefab1/skill_gem/skill_link_item.prefab
 Dependencies:
-- F:/Git/card/card-client/AssetBundles/p1
-- F:/Git/card/card-client/AssetBundles/p2
-- F:/Git/card/card-client/AssetBundles/p10
-- F:/Git/card/card-client/AssetBundles/gem
-- F:/Git/card/card-client/AssetBundles/p12
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p12
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p2
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p1
+- D:/Demo/Unity/card-game/card-client/AssetBundles/p10
+- D:/Demo/Unity/card-game/card-client/AssetBundles/gem

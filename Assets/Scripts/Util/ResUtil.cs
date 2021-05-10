@@ -12,6 +12,16 @@ public class ResUtil
 {
     private Dictionary<string, byte[]> _abByteMap = new Dictionary<string, byte[]>();
     private Dictionary<AssetBundle, List<ResObject>> _abMap = new Dictionary<AssetBundle, List<ResObject>>();
+    public string[] getABKeys()
+    {
+        FileInfo[] infos = Util.File.GetChildFiles(Path.Combine(GameConst.RES_LOCAL_ROOT, "./AssetBundles"));
+        string[] keys = new string[infos.Length];
+        for (int i = 0; i < infos.Length; i++)
+        {
+            keys[i] = infos[i].Name;
+        }
+        return keys;
+    }
     public AssetBundle GetBundleByName(string name)
     {
         foreach (var bundle in _abMap.Keys)
@@ -192,10 +202,10 @@ public class ResUtil
     }
     System.Collections.IEnumerator _loadAssetBundleAsyn(string key, Action<AssetBundle> cb = null)
     {
-        if (GameConst.PRO_ENV != ENV_TYPE.MASTER)
-        {
-            yield break;
-        }
+        // if (GameConst.PRO_ENV != ENV_TYPE.MASTER)
+        // {
+        //     yield break;
+        // }
         AssetBundle bundle = GetBundleByName(key);
         if (bundle != null)
         {
@@ -232,11 +242,33 @@ public class ResUtil
 
         if (cb != null) cb(bundle);
     }
-
+    public AssetBundle[] LoadAllAssetBundle()
+    {
+        List<AssetBundle> list = new List<AssetBundle>();
+        string[] keys = getABKeys();
+        foreach (var key in keys)
+        {
+            list.Add(LoadAssetBundle(key));
+        }
+        return list.ToArray();
+    }
+    public void LoadAllAssetBundleAsyn(Action<AssetBundle[]> cb)
+    {
+        List<AssetBundle> list = new List<AssetBundle>();
+        string[] keys = getABKeys();
+        foreach (var key in keys)
+        {
+            LoadAssetBundleAsyn(key, (b) =>
+            {
+                list.Add(b);
+                if (list.Count >= keys.Length)
+                    cb(list.ToArray());
+            });
+        }
+    }
     public void UnLoadAssetBundle(string key, bool unloadAllLoadedObjects = false)
     {
-
-        if (GameConst.PRO_ENV != ENV_TYPE.MASTER) return;
+        // if (GameConst.PRO_ENV != ENV_TYPE.MASTER) return;
         AssetBundle bundle = GetBundleByName(key);
         if (bundle == null) return;
         if (!unloadAllLoadedObjects && _abMap[bundle].Count > 0)
@@ -246,6 +278,17 @@ public class ResUtil
         _abMap.Remove(bundle);
         UnityEngine.Debug.Log("卸载AB包：" + key);
         bundle.Unload(unloadAllLoadedObjects);
+    }
+    public void UnLoadAllAssetBundle(bool unloadAllLoadedObjects = false)
+    {
+        string[] keys = getABKeys();
+        foreach (var key in keys)
+        {
+            LoadAssetBundleAsyn(key, (b) =>
+            {
+                UnLoadAssetBundle(key, unloadAllLoadedObjects);
+            });
+        }
     }
     public UnityEngine.Object Load(Type type, string key, string resName, bool loadIsClose = false)
     {
@@ -348,7 +391,7 @@ public class ResUtil
     System.Collections.IEnumerator _loadAsyn(Type type, string key, string resName, Action<UnityEngine.Object> cb = null, bool loadIsClose = false)
     {
         UnityEngine.Object res = default(UnityEngine.Object);
-        if (GameConst.PRO_ENV == ENV_TYPE.MASTER)
+        if (GameConst.PRO_ENV == ENV_TYPE.DEV)
         {
             AssetBundle bundle = GetBundleByName(key);
             if (bundle == null)

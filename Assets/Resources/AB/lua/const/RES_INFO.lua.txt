@@ -1,0 +1,126 @@
+local RES_INFO = {}
+local code = 0
+local genCode = function()
+    code = code + 1
+    return code
+end
+-- 资源Code
+local RES_CODE = {
+    AREA_ITEM_STATE_RED = genCode(),
+    AREA_ITEM_STATE_GRAY = genCode()
+}
+-- 资源配置 type-类型(0-sprite 1-gameObject 2-animator) ab-ab包名 resName-资源名 preload-是否预加载
+local RES_CONFIG = {
+    [RES_CODE.AREA_ITEM_STATE_RED] = {type = 0, ab = "p1", resName = "icon_red_point", preload = true},
+    [RES_CODE.AREA_ITEM_STATE_GRAY] = {type = 0, ab = "p1", resName = "icon_gray_point", preload = true}
+}
+-- 预加载资源
+local RES_MAP = {}
+RES_INFO.getConfig = function(code)
+    return RES_CONFIG[code]
+end
+-- 异步预加载
+RES_INFO.preloadRes = function(code, cb)
+    local config = RES_INFO.getConfig(code)
+    if (config == nil) then
+        return nil
+    end
+    print("预加载资源", code, utils.serialize(config))
+    local onTrigger = function(res)
+        RES_MAP[code] = res
+        if (cb ~= nil) then
+            cb(res)
+        end
+    end
+    if (config.type == 0) then
+        resUtil:LoadSpriteAsyn(config.ab, config.resName, System.Action_UnityEngine_Sprite(onTrigger))
+    elseif (config.type == 1) then
+        resUtil:LoadGameObjectAsyn(config.ab, config.resName, System.Action_UnityEngine_GameObject(onTrigger))
+    elseif (config.type == 2) then
+        resUtil:LoadAnimatorAsyn(
+            config.ab,
+            config.resName,
+            System.Action_UnityEngine_RuntimeAnimatorController(onTrigger)
+        )
+    end
+end
+-- 异步预加载所有
+RES_INFO.preloadAllRes = function(cb)
+    RES_MAP = {}
+    local ress = {}
+    local codes = {}
+    for code, config in pairs(RES_CONFIG) do
+        if (config.preload) then
+            table.insert(codes, code)
+        end
+    end
+    for index, code in ipairs(codes) do
+        RES_INFO.preloadRes(
+            code,
+            function(res)
+                table.insert(ress, res)
+                if (#ress >= #codes) then
+                    if (cb ~= nil) then
+                        cb(ress)
+                    end
+                end
+            end
+        )
+    end
+end
+RES_INFO.load = function(code)
+    local res = RES_MAP[code]
+    if (res ~= nil) then
+        print("加载资源", "预加载资源", code)
+        -- 存在预加载资源则直接返回
+        return res
+    end
+    -- 不存在预加载资源则从AB包加载
+    local config = RES_INFO.getConfig(code)
+    if (config == nil) then
+        return nil
+    end
+    print("加载资源", "AB包加载", code)
+    if (config.type == 0) then
+        res = resUtil:LoadSprite(config.ab, config.resName)
+    elseif (config.type == 1) then
+        res = resUtil:LoadGameObject(config.ab, config.resName)
+    elseif (config.type == 2) then
+        res = resUtil:LoadAnimator(config.ab, config.resName)
+    end
+    return res
+end
+RES_INFO.loadAsyn = function(code, cb)
+    local onTrigger = function(res)
+        if (cb ~= nil) then
+            cb(res)
+        end
+    end
+
+    local res = RES_MAP[code]
+    if (res ~= nil) then
+        print("加载资源", "预加载资源", code)
+        -- 存在预加载资源则直接返回
+        onTrigger(res)
+        return true
+    end
+    -- 不存在预加载资源则从AB包加载
+    local config = RES_INFO.getConfig(code)
+    if (config == nil) then
+        return false
+    end
+    print("加载资源", "AB包加载", code)
+    if (config.type == 0) then
+        resUtil:LoadSpriteAsyn(config.ab, config.resName, System.Action_UnityEngine_Sprite(onTrigger))
+    elseif (config.type == 1) then
+        resUtil:LoadGameObjectAsyn(config.ab, config.resName, System.Action_UnityEngine_GameObject(onTrigger))
+    elseif (config.type == 2) then
+        resUtil:LoadAnimatorAsyn(
+            config.ab,
+            config.resName,
+            System.Action_UnityEngine_RuntimeAnimatorController(onTrigger)
+        )
+    end
+    return true
+end
+return {RES_CODE = RES_CODE, RES_INFO = RES_INFO}

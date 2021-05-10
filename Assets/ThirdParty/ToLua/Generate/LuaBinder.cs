@@ -195,6 +195,7 @@ public static class LuaBinder
 		L.RegFunction("Action_string", System_Action_string);
 		L.RegFunction("Action_bytes", System_Action_bytes);
 		L.RegFunction("Action_UnityEngine_AssetBundle", System_Action_UnityEngine_AssetBundle);
+		L.RegFunction("Action_UnityEngine_AssetBundles", System_Action_UnityEngine_AssetBundles);
 		L.RegFunction("Action_UnityEngine_Object", System_Action_UnityEngine_Object);
 		L.RegFunction("Action_UnityEngine_Sprite", System_Action_UnityEngine_Sprite);
 		L.RegFunction("Action_UnityEngine_GameObject", System_Action_UnityEngine_GameObject);
@@ -1623,6 +1624,33 @@ public static class LuaBinder
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
 				Delegate arg1 = DelegateTraits<System.Action<UnityEngine.AssetBundle>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int System_Action_UnityEngine_AssetBundles(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<System.Action<UnityEngine.AssetBundle[]>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<System.Action<UnityEngine.AssetBundle[]>>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

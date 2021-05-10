@@ -7,6 +7,7 @@ public class ResUtilWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(ResUtil), typeof(System.Object));
+		L.RegFunction("getABKeys", getABKeys);
 		L.RegFunction("GetBundleByName", GetBundleByName);
 		L.RegFunction("GetBundleByRes", GetBundleByRes);
 		L.RegFunction("GetBundlesByRes", GetBundlesByRes);
@@ -19,7 +20,10 @@ public class ResUtilWrap
 		L.RegFunction("DecryptAssetBundleAsyn", DecryptAssetBundleAsyn);
 		L.RegFunction("LoadAssetBundle", LoadAssetBundle);
 		L.RegFunction("LoadAssetBundleAsyn", LoadAssetBundleAsyn);
+		L.RegFunction("LoadAllAssetBundle", LoadAllAssetBundle);
+		L.RegFunction("LoadAllAssetBundleAsyn", LoadAllAssetBundleAsyn);
 		L.RegFunction("UnLoadAssetBundle", UnLoadAssetBundle);
+		L.RegFunction("UnLoadAllAssetBundle", UnLoadAllAssetBundle);
 		L.RegFunction("Load", Load);
 		L.RegFunction("LoadAsyn", LoadAsyn);
 		L.RegFunction("UnLoad", UnLoad);
@@ -55,6 +59,23 @@ public class ResUtilWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: ResUtil.New");
 			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int getABKeys(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+			string[] o = obj.getABKeys();
+			ToLua.Push(L, o);
+			return 1;
 		}
 		catch (Exception e)
 		{
@@ -312,6 +333,40 @@ public class ResUtilWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadAllAssetBundle(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+			UnityEngine.AssetBundle[] o = obj.LoadAllAssetBundle();
+			ToLua.Push(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadAllAssetBundleAsyn(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+			System.Action<UnityEngine.AssetBundle[]> arg0 = (System.Action<UnityEngine.AssetBundle[]>)ToLua.CheckDelegate<System.Action<UnityEngine.AssetBundle[]>>(L, 2);
+			obj.LoadAllAssetBundleAsyn(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int UnLoadAssetBundle(IntPtr L)
 	{
 		try
@@ -336,6 +391,37 @@ public class ResUtilWrap
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: ResUtil.UnLoadAssetBundle");
+			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadAllAssetBundle(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 1)
+			{
+				ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+				obj.UnLoadAllAssetBundle();
+				return 0;
+			}
+			else if (count == 2)
+			{
+				ResUtil obj = (ResUtil)ToLua.CheckObject<ResUtil>(L, 1);
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.UnLoadAllAssetBundle(arg0);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: ResUtil.UnLoadAllAssetBundle");
 			}
 		}
 		catch (Exception e)
