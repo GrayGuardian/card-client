@@ -204,9 +204,19 @@ end
 RES_CODE.getUIPrefab = function(name)
     return RES_CODE[string.upper(name)]
 end
------------------------------------------- 加载函数 ------------------------------------------
--- 预加载资源
+RES_CODE.Count = 0
+RES_CODE.Preload_Count = 0
+for key, config in pairs(RES_CONFIG) do
+    RES_CODE.Count = RES_CODE.Count + 1
+    if (config.preload) then
+        RES_CODE.Preload_Count = RES_CODE.Preload_Count + 1
+    end
+end
+------------------------------------------ RES_INFO ------------------------------------------
 local RES_MAP = {}
+RES_INFO.getResCount = function()
+    return table.len(RES_MAP)
+end
 RES_INFO.getConfig = function(code)
     return RES_CONFIG[code]
 end
@@ -314,4 +324,4 @@ RES_INFO.loadAsyn = function(code, cb)
     end
 end
 
-return {RES_CODE = RES_CODE, RES_INFO = RES_INFO, RES_MAP = RES_MAP}
+return {RES_CODE = RES_CODE, RES_INFO = RES_INFO}

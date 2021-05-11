@@ -208,22 +208,18 @@ end
 function UI:loadAsset()
     print("预加载资源")
 
-    --通过虚假进度条加载
-    local t = 1 --预计需要时间
+    --通过进度条加载
     self:showBarNode()
     self:setBarDesc("加载资源。。。")
-    local num = 0
     local updateCb = nil
     updateCb = function()
-        num = num + UE.Time.deltaTime / t
-        self:setBarVal(num)
-        if num > 1 then
-        -- 进度条结束
-        -- self:hideBarNode()
-        -- self:broadcast_out(BROADCAST_CODE.MONO_UPDATE, updateCb)
+        -- 预加载资源
+        local start = 0
+        local target = 1
+        local value = RES_INFO.getResCount() / RES_CODE.Preload_Count
+        local progress = start + (target - start) * value
 
-        -- self:allOver()
-        end
+        self:setBarVal(progress)
     end
     self:broadcast_on(BROADCAST_CODE.MONO_UPDATE, updateCb)
 
@@ -246,16 +242,13 @@ function UI:loadAsset()
         end
     ):on(
         function(continue)
+            if (RES_CODE.Preload_Count == 0) then
+                continue()
+                return
+            end
             RES_INFO.preloadAllRes(
                 function(ress)
                     print("异步预加载所有资源>>>", #ress)
-                    print("同步加载", RES_INFO.load(RES_CODE.AREA_ITEM_STATE_RED))
-                    RES_INFO.loadAsyn(
-                        RES_CODE.AREA_ITEM_STATE_RED,
-                        function(res)
-                            print("异步加载", res)
-                        end
-                    )
                     continue()
                 end
             )
@@ -279,19 +272,6 @@ function UI:loadAsset()
             self:allOver()
         end
     ):show()
-
-    --需要预加载的AB包名
-    -- local abs = {"card1"}
-    -- for index, ab in ipairs(abs) do
-    --     resUtil:LoadAssetBundleAsyn(
-    --         ab,
-    --         System.Action_UnityEngine_AssetBundle(
-    --             function(bundle)
-    --                 print("异步加载AB包完毕>>>", ab, bundle)
-    --             end
-    --         )
-    --     )
-    -- end
 
     --需要从AB包中加载的对象池
     -- local pools = {{key = "role", abKey = "player", resName = "player", config = {cnt = 10}}}

@@ -23,7 +23,6 @@ _G.genErrorMsg = ERROR_INFO.genErrorMsg
 local RES_INFO = require("RES_INFO")
 _G.RES_CODE = RES_INFO.RES_CODE
 _G.RES_INFO = RES_INFO.RES_INFO
-_G.RES_MAP = RES_INFO.RES_MAP
 
 _G.pb = require("pb_util"):new()
 _G.json = require("json_util"):new()
