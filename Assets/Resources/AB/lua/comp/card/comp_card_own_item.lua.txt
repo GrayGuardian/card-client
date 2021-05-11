@@ -93,7 +93,7 @@ function Comp:refresh()
         local node = GameObject.Instantiate(self:load(RES_CODE.SKILL_HOLE_ITEM)).transform
         node.parent = self.skillHolesLayout
         node.localPosition = {x = 0, y = 0, z = 0}
-        node.localScale = {x = 1.5, y = 1.5, z = 1.5}
+        node.localScale = {x = 2.3, y = 2.3, z = 2.3}
         local c = comp:addComponent(node, "skill_hole_item", {info = holeInfo})
         self.holeCompMap[holeInfo.idx] = c
         -- 技能宝石
