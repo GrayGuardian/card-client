@@ -1,0 +1,67 @@
+ManifestFileVersion: 0
+CRC: 856604045
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 667252fe1c668530e524abd7b9342614
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 42ac18d68e44b8c9405b04c81332a19e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AB/skillgem/red_0.png
+- Assets/Resources/AB/skillgem/red_3.prefab
+- Assets/Resources/AB/skillgem/red_4.prefab
+- Assets/Resources/AB/skillgem/colorful_0.png
+- Assets/Resources/AB/skillgem/blue_2.png
+- Assets/Resources/AB/skillgem/blue_3.png
+- Assets/Resources/AB/skillgem/red_1.prefab
+- Assets/Resources/AB/skillgem/blue_0.png
+- Assets/Resources/AB/skillgem/colorful_4.png
+- Assets/Resources/AB/skillgem/blue_4.prefab
+- Assets/Resources/AB/skillgem/green_0.png
+- Assets/Resources/AB/skillgem/colorful_2.png
+- Assets/Resources/AB/skillgem/colorful_0.prefab
+- Assets/Resources/AB/skillgem/colorful_1.prefab
+- Assets/Resources/AB/skillgem/blue_4.png
+- Assets/Resources/AB/skillgem/colorful_4.prefab
+- Assets/Resources/AB/skillgem/blue_1.prefab
+- Assets/Resources/AB/skillgem/green_3.prefab
+- Assets/Resources/AB/skillgem/blue_2.prefab
+- Assets/Resources/AB/skillgem/green_1.png
+- Assets/Resources/AB/skillgem/red_1.png
+- Assets/Resources/AB/skillgem/blue_1.png
+- Assets/Resources/AB/skillgem/green_2.png
+- Assets/Resources/AB/skillgem/green_4.prefab
+- Assets/Resources/AB/skillgem/red_2.png
+- Assets/Resources/AB/skillgem/red_2.prefab
+- Assets/Resources/AB/skillgem/colorful_3.png
+- Assets/Resources/AB/skillgem/green_4.png
+- Assets/Resources/AB/skillgem/green_1.prefab
+- Assets/Resources/AB/skillgem/red_4.png
+- Assets/Resources/AB/skillgem/red_3.png
+- Assets/Resources/AB/skillgem/blue_0.prefab
+- Assets/Resources/AB/skillgem/green_2.prefab
+- Assets/Resources/AB/skillgem/red_0.prefab
+- Assets/Resources/AB/skillgem/blue_3.prefab
+- Assets/Resources/AB/skillgem/colorful_2.prefab
+- Assets/Resources/AB/skillgem/colorful_1.png
+- Assets/Resources/AB/skillgem/colorful_3.prefab
+- Assets/Resources/AB/skillgem/green_3.png
+- Assets/Resources/AB/skillgem/green_0.prefab
+Dependencies: []

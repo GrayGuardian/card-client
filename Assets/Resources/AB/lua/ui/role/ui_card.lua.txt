@@ -1,9 +1,9 @@
-local base = require('ui_base')
-local UI = class('card', base)
+local base = require("ui_base")
+local UI = class("card", base)
 
 ----------------UI配置------------------
 function UI:GET_AB()
-    return 'ui'
+    return "ui"
 end
 function UI:GET_DEFAULT_OPTS()
     return {order = -10, blockInput = false, blackMask = 0}
@@ -12,14 +12,14 @@ end
 
 function UI:awake()
     self.cardAvatarCompMap = {}
-    self.cardAvatarItemLayout = self.uiComp.ScrollRect.cardAvatarsScrollView.transform:Find('Viewport'):Find('Content')
-    self.cardLayout = self.node:Find('cardLayout')
+    self.cardAvatarItemLayout = self.uiComp.ScrollRect.cardAvatarsScrollView.transform:Find("Viewport"):Find("Content")
+    self.cardLayout = self.node:Find("cardLayout")
 
-    self.equipsRightLayout = self.node:Find('equipsRightLayout')
-    self.equipsLeftLayout = self.node:Find('equipsLeftLayout')
+    self.equipsRightLayout = self.node:Find("equipsRightLayout")
+    self.equipsLeftLayout = self.node:Find("equipsLeftLayout")
 
-    self.bagLayout = self.node:Find('bagLayout')
-    self.bagItemsLayout = self.uiComp.ScrollRect.bagContentScrollView.transform:Find('Viewport'):Find('Content')
+    self.bagLayout = self.node:Find("bagLayout")
+    self.bagItemsLayout = self.uiComp.ScrollRect.bagContentScrollView.transform:Find("Viewport"):Find("Content")
     self.bagItemsGroup = comp:getCSComponent(self.bagItemsLayout, UEUI.GridLayoutGroup)
 
     self.bagItemCompMap = {}
@@ -43,7 +43,7 @@ function UI:refreshLayout()
         y = rectTransform.sizeDelta.y
     }
     -- 按钮适配
-    node = self.node:Find('cardBtnLayout')
+    node = self.node:Find("cardBtnLayout")
     rectTransform = comp:getCSComponent(node, UE.RectTransform)
 
     group = self.uiComp.GridLayoutGroup.cardBtnLayout
@@ -73,11 +73,11 @@ function UI:refreshLayout()
 end
 
 function UI:onDestroy()
-    resUtil:UnLoadAssetBundle('card1')
+    resUtil:UnLoadAssetBundle("card1")
 end
 
 function UI:refreshView(viewParam)
-    print('更新界面>>>', utils.serialize(viewParam))
+    print("更新界面>>>", utils.serialize(viewParam))
 
     -- 更新卡牌头像框
     self.cardAvatarCompMap = {}
@@ -86,14 +86,14 @@ function UI:refreshView(viewParam)
         GameObject.Destroy(self.cardAvatarItemLayout:GetChild(i).gameObject)
     end
     for index, cardInfo in pairs(cardList) do
-        local node = GameObject.Instantiate(self:load_gameObject('prefab1', 'card_avatar_item')).transform
+        local node = GameObject.Instantiate(self:load(RES_CODE.CARD_AVATAR_ITEM)).transform
         node.parent = self.cardAvatarItemLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1, y = 1, z = 1}
         local c =
             comp:addComponent(
             node,
-            'card_avatar_item',
+            "card_avatar_item",
             {
                 info = cardInfo,
                 onClick = function(o)
@@ -104,7 +104,7 @@ function UI:refreshView(viewParam)
         self.cardAvatarCompMap[cardInfo:get_cid()] = c
     end
 
-    -- -- 更新卡牌内容
+    -- 更新卡牌内容
     if (self.cardInfo ~= nil) then
         self.cardAvatarCompMap[self.cardInfo:get_cid()]:unselect()
     end
@@ -115,20 +115,21 @@ function UI:refreshView(viewParam)
     end
     self.cardAvatarCompMap[self.cardInfo:get_cid()]:select()
 
-    -- -- 更新卡牌
+    -- 更新卡牌
     for i = 0, self.cardLayout.childCount - 1 do
         GameObject.Destroy(self.cardLayout:GetChild(i).gameObject)
     end
-    local node = GameObject.Instantiate(self:load_gameObject('prefab1', 'card_own_item')).transform
+
+    local node = GameObject.Instantiate(self:load(RES_CODE.CARD_OWN_ITEM)).transform
     node.parent = self.cardLayout
     node.localPosition = {x = 0, y = 0, z = 0}
     node.localScale = {x = 1.0, y = 1.0, z = 1.0}
-    comp:addComponent(node, 'card_own_item', {info = self.cardInfo})
+    comp:addComponent(node, "card_own_item", {info = self.cardInfo})
 end
 -- 点击卡牌头像框
 function UI:onCardAvatarClick(o)
     local info = o.info
-    print('点击头像框>>>>', utils.serialize(info.baseInfo))
+    print("点击头像框>>>>", utils.serialize(info.baseInfo))
     self:refreshView({cid = o.info:get_cid()})
 end
 return UI

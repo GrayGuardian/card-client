@@ -16,8 +16,8 @@ function UI:awake()
     self:refresh()
 end
 function UI:refresh()
-    for i = 1, 21 do
-        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "avatar1_item")).transform
+    for i = 1, GAME_CONFIG.AVATAR_SUM do
+        local node = GameObject.Instantiate(self:load(RES_CODE.AVATAR1_ITEM)).transform
         node.parent = self.contentNode
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 2, y = 2, z = 2}

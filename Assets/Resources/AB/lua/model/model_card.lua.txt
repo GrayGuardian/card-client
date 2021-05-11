@@ -8,7 +8,6 @@ function Model:onLoad()
 end
 function Model:loadDataed()
     self.tpl = tpl.template_card[self:get_tid()]
-    print(tpl.template_card, self:get_tid())
 end
 -- 获取强化等级
 function Model:getEnchLv()

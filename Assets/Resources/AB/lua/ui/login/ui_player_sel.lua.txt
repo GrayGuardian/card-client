@@ -41,7 +41,7 @@ function UI:refresh()
     end
 end
 function UI:addSelPlayerItem(info)
-    local node = GameObject.Instantiate(self:load_gameObject("prefab1", "selplayer_item")).transform
+    local node = GameObject.Instantiate(self:load(RES_CODE.SELPLAYER_ITEM)).transform
     node.parent = self.contentNode
     node.localPosition = {x = 0, y = 0, z = 0}
     node.localScale = {x = 1, y = 1, z = 1}

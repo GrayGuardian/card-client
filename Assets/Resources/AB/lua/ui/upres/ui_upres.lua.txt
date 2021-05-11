@@ -231,6 +231,10 @@ function UI:loadAsset()
     ActionList:new():on(
         function(continue)
             -- 加载所有AB包
+            if GameConst.PRO_ENV == ENV_TYPE.DEV then
+                continue()
+                return
+            end
             resUtil:LoadAllAssetBundleAsyn(
                 System.Action_UnityEngine_AssetBundles(
                     function(bundles)
@@ -259,6 +263,10 @@ function UI:loadAsset()
     ):on(
         function(continue)
             -- 卸载所有AB包
+            if GameConst.PRO_ENV == ENV_TYPE.DEV then
+                continue()
+                return
+            end
             resUtil:UnLoadAllAssetBundle()
             continue()
         end

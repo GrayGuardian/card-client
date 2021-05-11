@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3862811824
+CRC: 4120609725
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ea2c0cf89eb66b225f7fa563e1a5e1dc
+    Hash: c815711d65848c2643146db34b69bcb4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ef1af8ad14c77a6c79f14d6e0da2f9a
@@ -59,4 +59,4 @@ Dependencies:
 - D:/Demo/Unity/card-game/card-client/AssetBundles/p2
 - D:/Demo/Unity/card-game/card-client/AssetBundles/p1
 - D:/Demo/Unity/card-game/card-client/AssetBundles/p10
-- D:/Demo/Unity/card-game/card-client/AssetBundles/gem
+- D:/Demo/Unity/card-game/card-client/AssetBundles/skillgem

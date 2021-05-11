@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4081784353
+CRC: 1792205771
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: efb495f6140ea7d8ab6338f314d0d4b0
+    Hash: 012000cbdfb47968c37e4afb56a6ab8d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -105,6 +105,7 @@ Assets:
 - Assets/Resources/AB/lua/base/tolua/protobuf/decoder.lua.txt
 - Assets/Resources/AB/lua/comp/login/comp_area_item.lua.txt
 - Assets/Resources/AB/lua/scene/scene_base.lua.txt
+- Assets/Resources/AB/lua/const/RES_INFO.lua.txt
 - Assets/Resources/AB/lua/base/tolua/list.lua.txt
 - Assets/Resources/AB/lua/base/tolua/typeof.lua.txt
 - Assets/Resources/AB/lua/base/tolua/System/Injection/LuaInjectionStation.lua.txt

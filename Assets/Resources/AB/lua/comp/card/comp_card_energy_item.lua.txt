@@ -11,7 +11,7 @@ function Comp:refresh()
     else
         self.uiComp.Image.iconImage.gameObject:SetActive(true)
         self.uiComp.Image.iconImage.sprite =
-            self:load_sprite("p10", string.format("icon_energy_%s", self.state == 1 and "blue" or "red"))
+            self:load(self.state == 1 and RES_CODE.ICON_ENERGY_BLUE or RES_CODE.ICON_ENERGY_RED)
     end
 end
 return Comp

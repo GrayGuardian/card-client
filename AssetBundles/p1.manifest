@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2899670085
+CRC: 2016715814
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3f35532658ec86a97e14288dee53011b
+    Hash: da8ebb7887a9ce22618e6c1a23073684
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -47,8 +47,8 @@ Assets:
 - Assets/Resources/AB/p1/icon_back1.png
 - Assets/Resources/AB/p1/bg_item2.png
 - Assets/Resources/AB/p1/bar3_val1.png
-- Assets/Resources/AB/p1/bg_btn1.png
-- Assets/Resources/AB/p1/bg_btn2.png
+- Assets/Resources/AB/p1/btn1.png
+- Assets/Resources/AB/p1/btn2.png
 - Assets/Resources/AB/p1/bg_avatar2.png
 - Assets/Resources/AB/p1/bg_item1.png
 - Assets/Resources/AB/p1/bg_card_avatar.png

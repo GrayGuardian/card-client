@@ -40,7 +40,7 @@ function UI:refreshLayout()
     }
 end
 function UI:refresh()
-    self.uiComp.Image.avatarIconImage.sprite = self:load_sprite("avatar", player:get_avatarid())
+    self.uiComp.Image.avatarIconImage.sprite = self:load(RES_CODE.getAvatarIcon(player:get_avatarid()))
     self.uiComp.Text.nameText.text = player:get_name()
 
     self:refreshVipItem()

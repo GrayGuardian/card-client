@@ -9,7 +9,8 @@ function Comp:onLoad()
 end
 function Comp:refresh()
     -- 背景图
-    self.uiComp.Image.bgImage.sprite = self:load_sprite("p12", string.format("bg_%s0", self.info.color))
+
+    self.uiComp.Image.bgImage.sprite = self:load(RES_CODE.getColorBg(self.info.color))
 
     self:refreshSkillGem()
 end
@@ -24,10 +25,7 @@ function Comp:refreshSkillGem(skillGemInfo)
         self.uiComp.Image.maskImage.gameObject:SetActive(true)
         local node =
             GameObject.Instantiate(
-            self:load_gameObject(
-                "gem",
-                string.format("skill_gem_%s%s", self.skillGemInfo:get_color(), self.skillGemInfo.tpl.pic_icon_type)
-            )
+            self:load(RES_CODE.getSkillGemPrefab(self.skillGemInfo:get_color(), self.skillGemInfo.tpl.pic_icon_type))
         ).transform
         node.parent = self.skillGemLayout
         node.localPosition = {x = 0, y = 0, z = 0}

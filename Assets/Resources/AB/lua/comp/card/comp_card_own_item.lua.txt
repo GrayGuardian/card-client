@@ -15,7 +15,7 @@ function Comp:onLoad()
     self.starCompMap = {}
     self.energyCompMap = {}
     for i = 1, 9 do
-        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_star_item")).transform
+        local node = GameObject.Instantiate(self:load(RES_CODE.CARD_STAR_ITEM)).transform
         node.parent = self.starsLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
@@ -23,7 +23,7 @@ function Comp:onLoad()
         self.starCompMap[i] = c
     end
     for i = 1, 5 do
-        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_energy_item")).transform
+        local node = GameObject.Instantiate(self:load(RES_CODE.CARD_ENERGY_ITEM)).transform
         node.parent = self.energysLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}
@@ -35,29 +35,29 @@ function Comp:onLoad()
 end
 function Comp:refresh()
     -- 背景
-    self.uiComp.Image.bg0Image.sprite = self:load_sprite("p12", string.format("bg_%s0", self.tpl.pic_bg))
-    self.uiComp.Image.bg1Image.sprite = self:load_sprite("p12", string.format("bg_%s1", self.tpl.pic_bg))
+    self.uiComp.Image.bg0Image.sprite = self:load(RES_CODE.getColorBg(self.tpl.pic_bg))
+    self.uiComp.Image.bg1Image.sprite = self:load(RES_CODE.getCardIconColorBg(self.tpl.pic_bg))
     -- 卡牌图
     for i = 0, self.roleLayout.childCount - 1 do
         GameObject.Destroy(self.roleLayout:GetChild(i).gameObject)
     end
-    local node = GameObject.Instantiate(self:load_gameObject(self.tpl.pic_ab, self.info:get_tid())).transform
+    local node = GameObject.Instantiate(self:load(RES_CODE.getCardPrefab(self.info:get_tid()))).transform
     node.parent = self.roleLayout
     node.localPosition = {x = 0, y = 0, z = 0}
     node.localScale = {x = 1.0, y = 1.0, z = 1.0}
     -- 框
-    self.uiComp.Image.bgCard0Image.sprite = self:load_sprite("p10", string.format("bg_card_%s_0", self.tpl.rank))
-    self.uiComp.Image.bgCard1Image.sprite = self:load_sprite("p10", string.format("bg_card_%s_1", self.tpl.rank))
-    self.uiComp.Image.bgCard2Image.sprite = self:load_sprite("p10", string.format("bg_card_%s_2", self.tpl.rank))
+    local cardBgResCodes = RES_CODE.getCardBgs(self.tpl.rank)
+    self.uiComp.Image.bgCard0Image.sprite = self:load(cardBgResCodes[1])
+    self.uiComp.Image.bgCard1Image.sprite = self:load(cardBgResCodes[2])
+    self.uiComp.Image.bgCard2Image.sprite = self:load(cardBgResCodes[3])
     if (self.tpl.rank == 0) then
         self.uiComp.Image.bgCard3Image.gameObject:SetActive(false)
     else
         self.uiComp.Image.bgCard3Image.gameObject:SetActive(true)
-        self.uiComp.Image.bgCard3Image.sprite = self:load_sprite("p10", string.format("bg_card_%s_3", self.tpl.rank))
+        self.uiComp.Image.bgCard3Image.sprite = self:load(cardBgResCodes[4])
     end
     -- 属性
-    self.uiComp.Image.attributeIconImage.sprite =
-        self:load_sprite("p10", string.format("icon_attribute%s", self.tpl.attribute))
+    self.uiComp.Image.attributeIconImage.sprite = self:load(RES_CODE.getAttributeIcon(self.tpl.attribute))
     -- 强化等级
     for i, comp in pairs(self.starCompMap) do
         if (i <= self.info:getEnchLv()) then
@@ -90,7 +90,7 @@ function Comp:refresh()
     end
     for i, holeInfo in pairs(self.info:get_skillHoles()) do
         holeInfo.cid = self.info:get_cid()
-        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_hole_item")).transform
+        local node = GameObject.Instantiate(self:load(RES_CODE.SKILL_HOLE_ITEM)).transform
         node.parent = self.skillHolesLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.5, y = 1.5, z = 1.5}
@@ -107,7 +107,7 @@ function Comp:refresh()
         GameObject.Destroy(self.skillLinksLayout:GetChild(i).gameObject)
     end
     for i, linkInfo in pairs(self.info:get_skillLinks()) do
-        local node = GameObject.Instantiate(self:load_gameObject("prefab1", "skill_link_item")).transform
+        local node = GameObject.Instantiate(self:load(RES_CODE.SKILL_LINK_ITEM)).transform
         node.parent = self.skillLinksLayout
         node.localPosition = {x = 0, y = 0, z = 0}
         node.localScale = {x = 1.0, y = 1.0, z = 1.0}

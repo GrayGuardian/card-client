@@ -168,6 +168,42 @@ function SceneBase:load_animator_asyn(key, resName, cb, loadIsClose)
         loadIsClose
     )
 end
+-- 通过RES_INFO加载
+function SceneBase:load(code)
+    local config = RES_INFO.getConfig(code)
+    if (config == nil) then
+        return nil
+    end
+    if (config.preload) then
+        return RES_INFO.load(code)
+    else
+        if (config.type == 0) then
+            return self:load_sprite(config.ab, config.resName)
+        elseif (config.type == 1) then
+            return self:load_gameObject(config.ab, config.resName)
+        elseif (config.type == 2) then
+            return self:load_animator(config.ab, config.resName)
+        end
+    end
+end
+-- 通过RES_INFO异步加载
+function SceneBase:loadAsyn(code, cb)
+    local config = RES_INFO.getConfig(code)
+    if (config == nil) then
+        return
+    end
+    if (config.preload) then
+        RES_INFO.loadAsyn(code, cb)
+    else
+        if (config.type == 0) then
+            self:load_sprite_asyn(config.ab, config.resName, cb)
+        elseif (config.type == 1) then
+            self:load_gameObject_asyn(config.ab, config.resName, cb)
+        elseif (config.type == 2) then
+            self:load_animator_asyn(config.ab, config.resName, cb)
+        end
+    end
+end
 function SceneBase:unload(res)
     for k, prefab in pairs(self.abResMap) do
         if (prefab == res) then

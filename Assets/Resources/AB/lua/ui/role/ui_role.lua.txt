@@ -63,10 +63,10 @@ function UI:refreshView(viewParam, isForce)
     end
 end
 function UI:selectPageBtn(page)
-    comp:getCSComponent(self.pageBtnNodes[page + 1], UEUI.Image).sprite = self:load_sprite("p2", "bg_page_btn1_on")
+    comp:getCSComponent(self.pageBtnNodes[page + 1], UEUI.Image).sprite = self:load(RES_CODE.PAGE_BTN1_ON)
 end
 function UI:unselectPageBtn(page)
-    comp:getCSComponent(self.pageBtnNodes[page + 1], UEUI.Image).sprite = self:load_sprite("p2", "bg_page_btn1_off")
+    comp:getCSComponent(self.pageBtnNodes[page + 1], UEUI.Image).sprite = self:load(RES_CODE.PAGE_BTN1_OFF)
 end
 
 function UI:onPageBtnClick(o, order)

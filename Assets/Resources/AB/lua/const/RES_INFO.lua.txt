@@ -6,14 +6,205 @@ local genCode = function()
 end
 -- 资源Code
 local RES_CODE = {
+    ------------------------------------------ sprite ------------------------------------------
+    PAGE_BTN1_ON = genCode(),
+    PAGE_BTN1_OFF = genCode(),
+    -- 服务器状态图
     AREA_ITEM_STATE_RED = genCode(),
-    AREA_ITEM_STATE_GRAY = genCode()
+    AREA_ITEM_STATE_GRAY = genCode(),
+    -- 背景
+    BG_BLUE = genCode(),
+    BG_GREEN = genCode(),
+    BG_PURPLE = genCode(),
+    BG_RED = genCode(),
+    -- 卡牌图标背景
+    BG_CADE_ICON_BLUE = genCode(),
+    BG_CADE_ICON_GREEN = genCode(),
+    BG_CADE_ICON_PURPLE = genCode(),
+    BG_CADE_ICON_RED = genCode(),
+    -- 卡牌能量图标
+    ICON_ENERGY_BLUE = genCode(),
+    ICON_ENERGY_RED = genCode(),
+    -- 卡牌属性图标
+    ICON_ATTRIBUTE_0 = genCode(),
+    ICON_ATTRIBUTE_1 = genCode(),
+    ICON_ATTRIBUTE_2 = genCode(),
+    ------------------------------------------ prefab ------------------------------------------
+    AREA_ITEM = genCode(),
+    AVATAR1_ITEM = genCode(),
+    SELPLAYER_ITEM = genCode(),
+    CARD_AVATAR_ITEM = genCode(),
+    CARD_OWN_ITEM = genCode(),
+    CARD_STAR_ITEM = genCode(),
+    CARD_ENERGY_ITEM = genCode(),
+    SKILL_HOLE_ITEM = genCode(),
+    SKILL_LINK_ITEM = genCode(),
+    -- 技能宝石预制体
+    SKILL_GEM_BLUE_0 = genCode(),
+    SKILL_GEM_BLUE_1 = genCode(),
+    SKILL_GEM_BLUE_2 = genCode(),
+    SKILL_GEM_BLUE_3 = genCode(),
+    SKILL_GEM_BLUE_4 = genCode(),
+    SKILL_GEM_COLORFUL_0 = genCode(),
+    SKILL_GEM_COLORFUL_1 = genCode(),
+    SKILL_GEM_COLORFUL_2 = genCode(),
+    SKILL_GEM_COLORFUL_3 = genCode(),
+    SKILL_GEM_COLORFUL_4 = genCode(),
+    SKILL_GEM_GREEN_0 = genCode(),
+    SKILL_GEM_GREEN_1 = genCode(),
+    SKILL_GEM_GREEN_2 = genCode(),
+    SKILL_GEM_GREEN_3 = genCode(),
+    SKILL_GEM_GREEN_4 = genCode(),
+    SKILL_GEM_RED_0 = genCode(),
+    SKILL_GEM_RED_1 = genCode(),
+    SKILL_GEM_RED_2 = genCode(),
+    SKILL_GEM_RED_3 = genCode(),
+    SKILL_GEM_RED_4 = genCode(),
+    -- UI预制体
+    UI_CARD = genCode(),
+    UI_BG_LOGIN = genCode(),
+    UI_BG_MAIN = genCode()
 }
 -- 资源配置 type-类型(0-sprite 1-gameObject 2-animator) ab-ab包名 resName-资源名 preload-是否预加载
 local RES_CONFIG = {
+    ------------------------------------------ sprite ------------------------------------------
+    [RES_CODE.PAGE_BTN1_ON] = {type = 0, ab = "p2", resName = "btn_page1_on", preload = true},
+    [RES_CODE.PAGE_BTN1_OFF] = {type = 0, ab = "p2", resName = "btn_page1_off", preload = true},
+    -- 服务器状态图
     [RES_CODE.AREA_ITEM_STATE_RED] = {type = 0, ab = "p1", resName = "icon_red_point", preload = true},
-    [RES_CODE.AREA_ITEM_STATE_GRAY] = {type = 0, ab = "p1", resName = "icon_gray_point", preload = true}
+    [RES_CODE.AREA_ITEM_STATE_GRAY] = {type = 0, ab = "p1", resName = "icon_gray_point", preload = true},
+    -- 背景
+    [RES_CODE.BG_BLUE] = {type = 0, ab = "p12", resName = "bg_blue", preload = true},
+    [RES_CODE.BG_GREEN] = {type = 0, ab = "p12", resName = "bg_green", preload = true},
+    [RES_CODE.BG_PURPLE] = {type = 0, ab = "p12", resName = "bg_purple", preload = true},
+    [RES_CODE.BG_RED] = {type = 0, ab = "p12", resName = "bg_red", preload = true},
+    -- 卡牌图标背景
+    [RES_CODE.BG_CADE_ICON_BLUE] = {type = 0, ab = "p12", resName = "bg_card_icon_blue", preload = true},
+    [RES_CODE.BG_CADE_ICON_GREEN] = {type = 0, ab = "p12", resName = "bg_card_icon_green", preload = true},
+    [RES_CODE.BG_CADE_ICON_PURPLE] = {type = 0, ab = "p12", resName = "bg_card_icon_purple", preload = true},
+    [RES_CODE.BG_CADE_ICON_RED] = {type = 0, ab = "p12", resName = "bg_card_icon_red", preload = true},
+    -- 卡牌能量图标
+    [RES_CODE.ICON_ENERGY_BLUE] = {type = 0, ab = "p10", resName = "icon_energy_blue", preload = true},
+    [RES_CODE.ICON_ENERGY_RED] = {type = 0, ab = "p10", resName = "icon_energy_red", preload = true},
+    -- 卡牌属性图标
+    [RES_CODE.ICON_ATTRIBUTE_0] = {type = 0, ab = "p10", resName = "icon_attribute_0", preload = true},
+    [RES_CODE.ICON_ATTRIBUTE_1] = {type = 0, ab = "p10", resName = "icon_attribute_1", preload = true},
+    [RES_CODE.ICON_ATTRIBUTE_2] = {type = 0, ab = "p10", resName = "icon_attribute_2", preload = true},
+    ------------------------------------------ prefab ------------------------------------------
+    [RES_CODE.AREA_ITEM] = {type = 1, ab = "prefab1", resName = "area_item", preload = true},
+    [RES_CODE.AVATAR1_ITEM] = {type = 1, ab = "prefab1", resName = "avatar1_item", preload = true},
+    [RES_CODE.SELPLAYER_ITEM] = {type = 1, ab = "prefab1", resName = "selplayer_item", preload = true},
+    [RES_CODE.CARD_AVATAR_ITEM] = {type = 1, ab = "prefab1", resName = "card_avatar_item", preload = true},
+    [RES_CODE.CARD_OWN_ITEM] = {type = 1, ab = "prefab1", resName = "card_own_item", preload = true},
+    [RES_CODE.CARD_STAR_ITEM] = {type = 1, ab = "prefab1", resName = "card_star_item", preload = true},
+    [RES_CODE.CARD_ENERGY_ITEM] = {type = 1, ab = "prefab1", resName = "card_energy_item", preload = true},
+    [RES_CODE.SKILL_HOLE_ITEM] = {type = 1, ab = "prefab1", resName = "skill_hole_item", preload = true},
+    [RES_CODE.SKILL_LINK_ITEM] = {type = 1, ab = "prefab1", resName = "skill_link_item", preload = true},
+    -- 技能宝石预制体
+    [RES_CODE.SKILL_GEM_BLUE_0] = {type = 1, ab = "skillgem", resName = "blue_0", preload = true},
+    [RES_CODE.SKILL_GEM_BLUE_1] = {type = 1, ab = "skillgem", resName = "blue_1", preload = true},
+    [RES_CODE.SKILL_GEM_BLUE_2] = {type = 1, ab = "skillgem", resName = "blue_2", preload = true},
+    [RES_CODE.SKILL_GEM_BLUE_3] = {type = 1, ab = "skillgem", resName = "blue_3", preload = true},
+    [RES_CODE.SKILL_GEM_BLUE_4] = {type = 1, ab = "skillgem", resName = "blue_4", preload = true},
+    [RES_CODE.SKILL_GEM_COLORFUL_0] = {type = 1, ab = "skillgem", resName = "colorful_0", preload = true},
+    [RES_CODE.SKILL_GEM_COLORFUL_1] = {type = 1, ab = "skillgem", resName = "colorful_1", preload = true},
+    [RES_CODE.SKILL_GEM_COLORFUL_2] = {type = 1, ab = "skillgem", resName = "colorful_2", preload = true},
+    [RES_CODE.SKILL_GEM_COLORFUL_3] = {type = 1, ab = "skillgem", resName = "colorful_3", preload = true},
+    [RES_CODE.SKILL_GEM_COLORFUL_4] = {type = 1, ab = "skillgem", resName = "colorful_4", preload = true},
+    [RES_CODE.SKILL_GEM_GREEN_0] = {type = 1, ab = "skillgem", resName = "green_0", preload = true},
+    [RES_CODE.SKILL_GEM_GREEN_1] = {type = 1, ab = "skillgem", resName = "green_1", preload = true},
+    [RES_CODE.SKILL_GEM_GREEN_2] = {type = 1, ab = "skillgem", resName = "green_2", preload = true},
+    [RES_CODE.SKILL_GEM_GREEN_3] = {type = 1, ab = "skillgem", resName = "green_3", preload = true},
+    [RES_CODE.SKILL_GEM_GREEN_4] = {type = 1, ab = "skillgem", resName = "green_4", preload = true},
+    [RES_CODE.SKILL_GEM_RED_0] = {type = 1, ab = "skillgem", resName = "red_0", preload = true},
+    [RES_CODE.SKILL_GEM_RED_1] = {type = 1, ab = "skillgem", resName = "red_1", preload = true},
+    [RES_CODE.SKILL_GEM_RED_2] = {type = 1, ab = "skillgem", resName = "red_2", preload = true},
+    [RES_CODE.SKILL_GEM_RED_3] = {type = 1, ab = "skillgem", resName = "red_3", preload = true},
+    [RES_CODE.SKILL_GEM_RED_4] = {type = 1, ab = "skillgem", resName = "red_4", preload = true},
+    -- UI预制体
+    [RES_CODE.UI_CARD] = {type = 1, ab = "ui", resName = "ui_card", preload = true},
+    [RES_CODE.UI_BG_LOGIN] = {type = 1, ab = "ui", resName = "ui_bg_login", preload = true},
+    [RES_CODE.UI_BG_MAIN] = {type = 1, ab = "ui", resName = "ui_bg_main", preload = true}
 }
+
+-- 人物头像图
+RES_CODE.AVATAR_NULL = genCode()
+RES_CONFIG[RES_CODE.AVATAR_NULL] = {type = 0, ab = "avatar", resName = "-1", preload = true}
+for i = 1, GAME_CONFIG.AVATAR_SUM do
+    local key = string.format("AVATAR_%d", i)
+    RES_CODE[key] = genCode()
+    RES_CONFIG[RES_CODE[key]] = {type = 0, ab = "avatar", resName = tostring(i), preload = true}
+end
+-- 卡牌实例
+for tid, tpl in pairs(tpl.template_card) do
+    -- 卡牌预制体
+    local key = string.format("CARD_%d", tid)
+    RES_CODE[key] = genCode()
+    RES_CONFIG[RES_CODE[key]] = {type = 1, ab = tpl.pic_ab, resName = tostring(tid), preload = true}
+    -- 卡牌头像图
+    local key = string.format("CARD_AVATAR_%d", tid)
+    RES_CODE[key] = genCode()
+    RES_CONFIG[RES_CODE[key]] = {type = 0, ab = tpl.pic_ab, resName = string.format("%d_avatar", tid), preload = true}
+end
+-- 卡牌框背景
+for rank = 0, GAME_CONFIG.MAX_CARD_RANK - 1 do
+    local sum = 4
+    if (rank == 0) then
+        sum = 3
+    end
+    for i = 0, sum - 1 do
+        local key = string.format("BG_CARD_%d_%d", rank, i)
+        RES_CODE[key] = genCode()
+        RES_CONFIG[RES_CODE[key]] = {
+            type = 0,
+            ab = "p10",
+            resName = string.format("bg_card_%d_%d", rank, i),
+            preload = true
+        }
+    end
+end
+------------------------------------------ code获取封装函数 ------------------------------------------
+RES_CODE.getColorBg = function(color)
+    return RES_CODE[string.format("BG_%s", string.upper(color))]
+end
+RES_CODE.getCardIconColorBg = function(color)
+    return RES_CODE[string.format("BG_CADE_ICON_%s", string.upper(color))]
+end
+RES_CODE.getAvatarIcon = function(id)
+    local code = RES_CODE[string.format("AVATAR_%d", id)]
+    if (code == nil) then
+        return RES_CODE.AVATAR_NULL
+    end
+    return code
+end
+RES_CODE.getAttributeIcon = function(type)
+    return RES_CODE[string.format("ICON_ATTRIBUTE_%d", type)]
+end
+RES_CODE.getCardBgs = function(rank)
+    local sum = 4
+    if (rank == 0) then
+        sum = 3
+    end
+    local arr = {}
+    for i = 0, sum - 1 do
+        local key = string.format("BG_CARD_%d_%d", rank, i)
+        table.insert(arr, RES_CODE[key])
+    end
+    return arr
+end
+RES_CODE.getCardPrefab = function(tid)
+    return RES_CODE[string.format("CARD_%d", tid)]
+end
+RES_CODE.getCardAvatarIcon = function(tid)
+    return RES_CODE[string.format("CARD_AVATAR_%d", tid)]
+end
+RES_CODE.getSkillGemPrefab = function(color, type)
+    return RES_CODE[string.format("SKILL_GEM_%s_%d", string.upper(color), type)]
+end
+RES_CODE.getUIPrefab = function(name)
+    return RES_CODE[string.upper(name)]
+end
+------------------------------------------ 加载函数 ------------------------------------------
 -- 预加载资源
 local RES_MAP = {}
 RES_INFO.getConfig = function(code)
@@ -102,12 +293,12 @@ RES_INFO.loadAsyn = function(code, cb)
         print("加载资源", "预加载资源", code)
         -- 存在预加载资源则直接返回
         onTrigger(res)
-        return true
+        return
     end
     -- 不存在预加载资源则从AB包加载
     local config = RES_INFO.getConfig(code)
     if (config == nil) then
-        return false
+        return
     end
     print("加载资源", "AB包加载", code)
     if (config.type == 0) then
@@ -121,6 +312,6 @@ RES_INFO.loadAsyn = function(code, cb)
             System.Action_UnityEngine_RuntimeAnimatorController(onTrigger)
         )
     end
-    return true
 end
-return {RES_CODE = RES_CODE, RES_INFO = RES_INFO}
+
+return {RES_CODE = RES_CODE, RES_INFO = RES_INFO, RES_MAP = RES_MAP}

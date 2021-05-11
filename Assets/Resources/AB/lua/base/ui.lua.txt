@@ -68,10 +68,17 @@ function UI:showUI(name, param, opts)
     end
     comp = require(name):new(name, param, opts)
     self:addUI(comp)
-    --加载AB依赖包
-    resUtil:LoadAssetBundle(comp.ab)
-    --加载界面
-    comp.prefab = resUtil:Load(comp.ab, name)
+
+    -- 加载界面
+    -- 判断是否存在预加载资源
+    local code = RES_CODE.getUIPrefab(name)
+    if (code == nil) then
+        -- 通过AB包加载
+        comp.prefab = resUtil:Load(comp.ab, name)
+    else
+        -- 预加载资源
+        comp.prefab = RES_INFO.load(code)
+    end
     if comp.prefab == nil then
         return nil
     end

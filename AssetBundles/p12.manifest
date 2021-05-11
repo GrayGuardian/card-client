@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2921313621
+CRC: 1535954566
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0ae5512fde5e95ec63ebbfc1164fe6f7
+    Hash: 31317239d5534c8599f017ddabe75f45
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -14,12 +14,12 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/AB/p12/bg_blue1.png
-- Assets/Resources/AB/p12/bg_purple1.png
-- Assets/Resources/AB/p12/bg_purple0.png
-- Assets/Resources/AB/p12/bg_green0.png
-- Assets/Resources/AB/p12/bg_green1.png
-- Assets/Resources/AB/p12/bg_red1.png
-- Assets/Resources/AB/p12/bg_red0.png
-- Assets/Resources/AB/p12/bg_blue0.png
+- Assets/Resources/AB/p12/bg_card_icon_blue.png
+- Assets/Resources/AB/p12/bg_card_icon_purple.png
+- Assets/Resources/AB/p12/bg_purple.png
+- Assets/Resources/AB/p12/bg_green.png
+- Assets/Resources/AB/p12/bg_card_icon_green.png
+- Assets/Resources/AB/p12/bg_card_icon_red.png
+- Assets/Resources/AB/p12/bg_red.png
+- Assets/Resources/AB/p12/bg_blue.png
 Dependencies: []

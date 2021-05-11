@@ -42,38 +42,6 @@ function UI:onBtnClick()
 end
 function UI:onTestBtnClick()
     print("临时测试")
-
-    -- local time = UE.Time.time
-    -- self:load_sprite("card1", "1")
-    -- print("time>>>", UE.Time.time - time)
-
-    local time = UE.Time.time
-    self:load_sprite_asyn(
-        "card1",
-        "1",
-        function(sp)
-            print(sp)
-            print("time>>>", UE.Time.time - time)
-        end
-    )
-
-    -- for i = 1, 10 do
-    --     local node = GameObject.Instantiate(self:load_gameObject("prefab1", "card_avatar_item")).transform
-    --     node.parent = ui.uiCanvas
-    --     node.localPosition = {x = 0, y = ui.uiCanvas.childCount * 160, z = 0}
-    --     node.localScale = {x = 1, y = 1, z = 1}
-    --     local c =
-    --         comp:addComponent(
-    --         node,
-    --         "card_avatar_item",
-    --         {
-    --             info = player.cardMap[1],
-    --             onClick = function(o)
-    --                 print("123")
-    --             end
-    --         }
-    --     )
-    -- end
 end
 function UI:onDebugViewBtnClick()
     print("开关控制台视图")

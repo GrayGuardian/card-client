@@ -2,7 +2,7 @@
   "prefab1": {
     "bag_item": [
       "p2",
-      "gem"
+      "skillgem"
     ],
     "card_avatar_item": [
       "p1"
@@ -80,7 +80,7 @@
     "ui_card": [
       "p2",
       "prefab1",
-      "gem"
+      "skillgem"
     ],
     "ui_role": [
       "p2"

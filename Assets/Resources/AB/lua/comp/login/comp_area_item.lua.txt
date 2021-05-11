@@ -14,8 +14,9 @@ function Comp:refresh(info)
         self.info = info
     end
     self.uiComp.Text.nameText.text = self.info.name
+
     self.uiComp.Image.stateIcon.sprite =
-        self:load_sprite("p1", self.info.ismaintenance == 0 and "icon_red_point" or "icon_gray_point")
+        self:load(self.info.ismaintenance == 0 and RES_CODE.AREA_ITEM_STATE_RED or RES_CODE.AREA_ITEM_STATE_GRAY)
 end
 function Comp:showOutLine()
     self.uiComp.Image.outlineImage.gameObject:SetActive(true)

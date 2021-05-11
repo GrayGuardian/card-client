@@ -202,10 +202,10 @@ public class ResUtil
     }
     System.Collections.IEnumerator _loadAssetBundleAsyn(string key, Action<AssetBundle> cb = null)
     {
-        // if (GameConst.PRO_ENV != ENV_TYPE.MASTER)
-        // {
-        //     yield break;
-        // }
+        if (GameConst.PRO_ENV != ENV_TYPE.MASTER)
+        {
+            yield break;
+        }
         AssetBundle bundle = GetBundleByName(key);
         if (bundle != null)
         {
@@ -268,7 +268,7 @@ public class ResUtil
     }
     public void UnLoadAssetBundle(string key, bool unloadAllLoadedObjects = false)
     {
-        // if (GameConst.PRO_ENV != ENV_TYPE.MASTER) return;
+        if (GameConst.PRO_ENV != ENV_TYPE.MASTER) return;
         AssetBundle bundle = GetBundleByName(key);
         if (bundle == null) return;
         if (!unloadAllLoadedObjects && _abMap[bundle].Count > 0)
@@ -391,7 +391,7 @@ public class ResUtil
     System.Collections.IEnumerator _loadAsyn(Type type, string key, string resName, Action<UnityEngine.Object> cb = null, bool loadIsClose = false)
     {
         UnityEngine.Object res = default(UnityEngine.Object);
-        if (GameConst.PRO_ENV == ENV_TYPE.DEV)
+        if (GameConst.PRO_ENV == ENV_TYPE.MASTER)
         {
             AssetBundle bundle = GetBundleByName(key);
             if (bundle == null)
