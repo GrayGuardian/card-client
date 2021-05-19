@@ -276,8 +276,8 @@ public class ResTool : MonoBehaviour
             {
                 if (fileMap.ContainsKey(file.Name))
                 {
-                    Debug.LogError("Error:出现重复项：" + file.Name);
-                    return;
+                    // Debug.LogError("Error:出现重复项：" + file.Name);
+                    // return;
                 }
                 else
                 {

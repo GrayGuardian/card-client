@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2634814159
+CRC: 3666432885
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 275cdc82755836fd1d30fd13b2dcb272
+    Hash: b6128e7a844a68618c9782d825510159
   TypeTreeHash:
     serializedVersion: 2
     Hash: 98389b4b07b41cb84e430329cd7ce89c
@@ -41,9 +41,9 @@ Assets:
 - Assets/Resources/AB/upres/btn_close1.png
 - Assets/Resources/AB/upres/bg.jpg
 - Assets/Resources/AB/upres/bg_content1.png
-- Assets/Resources/AB/upres/bg_btn2.png
+- Assets/Resources/AB/upres/btn2.png
 - Assets/Resources/AB/upres/bar1_val.png
-- Assets/Resources/AB/upres/bg_btn1.png
+- Assets/Resources/AB/upres/btn1.png
 - Assets/Resources/AB/upres/ui_upres_tip.prefab
 - Assets/Resources/AB/upres/bg_ui1.png
 Dependencies: []
