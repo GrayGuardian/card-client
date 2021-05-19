@@ -132,4 +132,44 @@ function UI:onCardAvatarClick(o)
     print("点击头像框>>>>", utils.serialize(info.baseInfo))
     self:refreshView({cid = o.info:get_cid()})
 end
+
+function UI:onBagFoldBtnClick(o)
+    print("点击背包展开按钮")
+
+    local rectTransform = comp:getCSComponent(self.bagLayout, UE.RectTransform)
+    local x = rectTransform.offsetMax.x
+    local y
+    local ro
+    if (self.bagIsShow) then
+        y = -1553
+        ro = 270
+        self.bagIsShow = false
+    else
+        y = -287
+        ro = 90
+        self.bagIsShow = true
+    end
+
+    local time = 0.5
+    local newY = rectTransform.offsetMax.y
+
+    DG.Tweening.DOTween.To(
+        DG.Tweening.Core.DOGetter_float(
+            function()
+                return newY
+            end
+        ),
+        DG.Tweening.Core.DOSetter_float(
+            function(val)
+                newY = val
+                rectTransform.offsetMax = {x = x, y = newY}
+            end
+        ),
+        y,
+        time
+    ):SetEase(DG.Tweening.Ease.Linear)
+
+    local btnNode = self.uiComp.Button.bagFoldBtn.transform
+    btnNode:DOLocalRotate({x = 0, y = 0, z = ro}, time, DG.Tweening.RotateMode.Fast):SetEase(DG.Tweening.Ease.Linear)
+end
 return UI
